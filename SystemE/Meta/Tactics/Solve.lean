@@ -67,7 +67,6 @@ def finish : EuclidStepM Unit := do
     | some d =>
       applyHole (← d.toExpr.toSyntax) (← getUnusedUserName `h) |>.run Γ
       evalTactic $ ← `(tactic| try (clear ($(mkIdent Γ.holeName))))
-      evalTactic $ ← `(tactic| try aesop_destruct_products)
 
 end EuclidStep
 

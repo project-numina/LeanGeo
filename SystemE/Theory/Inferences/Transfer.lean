@@ -34,7 +34,6 @@ axiom equal_circles : ∀ (a b c : Point) (α β : Circle),
 axiom point_on_circle_if : ∀ (a b c : Point) (α : Circle),
   (a.isCentre α) ∧ (b.onCircle α) ∧ |(a─c)| = |(a─b)| → c.onCircle α
 
-@[aesop unsafe 80% [forward, apply]]
 -- If a point x is the centre of circle C and a point b is on C, then given some point c on C, the straight-line from x to c is equal to the straight-line from x to b
 axiom point_on_circle_onlyif : ∀ (a b c : Point) (α : Circle),
   (a.isCentre α) ∧ (b.onCircle α) ∧ (c.onCircle α) → |(a─c)| = |(a─b)|

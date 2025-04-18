@@ -98,6 +98,15 @@ sorry
 theorem perpBisector_equiv : ∀ (A B : Point) (L: Line),
 perpBisector A B L ↔ ∃ (P :Point) (AB : Line), midpoint A P B ∧ perpLine AB L ∧ distinctPointsOnLine A B AB := by
   sorry
+theorem between_fourpoint: ∀(A B C D: Point), between A B C ∧ between B C D ∧ between C D E → between A C E := by
+  euclid_intros
+  euclid_finish
+
+theorem between_zeroAngle : ∀ (A B C : Point), between A B C → ∠B:A:C = 0 := by
+  sorry
+
+theorem between_straightAngle : ∀ (A B C : Point), between A B C → ∠A:B:C = ∟  + ∟ := by
+  sorry
 
 --Triangle
 theorem triangle_anglePositive : ∀(A B C : Point) , triangle A B C → ∠A:B:C > 0 ∧ ∠A:C:B >0 ∧ ∠C:A:B >0 := by
@@ -129,6 +138,17 @@ theorem isoTriangle_eqangle : ∀ (A B C : Point), isoTriangle A B C → ∠ A:B
   euclid_assert ∠D:B:A = ∠D:C:A
   euclid_finish
 
+theorem eqside_eqangle :∀ (O A B : Point), |(O─A)|=|(O─B)| ∧ (A ≠ B) → ∠O:A:B = ∠O:B:A := by
+  euclid_intros
+  by_cases triangle O A B
+  · euclid_assert isoTriangle O A B
+    euclid_apply isoTriangle_eqangle O A B
+    euclid_finish
+  · euclid_assert between A O B
+    euclid_apply between_zeroAngle A O B
+    euclid_apply between_zeroAngle B O A
+    euclid_finish
+
 theorem eqangle_isoTriangle : ∀ (a b c : Point),
   (triangle a b c) ∧ (∠ b:a:c = ∠ a:b:c)
   → |(b─c)| = |(a─c)| := by
@@ -140,9 +160,9 @@ theorem eqangle_isoTriangle : ∀ (a b c : Point),
   sorry
 
 theorem isoTriangle_threeLine_concidence : ∀ (a b c d: Point),
-  isoTriangle a b c ∧ coll a b d→
-  (midpoint a d c ∨ ∠a:d:b = ∟ ∨ ∠a:d:c = ∟ ∨ ∠d:a:b = ∠ d:a:c) →
-  (midpoint a d c ∧  ∠a:d:b = ∟ ∧  ∠a:d:c = ∟ ∧  ∠d:a:b = ∠ d:a:c)
+  isoTriangle a b c ∧ coll c b d →
+  (midpoint b d c ∨ ∠a:d:b = ∟ ∨ ∠a:d:c = ∟ ∨ ∠d:a:b = ∠ d:a:c) →
+  (midpoint b d c ∧  ∠a:d:b = ∟ ∧  ∠a:d:c = ∟ ∧  ∠d:a:b = ∠ d:a:c)
 := by
   sorry
 
@@ -250,9 +270,7 @@ theorem eqInscribedAngle_eqChord : ∀
 := by
 sorry
 
-theorem chord_bisector : ∀ (O A B: Point) (C: Circle) (AB L: Line), O.isCentre C ∧ A.onCircle C ∧ B.onCircle C ∧ distinctPointsOnLine A B AB ∧ perpLine AB L
-  →  (O.onLine L ↔ perpBisector A B L) := by
-  sorry
+
 
 
 theorem inscribedAngle_eq_tangentAngle : ∀ (A B C D : Point) (Ω : Circle) (AB BC CAL : Line),

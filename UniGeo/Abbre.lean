@@ -164,7 +164,7 @@ abbrev congruent_test : Triangle → Triangle →  Prop
   (∠ A:B:C = ∠ D:E:F ∧ |(B─C)| = |(E─F)| ∧ ∠ C:A:B = ∠ F:D:E))
   ∧ ((¬ coll A B C) ∨ (¬ coll D E F))
 
-@[aesop unsafe [apply,forward]]
+@[simp]
 axiom congruent_property (T1 T2: Triangle): congruent T1 T2 →
   match T1,T2 with
   | (Triangle.ofPoints A B C) ,(Triangle.ofPoints D E F) =>
@@ -186,7 +186,7 @@ abbrev similar_test (T1 T2: Triangle): Prop :=
 
 notation:50 a:51 "~" b:51 => similar a b
 
-@[aesop unsafe [apply,forward]]
+@[simp]
 axiom similar_property (T1 T2: Triangle): similar T1 T2 →
   match T1,T2 with
   | (Triangle.ofPoints A B C) ,(Triangle.ofPoints D E F) =>

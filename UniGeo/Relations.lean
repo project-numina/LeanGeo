@@ -40,7 +40,7 @@ abbrev congruent : Triangle → Triangle →  Prop
   (∠ A:B:C = ∠ D:E:F ∧ ∠ B:C:A = ∠ E:F:D ∧ |(C─A)| = |(F─D)|) ∨
   (∠ A:B:C = ∠ D:E:F ∧ |(B─C)| = |(E─F)| ∧ ∠ C:A:B = ∠ F:D:E)
 
-@[aesop unsafe [apply,forward]]
+@[simp]
 axiom congruent_if (T1 T2: Triangle): congruent T1 T2 →
   match T1,T2 with
   | (Triangle.ofPoints A B C) ,(Triangle.ofPoints D E F) =>
@@ -64,7 +64,7 @@ abbrev similar (T1 T2: Triangle): Prop :=
 
 notation:50 a:51 "~" b:51 => similar a b
 
-@[aesop unsafe [apply,forward]]
+@[simp]
 axiom similar_if (T1 T2: Triangle): similar T1 T2 →
   match T1,T2 with
   | (Triangle.ofPoints A B C) ,(Triangle.ofPoints D E F) =>
