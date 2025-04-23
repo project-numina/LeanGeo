@@ -1,7 +1,6 @@
 import SystemE
-import UniGeo.Abbre
-
-
+import LeanGeo.Abbre
+namespace LeanGeo
 theorem construct_perpBisector (a b : Point) : ¬ (a ≠ b) →  ∃ L, perpBisector a b L := by
   sorry
 
@@ -44,6 +43,7 @@ theorem between_not_symm : ∀(A B C : Point), ¬ between A B C → ¬ between C
 theorem coll_exist_line : ∀ (A B C : Point), coll A B C ↔ ∃(l:Line),
 A.onLine l ∧ B.onLine l ∧ C.onLine l := by
   sorry
+
 
 theorem point_not_onLine : ∀(A B C : Point) (l :Line), ¬ coll A B C ∧ distinctPointsOnLine B C l → ¬ A.onLine l := by
   rintro A B C l ⟨h1,h2⟩ h3
