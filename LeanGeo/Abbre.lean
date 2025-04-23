@@ -1,5 +1,6 @@
 import SystemE
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+namespace LeanGeo
 @[simp]
 abbrev cyclic (A B C D: Point) : Prop :=
  ∃ O: Circle, A.onCircle O ∧ B.onCircle O ∧ C.onCircle O ∧ D.onCircle O
@@ -140,7 +141,7 @@ A ≠ B ∧ B ≠ C ∧ C ≠ D ∧ D ≠ A ∧ A ≠ C ∧ B ≠ D
 @[simp]
 abbrev distinctThreePoints (A B C: Point): Prop :=
 A ≠ B ∧ B ≠ C ∧ A ≠ C
-
+end LeanGeo
 namespace Triangle
 
 @[simp]
@@ -162,7 +163,7 @@ abbrev congruent_test : Triangle → Triangle →  Prop
   (∠ C:A:B = ∠ F:D:E ∧ ∠ B:C:A = ∠ E:F:D ∧ |(A─B)| = |(D─E)|) ∨
   (∠ A:B:C = ∠ D:E:F ∧ ∠ B:C:A = ∠ E:F:D ∧ |(C─A)| = |(F─D)|) ∨
   (∠ A:B:C = ∠ D:E:F ∧ |(B─C)| = |(E─F)| ∧ ∠ C:A:B = ∠ F:D:E))
-  ∧ ((¬ coll A B C) ∨ (¬ coll D E F))
+  ∧ ((¬ LeanGeo.coll A B C) ∨ (¬ LeanGeo.coll D E F))
 
 @[simp]
 axiom congruent_property (T1 T2: Triangle): congruent T1 T2 →
@@ -182,7 +183,7 @@ abbrev similar_test (T1 T2: Triangle): Prop :=
   (|(C─A)| / |(F─D)| = |(A─B)| / |(D─E)| ∧ ∠ C:A:B = ∠ F:D:E) ∨
 -- SSS criterion (with side ratios)
   (|(A─B)| / |(D─E)| = |(B─C)| / |(E─F)| ∧ |(B─C)| / |(E─F)| = |(C─A)| / |(F─D)|))
-  ∧ (¬ coll A B C)
+  ∧ (¬ LeanGeo.coll A B C)
 
 notation:50 a:51 "~" b:51 => similar a b
 
@@ -195,9 +196,3 @@ axiom similar_property (T1 T2: Triangle): similar T1 T2 →
    ∧ ∠ A:C:B = ∠ D:F:E ∧ ∠ B:A:C = ∠ E:D:F
 
 end Triangle
-
-namespace Circle
-@[simp]
-abbrev radius (C : Circle) (r : ℝ) :=
-  ∀  (x y : Point), x.isCentre C ∧ y.onCircle C → |(x─y)| = r
-end Circle

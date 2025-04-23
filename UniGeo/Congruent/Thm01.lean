@@ -1,12 +1,19 @@
 import SystemE
 import Book.Prop29
-import SystemE.Theory.Relations
-import UniGeo.Abbre
+import UniGeo.Relations
+
 namespace UniGeo.Congruent
 
-set_option maxHeartbeats 2000000
-
-theorem cyclic_eqangle : ∀ (A B C D : Point) (AB BC CD DA : Line), ( formQuadrilateral A B C D AB BC CD DA) → (A ≠ C) → (∠ D:A:C = ∠ D:B:C) → ∠ C : D : A + ∠ C : B : A = ∟ + ∟ := by
-  sorry
+theorem theorem_1 : ∀ (R S T U : Point) (RS ST RT TU RU : Line),
+  formTriangle R S T RS ST RT ∧
+  formTriangle R T U RT TU RU ∧
+  S.opposingSides U RT ∧
+  |(T─U)| = |(R─S)| ∧
+  ¬ RS.intersectsLine TU →
+  (△ R:T:U).congruent (△ T:R:S) :=
+by
+  euclid_intros
+  euclid_apply Elements.Book1.proposition_29''' S U R T RS TU RT
+  euclid_finish
 
 end UniGeo.Congruent

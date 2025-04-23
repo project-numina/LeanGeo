@@ -4,7 +4,7 @@ import json
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # 输入文件路径
-json_file = "data/Kiselev.json"
+json_file = "data/Numina_Geometry_all.json"
 from openai import OpenAI
 pass_at = 1
 api_key = "sk-UqsUV3Gsprv60YNoeCUeIRdH2jWp7AqEKjW7CDvnWvi2BXlY"
@@ -147,7 +147,8 @@ syntax.
     for idx, entry in enumerate(data):
         problem = entry.get("problem", "未知问题")
         name = entry.get("name", f"idx")
-        questions.append(f"<{name}> \n    {problem} \n\n")
+        if idx < 100:
+            questions.append(f"<{name}> \n    {problem} \n\n")
     #txt2 ="以下是一个翻译结果的验证器给你翻译的反馈，请根据反馈修改你的翻译，并给出修改后的翻译："
     # 循环提问并获取回答"
 

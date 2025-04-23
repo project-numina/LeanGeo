@@ -33,6 +33,7 @@ popd
 pip install smt-portfolio
 
 # Build the Lean project.
-lake script run check
+# lake script run check
+lake update
 lake exe cache get
-lake build SystemE Book UniGeo E3
+lake build SystemE Book UniGeo E3 REPL mathlib LeanGeo

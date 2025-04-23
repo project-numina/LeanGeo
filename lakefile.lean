@@ -14,6 +14,9 @@ lean_lib Book {
 lean_lib UniGeo {
 }
 
+lean_lib LeanGeo {
+}
+
 lean_lib E3 {
 
 }
