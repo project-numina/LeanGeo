@@ -38,4 +38,4 @@ RUN curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -
 RUN lake script run check
 RUN lake update
 RUN lake exe cache get
-RUN lake build SystemE Book UniGeo E3 mathlib REPL
+RUN lake build SystemE Book UniGeo E3 mathlib REPL LeanGeo
