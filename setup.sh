@@ -12,7 +12,7 @@ popd
 echo "installing cvc5"
 git clone https://github.com/cvc5/cvc5
 pushd cvc5
-./configure.sh
+./configure.sh --auto-download
 pushd build
 make
 make check
