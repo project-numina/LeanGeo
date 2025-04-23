@@ -10,7 +10,7 @@ popd
 
 # Build and Install CVC5.
 echo "installing cvc5"
-git clone GitHub - cvc5/cvc5: cvc5 is an open-source automatic theorem prover for Satisfiability Modulo Theori
+git clone https://github.com/cvc5/cvc5
 pushd cvc5
 ./configure.sh
 pushd build
