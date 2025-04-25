@@ -67,8 +67,9 @@ theorem angle_coincide_zero : ∀ (a o : Point), (a ≠ o) → ∠a:o:a = 0:= by
   sorry
 theorem angle_positive_neq : ∀ (a o b : Point), (∠a:o:b>0) → (a ≠ b) ∧ (a ≠ o) ∧ (b ≠ o) := by
   sorry
+theorem angle_between_tranverse : ∀ (a b c d : Point),between a b c ∧ ¬ coll a b d → ∠d:c:b = ∠d:c:a ∧ ∠d:b:c + ∠d:b:a = ∟ + ∟ := by
+  sorry
 
---Trigonometric
 theorem rightAngle_eq_pi_div_two : ∟ = Real.pi / 2 := by
   sorry
 
@@ -126,7 +127,7 @@ theorem triangle_exteriorAngle : ∀ (a b c d: Point), (triangle a b c) ∧ (bet
   euclid_apply supplementaryAngle_line c a b d
   euclid_finish
 
-theorem isoTriangle_eqangle : ∀ (A B C : Point), isoTriangle A B C → ∠ A:B:C = ∠A:C:B := by
+theorem isoTriangle_eqAngle : ∀ (A B C : Point), isoTriangle A B C → ∠ A:B:C = ∠A:C:B := by
   euclid_intros
   euclid_apply exists_midpoint B C as D
   euclid_apply line_from_points B C as BC
@@ -138,18 +139,18 @@ theorem isoTriangle_eqangle : ∀ (A B C : Point), isoTriangle A B C → ∠ A:B
   euclid_assert ∠D:B:A = ∠D:C:A
   euclid_finish
 
-theorem eqside_eqangle :∀ (O A B : Point), |(O─A)|=|(O─B)| ∧ (A ≠ B) → ∠O:A:B = ∠O:B:A := by
+theorem eqside_eqAngle :∀ (O A B : Point), |(O─A)|=|(O─B)| ∧ (A ≠ B) → ∠O:A:B = ∠O:B:A := by
   euclid_intros
   by_cases triangle O A B
   · euclid_assert isoTriangle O A B
-    euclid_apply isoTriangle_eqangle O A B
+    euclid_apply isoTriangle_eqAngle O A B
     euclid_finish
   · euclid_assert between A O B
     euclid_apply between_zeroAngle A O B
     euclid_apply between_zeroAngle B O A
     euclid_finish
 
-theorem eqangle_isoTriangle : ∀ (a b c : Point),
+theorem eqAngle_isoTriangle : ∀ (a b c : Point),
   (triangle a b c) ∧ (∠ b:a:c = ∠ a:b:c)
   → |(b─c)| = |(a─c)| := by
   euclid_intros
@@ -170,6 +171,10 @@ theorem pythagorean : ∀ (a b c: Point) (AB BC AC : Line),
   formTriangle a b c AB BC AC ∧ (∠ b:a:c : ℝ) = ∟ →
   |(b─c)| * |(b─c)| = |(b─a)| * |(b─a)| + |(a─c)| * |(a─c)| :=
 by
+  sorry
+
+theorem pythagorean_point : ∀ (a b c: Point), (triangle a b c) ∧ (∠ b:a:c : ℝ) = ∟ →
+  |(b─c)| * |(b─c)| = |(b─a)| * |(b─a)| + |(a─c)| * |(a─c)| := by
   sorry
 
 theorem triangle_side_angle_inequality : ∀ (a b c: Point),
@@ -270,7 +275,11 @@ theorem eqInscribedAngle_eqChord : ∀
 := by
 sorry
 
-
+theorem intersecting_chord : ∀ (A B C D E : Point) (O: Circle),
+  A.onCircle O ∧ B.onCircle O ∧ C.onCircle O ∧ D.onCircle O ∧
+  distinctFourPoints A B C D ∧
+  between A E B ∧ between C E D → |(A─E)| * |(E─B)| = |(C─E)| * |(E─D)|:= by
+  sorry
 
 
 theorem inscribedAngle_eq_tangentAngle : ∀ (A B C D : Point) (Ω : Circle) (AB BC CAL : Line),
@@ -297,8 +306,8 @@ theorem diameter_rightAngle : ∀ (a b c: Point) (C: Circle), (diameter a b C) �
   euclid_apply line_from_points a b as ab
   euclid_assert isoTriangle o a c
   euclid_assert isoTriangle o b c
-  euclid_apply isoTriangle_eqangle o a c
-  euclid_apply isoTriangle_eqangle o b c
+  euclid_apply isoTriangle_eqAngle o a c
+  euclid_apply isoTriangle_eqAngle o b c
   euclid_assert triangle a b c
   euclid_apply triangle_angleSum a b c
   euclid_assert ∠o:a:c = ∠b:a:c
@@ -366,7 +375,7 @@ theorem parallelogram_eqside : ∀ (A B C D : Point) (AB BC CD DA : Line),
   → (|(A─B)| = |(C─D)| ∧ |(B─C)| = |(D─A)|) := by
 sorry
 
-theorem parallelogram_eqangle :
+theorem parallelogram_eqAngle :
   ∀ (A B C D : Point) (AB BC CD DA : Line),
   (formQuadrilateral A B C D AB BC CD DA)
   ∧ (¬ AB.intersectsLine CD)
