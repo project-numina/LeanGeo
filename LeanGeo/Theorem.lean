@@ -32,13 +32,7 @@ sorry
 theorem supplementaryAngle_line : ∀ (d a b c: Point), (between a b c) ∧ (¬ coll a b d) → ∠d:b:a + ∠d:b:c = ∟ + ∟ := by
   sorry
 
-theorem between_not_symm : ∀(A B C : Point), ¬ between A B C → ¬ between C B A := by
-  intro A B C h
-  intro h₁
-  have h₂ := between_symm C B A h₁
-  cases h₂ with
-  | intro h₂ h₃ =>
-  exact h h₂
+
 
 theorem coll_exist_line : ∀ (A B C : Point), coll A B C ↔ ∃(l:Line),
 A.onLine l ∧ B.onLine l ∧ C.onLine l := by
@@ -67,7 +61,7 @@ theorem angle_coincide_zero : ∀ (a o : Point), (a ≠ o) → ∠a:o:a = 0:= by
   sorry
 theorem angle_positive_neq : ∀ (a o b : Point), (∠a:o:b>0) → (a ≠ b) ∧ (a ≠ o) ∧ (b ≠ o) := by
   sorry
-theorem angle_between_tranverse : ∀ (a b c d : Point),between a b c ∧ ¬ coll a b d → ∠d:c:b = ∠d:c:a ∧ ∠d:b:c + ∠d:b:a = ∟ + ∟ := by
+theorem angle_between_transfer : ∀ (a b c d : Point),between a b c ∧ ¬ coll a b d → ∠d:c:b = ∠d:c:a ∧ ∠d:b:c + ∠d:b:a = ∟ + ∟ := by
   sorry
 
 theorem rightAngle_eq_pi_div_two : ∟ = Real.pi / 2 := by
@@ -251,9 +245,9 @@ theorem eqChord_eqCentralAngle : ∀ (a b c d o: Point) (O : Circle), a.onCircle
       euclid_apply Triangle.congruent_property (△ a:o:b) (△ c:o:d)
       euclid_finish
 
-theorem threePoints_uniqueCircle : ∀ (A B C : Point),
+theorem threePoints_existCircle : ∀ (A B C : Point),
   triangle A B C →
-  ∃! (Ω : Circle),
+  ∃ (Ω : Circle),
     (A.onCircle Ω ∧ B.onCircle Ω ∧ C.onCircle Ω) :=
 by sorry
 
@@ -296,24 +290,6 @@ theorem intersecting_circles_perpendicular_bisector :
   → perpBisector A B L :=
 by sorry
 
-theorem diameter_rightAngle : ∀ (a b c: Point) (C: Circle), (diameter a b C) ∧ (c.onCircle C) ∧ (c ≠ a) ∧ (c ≠ b) → ∠ a:c:b = ∟ := by
-  euclid_intros
-  euclid_apply line_from_points a b as AB
-  euclid_apply line_from_points b c as BC
-  euclid_apply line_from_points c a as CA
-  euclid_apply exists_centre C as o
-  euclid_assert between a o b
-  euclid_apply line_from_points a b as ab
-  euclid_assert isoTriangle o a c
-  euclid_assert isoTriangle o b c
-  euclid_apply isoTriangle_eqAngle o a c
-  euclid_apply isoTriangle_eqAngle o b c
-  euclid_assert triangle a b c
-  euclid_apply triangle_angleSum a b c
-  euclid_assert ∠o:a:c = ∠b:a:c
-  euclid_assert ∠o:b:c = ∠a:b:c
-  euclid_assert ∠a:c:b = ∠ a:c:o + ∠o:c:b
-  euclid_finish
 
 theorem diameter_longest : ∀(a b c d: Point) (C: Circle), (diameter a b C) ∧ (c.onCircle C) ∧ (d.onCircle C) → |(a─b)| ≥ |(c─d)| := by
   euclid_intros
@@ -444,3 +420,7 @@ theorem isoTrapezoid_eqAngle:
   (|(B─C)| = |(D─A)|)
   → (∠A:B:C = ∠D:C:B) ∧ (∠B:A:D = ∠C:D:A) := by
 sorry
+
+--Algebra
+theorem ratio_transfer : ∀ (a b c d : ℝ), a / b = c / d  → a / c = b / d := by
+  sorry

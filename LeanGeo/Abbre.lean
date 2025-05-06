@@ -42,7 +42,7 @@ A.onCircle Ω ∧ B.onCircle Ω ∧ C.onCircle Ω
 
 @[simp]
 abbrev inCentre (I A B C : Point) : Prop :=
-∠ I:A:B = ∠ I:A:C ∧ ∠ I:C:A = ∠ I:C:B
+∠ I:A:B = ∠ I:A:C ∧ ∠ I:C:A = ∠ I:C:B ∧ ∠I:B:A = ∠I:B:C
 
 @[simp]
 abbrev tangentLine (L : Line) (O : Circle) : Prop :=
@@ -75,16 +75,17 @@ abbrev insideQuadrilateral (X A B C D: Point) (AB BC CD DA: Line) : Prop :=
 X.sameSide A BC ∧ X.sameSide B CD ∧ X.sameSide C DA ∧ X.sameSide D AB
 
 @[simp]
+abbrev coll (A B C : Point) : Prop :=
+between A B C ∨ between B C A ∨ between C A B ∨ A = B ∨ A = C ∨ B = C
+
+@[simp]
 abbrev perpPoint (A B C D : Point) : Prop :=
-∃ (P : Point), (collinear P A B) ∧ (collinear P C D) ∧ (∠ A:P:C = ∟)
+∃ (P : Point), (coll P A B) ∧ (coll P C D) ∧ (∠ A:P:C = ∟)
 
 @[simp]
 abbrev orthoCentre (X A B C : Point) : Prop :=
 perpPoint X A B C ∧ perpPoint X B A C ∧ perpPoint X C A B
 
-@[simp]
-abbrev coll (A B C : Point) : Prop :=
-between A B C ∨ between B C A ∨ between C A B ∨ A = B ∨ A = C ∨ B = C
 
 @[simp]
 abbrev triangle (A B C : Point) : Prop :=
@@ -178,21 +179,21 @@ abbrev similar_test (T1 T2: Triangle): Prop :=
   (∠ B:C:A = ∠ E:F:D ∧ ∠ C:A:B = ∠ F:D:E) ∨
   (∠ C:A:B = ∠ F:D:E ∧ ∠ A:B:C = ∠ D:E:F) ∨
 -- SAS criterion (with side ratios)
-  (|(A─B)| / |(D─E)| = |(B─C)| / |(E─F)| ∧ ∠ A:B:C = ∠ D:E:F) ∨
-  (|(B─C)| / |(E─F)| = |(C─A)| / |(F─D)| ∧ ∠ B:C:A = ∠ E:F:D) ∨
-  (|(C─A)| / |(F─D)| = |(A─B)| / |(D─E)| ∧ ∠ C:A:B = ∠ F:D:E) ∨
+  (|(A─B)| * |(E─F)| = |(B─C)| * |(D─E)| ∧ ∠ A:B:C = ∠ D:E:F) ∨
+  (|(B─C)| * |(F─D)| = |(C─A)| * |(E─F)| ∧ ∠ B:C:A = ∠ E:F:D) ∨
+  (|(C─A)| * |(D─E)| = |(A─B)| * |(F─D)| ∧ ∠ C:A:B = ∠ F:D:E) ∨
 -- SSS criterion (with side ratios)
-  (|(A─B)| / |(D─E)| = |(B─C)| / |(E─F)| ∧ |(B─C)| / |(E─F)| = |(C─A)| / |(F─D)|))
-  ∧ (¬ LeanGeo.coll A B C)
+  (|(A─B)| * |(E─F)| = |(B─C)| * |(D─E)| ∧ |(B─C)| * |(F─D)| = |(C─A)| * |(E─F)|)
+  ∧ (¬ LeanGeo.coll A B C))
 
 notation:50 a:51 "~" b:51 => similar a b
 
 @[simp]
-axiom similar_property (T1 T2: Triangle): similar T1 T2 →
+axiom similar_property (T1 T2: Triangle):  T1.similar_test T2 →
   match T1,T2 with
   | (Triangle.ofPoints A B C) ,(Triangle.ofPoints D E F) =>
-    |(A─B)| / |(D─E)| = |(B─C)| / |(E─F)| ∧ |(A─B)| / |(D─E)| = |(B─C)| / |(E─F)|
-   ∧ |(C─A)| / |(F─D)| = |(A─B)| / |(D─E)| ∧ ∠ A:B:C = ∠ D:E:F
+    |(A─B)| * |(E─F)| = |(B─C)| * |(D─E)| ∧ |(B─C)| * |(F─D)| = |(C─A)| * |(E─F)|
+   ∧ |(C─A)| * |(D─E)| = |(A─B)| * |(F─D)| ∧ ∠ A:B:C = ∠ D:E:F
    ∧ ∠ A:C:B = ∠ D:F:E ∧ ∠ B:A:C = ∠ E:D:F
 
 end Triangle
