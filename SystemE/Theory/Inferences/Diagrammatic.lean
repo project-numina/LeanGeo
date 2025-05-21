@@ -287,7 +287,7 @@ axiom parallel_line_unique : ∀ (a : Point) (L M N : Line),
 -- -/
 
 axiom intersection_symm :
-  ∀ (L M : Line), L.intersectsLine M → L.intersectsLine L
+  ∀ (L M : Line), L.intersectsLine M → M.intersectsLine L
 
 -- ********
 -- 2

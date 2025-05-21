@@ -904,24 +904,7 @@ def euclidTheory : List Smt.Command := [
         (+ (AreaPPP a c d) (AreaPPP a d b))
       )
     )
-  )")),
-  --Added
-  (Smt.Command.assert (Smt.Term.literalT "
-  (forall ((a Point) (b Point) (c Point) (d Point) (AB Line))
-    (=>
-      (and
-        (OnL a AB)
-        (OnL b AB)
-        (OnL c AB)
-        (Between a b c)
-        (not (OnL d AB))
-      )
-      (=
-        (AnglePPP d c b)
-        (AnglePPP d c a)
-      )
-    )
-  )")),
+  )"))
   -- rectangle_area
   /-
   (Smt.Command.assert (Smt.Term.literalT "

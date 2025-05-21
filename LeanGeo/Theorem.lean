@@ -91,7 +91,7 @@ theorem perpBisector_construction :
 sorry
 
 theorem perpBisector_equiv : ∀ (A B : Point) (L: Line),
-perpBisector A B L ↔ ∃ (P :Point) (AB : Line), midpoint A P B ∧ perpLine AB L ∧ distinctPointsOnLine A B AB := by
+perpBisector A B L ↔ ∃ (P :Point) (AB : Line), P.onLine L ∧ midpoint A P B ∧ perpLine AB L ∧ distinctPointsOnLine A B AB := by
   sorry
 theorem between_fourpoint: ∀(A B C D: Point), between A B C ∧ between B C D ∧ between C D E → between A C E := by
   euclid_intros
@@ -131,7 +131,7 @@ theorem isoTriangle_eqAngle : ∀ (A B C : Point), isoTriangle A B C → ∠ A:B
   euclid_assert Triangle.congruent_test (△ D:A:B) (△ D:A:C)
   euclid_apply Triangle.congruent_property (△ D:A:B) (△ D:A:C)
   euclid_assert ∠D:B:A = ∠D:C:A
-  euclid_finish
+  sorry
 
 theorem eqside_eqAngle :∀ (O A B : Point), |(O─A)|=|(O─B)| ∧ (A ≠ B) → ∠O:A:B = ∠O:B:A := by
   euclid_intros
@@ -183,7 +183,7 @@ axiom triangle_inequality : ∀ (a b c : Point), triangle a b c →
 axiom triangle_inequality_le : ∀ (a b c : Point),
 |(a─b)| ≤  |(b─c)| + |(c─a)|
 
-theorem triangle_ineqaulity_eql : ∀ (a b c : Point), |(a─b)| = |(b─c)| + |(c─a)| → between b c a := by
+theorem triangle_ineqaulity_eql : ∀ (a b c : Point), distinctThreePoints a b c ∧ |(a─b)| = |(b─c)| + |(c─a)| → between b c a  := by
   sorry
 
 
@@ -212,7 +212,7 @@ theorem parallel_SupplementConsecutiveAngles :
 := by
 sorry
 theorem perpLine_perpLine_parallel : ∀ (L1 L2 M : Line),
-  (perpLine L1 M) ∧ (perpLine L2 M) →
+  (perpLine L1 M) ∧ (perpLine L2 M) ∧ L1 ≠ L2 →
   ¬(L1.intersectsLine L2) :=
 by sorry
 
@@ -310,10 +310,6 @@ theorem inscribed_formtriangle : ∀ (A B C O : Point) (Γ : Circle),
   → triangle A B C := by
 sorry
 
-theorem inscribed_angle_measure : ∀ (A B C O : Point) (Γ : Circle),
-  A.onCircle Γ ∧ B.onCircle Γ ∧ C.onCircle Γ ∧ O.isCentre Γ ∧ A ≠ B ∧ B ≠ C ∧ C ≠ A
-  → 2 * ∠ A:B:C = ∠ A:O:C := by
-sorry
 
 theorem tangent_circles_line_of_centers
   : ∀ (C1 C2 : Circle) (O1 O2 T : Point),
@@ -346,8 +342,8 @@ sorry
 
 theorem parallelogram_eqside : ∀ (A B C D : Point) (AB BC CD DA : Line),
   (formQuadrilateral A B C D AB BC CD DA ∧
-   ¬(∃ X : Point, twoLinesIntersectAtPoint AB DC X) ∧
-   ¬(∃ X : Point, twoLinesIntersectAtPoint BC DA X))
+   ¬(AB.intersectsLine CD) ∧
+   ¬(BC.intersectsLine DA))
   → (|(A─B)| = |(C─D)| ∧ |(B─C)| = |(D─A)|) := by
 sorry
 

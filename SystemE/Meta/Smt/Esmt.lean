@@ -69,7 +69,7 @@ def sanitize (s : String) : EsmtM String := do
   if s.any (fun e => !(e.isAlphanum || e == '_')) then
     return "v" ++ s!"_{(← get).numId}"
   else
-    return s
+    return s ++ s!"_{(← get).numId}"
 
 def replaceNames : Esmt → HashMap FVarId String → Esmt
 | .mk consts _ asserts n, new => .mk consts new asserts n

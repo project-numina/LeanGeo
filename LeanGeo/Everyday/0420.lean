@@ -10,7 +10,7 @@ distinctPointsOnLine A B AB ∧ distinctPointsOnLine N P NP ∧ distinctPointsOn
   by_cases (O = M)
   · sorry
   · euclid_assert triangle P O M
-    euclid_apply angle_between_tranverse A M O P
+    euclid_apply angle_between_transfer A M O P
     euclid_assert ∠M:O:P = ∟
     euclid_apply pythagorean_point O P M
     euclid_apply intersecting_chord A B P N M C
