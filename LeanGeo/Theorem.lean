@@ -1,13 +1,13 @@
 import SystemE
 import LeanGeo.Abbre
 namespace LeanGeo
-theorem construct_perpBisector (a b : Point) : ¬ (a ≠ b) →  ∃ L, perpBisector a b L := by
+theorem construct_perpBisector (a b : Point) : (a ≠ b) → ∃ L, perpBisector a b L := by
   sorry
 
 theorem exists_centre : ∀ (O: Circle), ∃ (C : Point), C.isCentre O := by
   sorry
 
-theorem exists_midpoint : ∀ (A B : Point), ∃(P : Point), midpoint A P B := by
+theorem exists_midpoint : ∀ (A B : Point), (A ≠ B) →  (∃(P : Point), midpoint A P B) := by
   sorry
 
 --theorem exists_foot : ∀ (A : Point) (l : Line), ∃(P : Point), P.onLine l ∧
@@ -17,15 +17,14 @@ theorem midpoint_twice: ∀ (A B P : Point), midpoint A P B → |(A─B)| * 1/2 
   euclid_intros
   euclid_finish
 
-theorem exists_foot : ∀ (c a b : Point) (AB : Line),
-  distinctPointsOnLine a b AB ∧ ¬(c.onLine AB) →
-  exists h : Point, h.onLine AB ∧ (∠ a:h:c = ∟ ∨ ∠ b:h:c = ∟) :=
+theorem exists_foot : ∀ (c a b : Point) (AB : Line), ¬(c.onLine AB) →
+  ∃ h : Point, foot c h AB  :=
 by
   sorry
 
 theorem exists_angleBisection : ∀ (A B C : Point),
-(A ≠ B) ∧ (A ≠ C) ∧ ¬(coll A B C)
-→ ∃ (L : Line), ∀ (P: Point), P.onLine L ↔ ∠ A:B:P = ∠ P:B:C
+ ¬(coll A B C)
+→ ∃ (L : Line), ∀ (P: Point), P.onLine L →  ∠ A:B:P = ∠ P:B:C
 := by
 sorry
 
@@ -40,18 +39,11 @@ A.onLine l ∧ B.onLine l ∧ C.onLine l := by
 
 
 theorem point_not_onLine : ∀(A B C : Point) (l :Line), ¬ coll A B C ∧ distinctPointsOnLine B C l → ¬ A.onLine l := by
-  rintro A B C l ⟨h1,h2⟩ h3
-  have h: coll A B C := by
-    rw [coll_exist_line]
-    use l
-    euclid_finish
-  exact h1 h
+  sorry
 
-theorem unique_perpLine : ∀ (A : Point) (L : Line),
-  ¬(A.onLine L)
-  → ∃! (M : Line),
+theorem unique_perpLine : ∀ (A : Point) (L : Line), ∃ (M : Line),
     A.onLine M
-    ∧ perpLine L M
+    ∧ perpLine L M ∧ (∀ (N : Line),A.onLine N ∧ perpLine L N → N = M)
     :=
 by
   sorry
@@ -59,11 +51,11 @@ by
 --Angle
 theorem angle_coincide_zero : ∀ (a o : Point), (a ≠ o) → ∠a:o:a = 0:= by
   sorry
-theorem angle_positive_neq : ∀ (a o b : Point), (∠a:o:b>0) → (a ≠ b) ∧ (a ≠ o) ∧ (b ≠ o) := by
-  sorry
-theorem angle_between_transfer : ∀ (a b c d : Point),between a b c ∧ ¬ coll a b d → ∠d:c:b = ∠d:c:a ∧ ∠d:b:c + ∠d:b:a = ∟ + ∟ := by
-  sorry
 
+--theorem angle_positive_neq : ∀ (a o b : Point), (∠a:o:b>0) → (a ≠ b) ∧ (a ≠ o) ∧ (b ≠ o) := by
+--  sorry
+theorem angle_between_transfer : ∀ (a b c d : Point),between a b c ∧ ¬ coll a b d → ∠d:c:b = ∠d:c:a ∧ ∠d:b:c + ∠d:b:a = ∟ + ∟ ∧ ∠d:a:b = ∠d:a:c:= by
+  sorry
 theorem rightAngle_eq_pi_div_two : ∟ = Real.pi / 2 := by
   sorry
 
@@ -86,32 +78,31 @@ sorry
 
 theorem perpBisector_construction :
 ∀ (a b p q : Point) (L : Line),
-(|(a─p)| = |(b─p)|) ∧ (|(a─q)| = |(b─q)|) ∧ distinctPointsOnLine p q L
+(a ≠ b) ∧ (|(a─p)| = |(b─p)|) ∧ (|(a─q)| = |(b─q)|) ∧ distinctPointsOnLine p q L
 → perpBisector a b L := by
 sorry
 
 theorem perpBisector_equiv : ∀ (A B : Point) (L: Line),
 perpBisector A B L ↔ ∃ (P :Point) (AB : Line), P.onLine L ∧ midpoint A P B ∧ perpLine AB L ∧ distinctPointsOnLine A B AB := by
   sorry
-theorem between_fourpoint: ∀(A B C D: Point), between A B C ∧ between B C D ∧ between C D E → between A C E := by
-  euclid_intros
-  euclid_finish
 
 theorem between_zeroAngle : ∀ (A B C : Point), between A B C → ∠B:A:C = 0 := by
-  sorry
+  euclid_intros
+  euclid_apply line_from_points A B as AB
+  euclid_finish
 
 theorem between_straightAngle : ∀ (A B C : Point), between A B C → ∠A:B:C = ∟  + ∟ := by
-  sorry
+  euclid_intros
+  euclid_apply line_from_points A B as AB
+  euclid_finish
 
 --Triangle
 theorem triangle_anglePositive : ∀(A B C : Point) , triangle A B C → ∠A:B:C > 0 ∧ ∠A:C:B >0 ∧ ∠C:A:B >0 := by
-  sorry
+  euclid_intros
+  euclid_apply line_from_points
+  euclid_finish
 
 theorem triangle_angleSum : ∀(A B C : Point) , triangle A B C → ∠A:B:C +∠B:C:A + ∠C:A:B = ∟ + ∟ := by
-  euclid_intros
-  euclid_assert ¬ (between A B C)
-  euclid_assert A ≠ B
-  euclid_apply line_from_points A B as AB
   sorry
 
 theorem triangle_exteriorAngle : ∀ (a b c d: Point), (triangle a b c) ∧ (between a b d) → ∠d:b:c = ∠b:c:a + ∠c:a:b := by
@@ -199,8 +190,22 @@ theorem parallel_eqAlternateAngles :
   → ∠ C:A:B = ∠ A:B:D
 := by
 sorry
+theorem eqAlternateExteriorAngle_parallel : ∀ (a b c d e : Point) (AB CD BD : Line),
+  distinctPointsOnLine a b AB ∧ distinctPointsOnLine c d CD ∧ distinctPointsOnLine b d BD ∧
+  (between e b d) ∧ (a.sameSide c BD) ∧
+  (∠ e:b:a = ∠ e:d:c) →
+  ¬(AB.intersectsLine CD) :=
+by
+  sorry
 
-theorem parallel_SupplementConsecutiveAngles :
+theorem parallel_eqAlternateExteriorAngle : ∀ (a b c d e : Point) (AB CD BD : Line),
+  distinctPointsOnLine a b AB ∧ distinctPointsOnLine c d CD ∧ distinctPointsOnLine b d BD ∧
+  (between e b d) ∧ (a.sameSide c BD) ∧
+  ¬(AB.intersectsLine CD)  → (∠ e:b:a = ∠ e:d:c)
+   :=
+by
+  sorry
+theorem parallel_supplementConsecutiveAngle :
 ∀ (L M T : Line) (A B C D : Point),
   (¬ L.intersectsLine M) ∧
   twoLinesIntersectAtPoint L T A ∧
@@ -211,6 +216,18 @@ theorem parallel_SupplementConsecutiveAngles :
   → ∠ C:A:B + ∠ A:B:D = ∟ + ∟
 := by
 sorry
+
+theorem supplementConsecutiveAngles_parallel :
+∀ (L M T : Line) (A B C D : Point),
+  twoLinesIntersectAtPoint L T A ∧
+  twoLinesIntersectAtPoint M T B ∧
+  C.onLine L ∧
+  D.onLine M ∧
+  C.sameSide D T
+  ∧ ∠ C:A:B + ∠ A:B:D = ∟ + ∟ → (¬ L.intersectsLine M)
+:= by
+sorry
+
 theorem perpLine_perpLine_parallel : ∀ (L1 L2 M : Line),
   (perpLine L1 M) ∧ (perpLine L2 M) ∧ L1 ≠ L2 →
   ¬(L1.intersectsLine L2) :=
@@ -275,8 +292,18 @@ theorem intersecting_chord : ∀ (A B C D E : Point) (O: Circle),
   between A E B ∧ between C E D → |(A─E)| * |(E─B)| = |(C─E)| * |(E─D)|:= by
   sorry
 
+--Proved in Everyday/0415.lean
+theorem chord_bisector_line : ∀ (O A B: Point) (C: Circle) (AB L: Line), O.isCentre C ∧ A.onCircle C ∧ B.onCircle C ∧ distinctPointsOnLine A B AB ∧ perpLine AB L
+  → O.onLine L →  perpBisector A B L := by
+  sorry
 
-theorem inscribedAngle_eq_tangentAngle : ∀ (A B C D : Point) (Ω : Circle) (AB BC CAL : Line),
+theorem chord_foot_midpoint : ∀ (O A B D: Point) (C: Circle) (AB: Line), O.isCentre C ∧ A.onCircle C ∧ B.onCircle C ∧ distinctPointsOnLine A B AB ∧ foot O D AB → |(A─D)| = |(D─B)|:= by
+  sorry
+
+theorem foot_chord_midpoint : ∀ (O A B D: Point) (C: Circle) (AB: Line), O.isCentre C ∧ A.onCircle C ∧ B.onCircle C ∧ distinctPointsOnLine A B AB ∧ midpoint A D B ∧ (¬O.onLine AB) → foot O D AB:= by
+  sorry
+
+theorem inscribedAngle_eq_tangentAngle : ∀ (A B C D : Point) (Ω : Circle) (AB BC CA L : Line),
   (A.onCircle Ω) ∧ (B.onCircle Ω) ∧ (C.onCircle Ω) ∧ formTriangle A B C AB BC CA ∧
   distinctPointsOnLine A D L ∧ tangentAtPoint L Ω A ∧ B.sameSide D AC
   → ∠ B:A:D = ∠ B:C:A :=
@@ -284,15 +311,22 @@ by sorry
 
 theorem intersecting_circles_perpendicular_bisector :
   ∀ (C1 C2 : Circle) (O1 O2 A B : Point) (L : Line),
-  (circlesIntersectsAtTwoPoints C1 C2 O1 O2)
+  (circlesIntersectsAtTwoPoints C1 C2 A B) ∧ O1.isCentre C1 ∧ O2.isCentre C2
   ∧ (O1.onLine L)
   ∧ (O2.onLine L)
   → perpBisector A B L :=
 by sorry
 
-
-theorem diameter_longest : ∀(a b c d: Point) (C: Circle), (diameter a b C) ∧ (c.onCircle C) ∧ (d.onCircle C) → |(a─b)| ≥ |(c─d)| := by
+theorem rightAngle_diameter : ∀(A B C O:Point) (Ω : Circle), O.isCentre Ω ∧ circumCircle Ω A B C ∧ A ≠ B ∧ B ≠ C ∧ C ≠ A ∧ ∠B:A:C = ∟ → diameter B C O Ω := by
+  sorry
+theorem rightAngle_diameter_onCircle : ∀ (A B C O: Point) (Ω: Circle), diameter A B O Ω ∧ ∠A:C:B = ∟ → C.onCircle Ω := by
+  sorry
+theorem diameter_longest : ∀(a b c d o: Point) (C: Circle), (diameter a b o C) ∧ (c.onCircle C) ∧ (d.onCircle C) → |(a─b)| ≥ |(c─d)| := by
   euclid_intros
+  sorry
+
+--See proof in Exervise/1-6
+theorem diameter_rightAngle : ∀ (a b c o : Point) (C: Circle), o.isCentre C ∧  (diameter a b o C) ∧ (c.onCircle C) ∧ (c ≠ a) ∧ (c ≠ b) → ∠ a:c:b = ∟ := by
   sorry
 
 theorem perpendicular_radius_tangent : ∀
@@ -326,21 +360,18 @@ sorry
 --Quadrilateral
 theorem parallelogram_tests : ∀
   (A B C D : Point)
-  (AB BC CD DA AC BD : Line),
+  (AB BC CD DA: Line),
   (formQuadrilateral A B C D AB BC CD DA) ∧
-  (
-    (|(A─B)| = |(C─D)| ∧ |(B─C)| = |(D─A)|)
+    ((|(A─B)| = |(C─D)| ∧ |(B─C)| = |(D─A)|)
     ∨
     (|(A─B)| = |(C─D)| ∧ ¬ AB.intersectsLine CD)
-    ∨
-    (∃ O : Point, twoLinesIntersectAtPoint AC BD O ∧ midpoint A O C ∧ midpoint B O D)
-  )
+    ∨ (|(B─C)| = |(D─A)| ∧ ¬ BC.intersectsLine DA))
   →
   (parallelogram A B C D AB BC CD DA)
 := by
 sorry
 
-theorem parallelogram_eqside : ∀ (A B C D : Point) (AB BC CD DA : Line),
+theorem parallelogram_eqSide : ∀ (A B C D : Point) (AB BC CD DA : Line),
   (formQuadrilateral A B C D AB BC CD DA ∧
    ¬(AB.intersectsLine CD) ∧
    ¬(BC.intersectsLine DA))
@@ -419,4 +450,37 @@ sorry
 
 --Algebra
 theorem ratio_transfer : ∀ (a b c d : ℝ), a / b = c / d  → a / c = b / d := by
+  sorry
+
+theorem power_cyclic: ∀ (a b c d e: Point),distinctFourPoints a b c d ∧ (coll a b e) ∧ (coll c d e) ∧ |(e─a)| * |(e─b)| = |(e─c)| * |(e─d)| → cyclic a b c d := by
+  sorry
+
+theorem cyclic_power: ∀ (a b c d e: Point),distinctFourPoints a b c d ∧ cyclic a b c d ∧ (coll a b e) ∧ (coll c d e) → |(e─a)| * |(e─b)| = |(e─c)| * |(e─d)| := by
+  sorry
+
+theorem congruent_SSS : ∀ (A B C D E F : Point), triangle A B C ∧ triangle D E F ∧ |(A─B)| = |(D─E)| ∧ |(B─C)| = |(E─F)| ∧ |(C─A)| = |(F─D)| → congruentTriangle A B C D E F := by
+  sorry
+
+theorem congruent_SAS : ∀ (A B C D E F : Point), triangle A B C ∧ triangle D E F ∧ |(A─B)| = |(D─E)| ∧ ∠ A:B:C = ∠ D:E:F ∧ |(B─C)| = |(E─F)| → congruentTriangle A B C D E F := by
+  sorry
+
+theorem congruent_ASA : ∀ (A B C D E F : Point), triangle A B C ∧ triangle D E F ∧ |(A─B)| = |(D─E)| ∧ ∠ A:B:C = ∠ D:E:F ∧ ∠ B:A:C = ∠ E:D:F → congruentTriangle A B C D E F := by
+  sorry
+
+theorem congruent_AAS : ∀ (A B C D E F : Point), triangle A B C ∧ triangle D E F ∧ |(A─B)| = |(D─E)| ∧ ∠ A:B:C = ∠ D:E:F ∧ ∠ A:C:B = ∠ D:F:E → congruentTriangle A B C D E F := by
+  sorry
+
+theorem similar_AA : ∀ (A B C D E F : Point), triangle A B C ∧ triangle D E F ∧  ∠ A:B:C = ∠ D:E:F ∧ ∠ B:A:C = ∠ E:D:F → similarTriangle A B C D E F := by
+  sorry
+
+ theorem similar_SAS : ∀ (A B C D E F : Point), triangle A B C ∧ triangle D E F ∧  ∠ A:B:C = ∠ D:E:F ∧ |(A─B)| * |(E─F)| = |(B─C)| * |(D─E)| → similarTriangle A B C D E F := by
+  sorry
+
+theorem similar_SSS : ∀ (A B C D E F : Point), triangle A B C ∧ triangle D E F ∧ |(A─B)| * |(E─F)| = |(B─C)| * |(D─E)| ∧ |(B─C)| * |(F─D)| = |(C─A)| * |(E─F)| → similarTriangle A B C D E F := by
+  sorry
+
+theorem triangle_median_line_parallel : ∀ (a b c d e : Point) (AB BC CA DE: Line), formTriangle a b c AB BC CA ∧ distinctPointsOnLine d e DE ∧ midpoint a d b ∧ midpoint a e c →  ¬ BC.intersectsLine DE:= by
+  sorry
+
+theorem triangle_median_line_half : ∀ (a b c d e : Point), triangle a b c ∧ midpoint a d b ∧ midpoint a e c → |(b─c)| = |(d─e)| * 2:= by
   sorry

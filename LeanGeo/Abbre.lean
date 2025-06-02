@@ -21,8 +21,11 @@ abbrev perpLine (L M : Line) : Prop :=
   ∃(X : Point), twoLinesIntersectAtPoint L M X ∧ perpLineatPoint L M X
 
 @[simp]
+abbrev foot (A B : Point) (l : Line) :=
+  ¬A.onLine l ∧ B.onLine l ∧ (∀ (C : Point), C.onLine l ∧ B ≠ C → ∠ C:B:A = ∟)
+@[simp]
 abbrev perpBisector (a b : Point) (L : Line) : Prop :=
-  ∀ (x : Point), x.onLine L → |(x─a)| = |(x─b)|
+  ¬(a = b) ∧ ∀ (x : Point), x.onLine L → |(x─a)| = |(x─b)|
 
 @[simp]
 abbrev concurrent (l1 l2 l3 : Line) : Prop :=
@@ -43,6 +46,10 @@ A.onCircle Ω ∧ B.onCircle Ω ∧ C.onCircle Ω
 @[simp]
 abbrev inCentre (I A B C : Point) : Prop :=
 ∠ I:A:B = ∠ I:A:C ∧ ∠ I:C:A = ∠ I:C:B ∧ ∠I:B:A = ∠I:B:C
+
+@[simp]
+abbrev exCentre (J A B C : Point) : Prop :=
+∠ J:B:A + ∠J:B:C = ∟ + ∟ ∧ ∠ J:C:A + ∠ J:C:B = ∟ + ∟
 
 @[simp]
 abbrev tangentLine (L : Line) (O : Circle) : Prop :=
@@ -92,6 +99,11 @@ abbrev triangle (A B C : Point) : Prop :=
 ¬ (coll A B C)
 
 @[simp]
+abbrev acuteTriangle (A B C : Point) : Prop :=
+triangle A B C ∧ ∠A:B:C < ∟ ∧ ∠B:C:A < ∟ ∧ ∠C:A:B < ∟
+
+
+@[simp]
 abbrev isoTriangle (A B C : Point) : Prop :=
 triangle A B C ∧ |(A─B)| = |(A─C)|
 
@@ -100,8 +112,8 @@ abbrev rightTriangle (A B C : Point) : Prop :=
 triangle A B C ∧ ∠B:A:C = ∟
 
 @[simp]
-abbrev diameter (A B: Point) (C: Circle): Prop :=
-∃ O: Point, O.isCentre C ∧ A.onCircle C ∧ B.onCircle C ∧ between A O B
+abbrev diameter (A B O: Point) (C: Circle): Prop :=
+midpoint A O B ∧ O.isCentre C ∧ A.onCircle C ∧ B.onCircle C
 
 @[simp]
 abbrev circlesIntersectsAtTwoPoints (C1 C2 : Circle) (A B : Point): Prop :=
@@ -142,6 +154,14 @@ A ≠ B ∧ B ≠ C ∧ C ≠ D ∧ D ≠ A ∧ A ≠ C ∧ B ≠ D
 @[simp]
 abbrev distinctThreePoints (A B C: Point): Prop :=
 A ≠ B ∧ B ≠ C ∧ A ≠ C
+
+@[simp]
+abbrev congruentTriangle (A B C D E F: Point) : Prop :=
+triangle A B C ∧ triangle D E F ∧ |(A─B)| = |(D─E)| ∧ |(B─C)| = |(E─F)| ∧ |(A─C)| = |(D─F)| ∧ ∠A:B:C = ∠D:E:F ∧ ∠B:A:C = ∠E:D:F ∧ ∠A:C:B = ∠D:F:E
+
+@[simp]
+abbrev similarTriangle (A B C D E F: Point) : Prop :=
+triangle A B C ∧ triangle D E F ∧ ∠A:B:C = ∠D:E:F ∧ ∠B:A:C = ∠E:D:F ∧ ∠A:C:B = ∠D:F:E ∧ |(A─B)| * |(E─F)| = |(B─C)| * |(D─E)| ∧ |(B─C)| * |(F─D)| = |(C─A)| * |(E─F)| ∧ |(C─A)| * |(D─E)| = |(A─B)| * |(F─D)|
 end LeanGeo
 namespace Triangle
 
