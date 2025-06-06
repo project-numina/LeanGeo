@@ -1,3 +1,14 @@
+<<<<<<< HEAD
+import LeanGeo.Theorem.Basic
+import LeanGeo.Theorem.Angle
+import LeanGeo.Theorem.Position
+import LeanGeo.Theorem.Parallel
+import LeanGeo.Theorem.Construction
+import LeanGeo.Theorem.Triangle
+import LeanGeo.Theorem.Circle
+import LeanGeo.Theorem.Quadrilateral
+import LeanGeo.Theorem.TriangleCenter
+=======
 import SystemE
 import LeanGeo.Abbre
 namespace LeanGeo
@@ -484,3 +495,4 @@ theorem triangle_median_line_parallel : ∀ (a b c d e : Point) (AB BC CA DE: Li
 
 theorem triangle_median_line_half : ∀ (a b c d e : Point), triangle a b c ∧ midpoint a d b ∧ midpoint a e c → |(b─c)| = |(d─e)| * 2:= by
   sorry
+>>>>>>> origin/master

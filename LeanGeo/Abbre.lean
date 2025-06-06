@@ -3,7 +3,7 @@ import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
 namespace LeanGeo
 @[simp]
 abbrev cyclic (A B C D: Point) : Prop :=
- ∃ O: Circle, A.onCircle O ∧ B.onCircle O ∧ C.onCircle O ∧ D.onCircle O
+ ∃ (O: Circle), A.onCircle O ∧ B.onCircle O ∧ C.onCircle O ∧ D.onCircle O
 
 --abbrev collinear (P A B : Point) : Prop :=
  --- ∃ l : Line, (P.on_Line l) ∧ (A.on_Line l) ∧ (B.on_Line l)
