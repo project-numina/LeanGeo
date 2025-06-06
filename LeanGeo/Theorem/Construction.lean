@@ -21,9 +21,9 @@ theorem midpoint_twice: ∀ (A B P : Point), midpoint A P B → |(A─B)| * 1/2 
   euclid_apply line_from_points
   euclid_finish
 
-theorem exists_foot : ∀ (c a b : Point) (AB : Line),
-  distinctPointsOnLine a b AB ∧ ¬(c.onLine AB) →
-  exists h : Point, h.onLine AB ∧ (∠ a:h:c = ∟ ∨ ∠ b:h:c = ∟) :=
+theorem exists_foot : ∀ (c: Point) (AB : Line),
+   ¬(c.onLine AB) →
+  exists h : Point, foot c h AB :=
 by
   sorry
 
