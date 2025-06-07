@@ -2,7 +2,7 @@ import SystemE
 import LeanGeo.Abbre
 
 namespace LeanGeo
-theorem construct_perpBisector (a b : Point) : ¬ (a ≠ b) →  ∃ L, perpBisector a b L := by
+theorem construct_perpBisector (a b : Point) :  (a ≠ b) →  ∃ L, perpBisector a b L := by
   euclid_intros
   euclid_apply line_from_points
   sorry
