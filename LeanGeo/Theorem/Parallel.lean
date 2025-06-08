@@ -103,7 +103,30 @@ theorem perpLine_perpLine_parallel : ∀ (L1 L2 M : Line),
   (perpLine L1 M) ∧ (perpLine L2 M) ∧ L1 ≠ L2 →
   ¬(L1.intersectsLine L2) :=
 by
-  sorry
+  euclid_intros
+  obtain ⟨X, hX⟩ := left
+  obtain ⟨Y, hY⟩ := left_1
+  obtain ⟨E1, hE1⟩ := intersection_lines L1 M hX.1.1
+  obtain ⟨E2, hE2⟩ := intersection_lines L2 M hY.1.1
+  have : E1 ≠ E2 := by
+    intro h
+    rw [← h] at hE2
+    obtain ⟨E1', hE1'⟩ := exists_distincts_points_on_line M E1
+    obtain ⟨E1'', hE1''⟩ := exists_distincts_points_on_line L1 E1
+    obtain ⟨E1''', hE1'''⟩ := exists_distincts_points_on_line L2 E1
+    have := hX.2 E1'' E1' (by euclid_finish) (by euclid_finish) (by euclid_finish) (by euclid_finish)
+    have : E1 = X := by euclid_finish
+    have : E1 = Y := by euclid_finish
+    have : twoLinesIntersectAtPoint L2 L1 Y := by euclid_finish
+    have := hY.2 E1''' E1' (by euclid_finish) (by euclid_finish) (by euclid_finish) (by euclid_finish)
+    have : coll E1 E1'' E1''' := by sorry
+    euclid_finish
+  obtain ⟨E1', hE1'⟩ := exists_distincts_points_on_line L1 E1
+  obtain ⟨M', hM'⟩ := proposition_31 E1' E1 E2 M (by euclid_finish)
+  have : M'.intersectsLine L2 := by euclid_finish
+  obtain ⟨E2', hE2'⟩ := intersection_lines M' L2 this
+  have := supplementConsecutiveAngles_parallel L1 L2 M E1 E2 E1' E2' (by euclid_finish)
+  euclid_finish
 
 theorem perpLine_parallel_perpLine:
   ∀ (M N L : Line),
