@@ -2,6 +2,8 @@ import SystemE
 import LeanGeo.Abbre
 import Book
 
+set_option maxHeartbeats 0
+
 open Elements.Book1
 
 namespace LeanGeo
@@ -99,6 +101,7 @@ theorem supplementConsecutiveAngles_parallel :
   have := parallel_if c' C d' D a' b' A B L M T (by euclid_finish)
   euclid_finish
 
+theorem coll_of_rayAngleEq (A B C C' : Point) (hAB : A ≠ B) (hC : ¬ coll A B C) (hC' : ¬ coll A B C') : ∠ A:B:C = ∠ A:B:C' → coll B C C' := sorry
 theorem perpLine_perpLine_parallel : ∀ (L1 L2 M : Line),
   (perpLine L1 M) ∧ (perpLine L2 M) ∧ L1 ≠ L2 →
   ¬(L1.intersectsLine L2) :=
@@ -119,7 +122,9 @@ by
     have : E1 = Y := by euclid_finish
     have : twoLinesIntersectAtPoint L2 L1 Y := by euclid_finish
     have := hY.2 E1''' E1' (by euclid_finish) (by euclid_finish) (by euclid_finish) (by euclid_finish)
-    have : coll E1 E1'' E1''' := by sorry
+    have : coll E1 E1'' E1''' := by
+      have := coll_of_rayAngleEq
+      euclid_finish
     euclid_finish
   obtain ⟨E1', hE1'⟩ := exists_distincts_points_on_line L1 E1
   obtain ⟨M', hM'⟩ := proposition_31 E1' E1 E2 M (by euclid_finish)
