@@ -70,7 +70,7 @@ theorem similar_SSS : ∀ (A B C D E F : Point), triangle A B C ∧ triangle D E
   sorry
 
 --nlinarith makes it very slow in this proof.
-theorem HL_congruent : ∀ (a b c d e f : Point) ,  rightTriangle a b c ∧ rightTriangle d e f ∧ |(a─b)| = |(d─e)| ∧ |(b─c)| = |(e─f)| → (△a:b:c).congruent_test (△d:e:f) := by
+theorem HL_congruent : ∀ (a b c d e f : Point) ,  rightTriangle a b c ∧ rightTriangle d e f ∧ |(a─b)| = |(d─e)| ∧ |(b─c)| = |(e─f)| → congruentTriangle a b c d e f := by
   euclid_intros
   euclid_apply pythagorean_point a b c
   euclid_apply pythagorean_point d e f
@@ -89,6 +89,7 @@ theorem HL_congruent : ∀ (a b c d e f : Point) ,  rightTriangle a b c ∧ righ
     have h8 : |(d─f)| > 0 := by euclid_finish
     --nlinarith [h6, h7, h8]
     sorry
+  euclid_apply congruent_SSS a b c d e f
   euclid_finish
 
 theorem isoTriangle_eqAngle : ∀ (A B C : Point), isoTriangle A B C → ∠ A:B:C = ∠A:C:B := by
@@ -131,24 +132,64 @@ theorem eqAngle_isoTriangle : ∀ (a b c : Point),
   euclid_apply congruent_AAS a d b a d c
   euclid_finish
 
-theorem isoTriangle_threeLine_concidence : ∀ (a b c d: Point),
-  isoTriangle a b c ∧ coll c b d →
-  (midpoint b d c ∨ ∠a:d:b = ∟ ∨ ∠a:d:c = ∟ ∨ ∠d:a:b = ∠ d:a:c) →
-  (midpoint b d c ∧  ∠a:d:b = ∟ ∧  ∠a:d:c = ∟ ∧  ∠d:a:b = ∠ d:a:c)
+theorem isoTriangle_threeLine_concidence_midpoint : ∀ (a b c d: Point),
+  isoTriangle a b c ∧ midpoint b d c →
+  ( ∠a:d:b = ∟ ∧  ∠a:d:c = ∟ ∧  ∠d:a:b = ∠ d:a:c)
 := by
-  sorry
+  euclid_intros
+  euclid_apply line_from_points
+  euclid_apply congruent_SSS a b d a c d
+  euclid_finish
+
+theorem isoTriangle_threeLine_concidence_foot : ∀ (a b c d: Point)(BC : Line),
+  isoTriangle a b c ∧ distinctPointsOnLine b c BC ∧ foot a d BC →
+  midpoint b d c ∧  ∠a:d:b = ∟ ∧  ∠a:d:c = ∟ ∧  ∠d:a:b = ∠ d:a:c
+:= by
+  euclid_intros
+  euclid_apply isoTriangle_eqAngle a b c
+  have h1 : ∠a:b:c < ∟ ∧ ∠a:c:b < ∟ := by
+    euclid_apply triangle_angleSum a b c
+    euclid_apply triangle_anglePositive a b c
+    euclid_finish
+  euclid_apply acute_triangle_foot_between a b c d BC
+  have h2: ∠a:d:b = ∟ := by
+    euclid_finish
+  have h3: ∠a:d:c = ∟ := by
+    euclid_finish
+  euclid_apply HL_congruent d a b d a c
+  euclid_finish
 
 
 
+theorem isoTriangle_threeLine_concidence_bisector : ∀ (a b c d: Point),
+  isoTriangle a b c ∧ ∠d:a:b = ∠ d:a:c ∧ coll b c d→
+  (midpoint b d c ∧  ∠a:d:b = ∟ ∧  ∠a:d:c = ∟)
+:= by
+  euclid_intros
+  euclid_apply angle_bisector_between a b c d
+  euclid_apply line_from_points
+  euclid_apply congruent_SAS b a d c a d
+  euclid_finish
+
+theorem perp_bisector_eqSide : ∀ (A B C D: Point), midpoint B D C ∧ ∠A:D:B = ∟ ∧ triangle A B C → isoTriangle A B C:= by
+  euclid_intros
+  euclid_apply line_from_points
+  euclid_assert ∠A:D:C = ∟
+  euclid_apply congruent_SAS A D B A D C
+  euclid_finish
 theorem triangle_median_line_parallel : ∀ (a b c d e : Point) (AB BC CA DE: Line), formTriangle a b c AB BC CA ∧ distinctPointsOnLine d e DE ∧ midpoint a d b ∧ midpoint a e c →  ¬ BC.intersectsLine DE:= by
-  sorry
+  euclid_intros
+  euclid_apply similar_SAS d a e b a c
+  euclid_apply eqAlternateExteriorAngle_parallel
+  euclid_finish
 
 theorem triangle_median_line_half : ∀ (a b c d e : Point), triangle a b c ∧ midpoint a d b ∧ midpoint a e c → |(b─c)| = |(d─e)| * 2:= by
   euclid_intros
   euclid_apply line_from_points
-  euclid_assert |(a─b)| * |(a─e)| = |(a─c)| * |(a─d)|
-  euclid_assert (△ a:b:c).similar_test ((△ a:d:e))
-  euclid_apply (△ a:b:c).similar_property ((△ a:d:e))
+  euclid_apply similar_SAS d a e b a c
+  have h1: |(b─a)| = |(d─a)| * 2 := by
+    euclid_apply midpoint_twice
+    euclid_finish
   euclid_finish
 
 theorem self_fullAngle : ∀ (A B C O : Point) (AB BC CA: Line), formTriangle A B C AB BC CA ∧ insideTriangle O A B C AB BC CA → ∠A:O:C + ∠ C:O:B + ∠ B:O:A = ∟ + ∟ +  ∟ + ∟ := by
@@ -163,8 +204,6 @@ theorem opposingsides_inside_triangle :  ∀ (A B C I : Point) (AB BC CA AI BI C
   euclid_intros
   sorry
 
-theorem triangle_area :∀ (a b c d: Point), (coll a b d) ∧ (triangle a b c) ∧ ((∠c:d:a = ∟) ∨ (∠c:d:b = ∟)) → (△a:b:c).area = |(c─d)| * |(a─b)| := by
-  sorry
 
 theorem para_similar_in : ∀ (A B C D E : Point) (AB CD : Line), distinctPointsOnLine A B AB ∧ distinctPointsOnLine C D CD ∧ ¬ AB.intersectsLine CD ∧ between A E C ∧ coll B E D ∧ AB ≠ CD → similarTriangle A B E C D E := by
   euclid_intros
@@ -184,8 +223,18 @@ theorem para_similar_in : ∀ (A B C D E : Point) (AB CD : Line), distinctPoints
   euclid_apply similar_AA A B E C D E
   euclid_finish
 
-theorem para_similar_out: ∀ (A B C D E : Point) (AB CD : Line), distinctPointsOnLine A B AB ∧ distinctPointsOnLine C D CD ∧ ¬ AB.intersectsLine CD ∧ between E A C ∧ coll B E D ∧ AB ≠ CD → (△A:B:E).similar_test (△C:D:E) := by
-  sorry
+theorem para_similar_out: ∀ (A B C D E : Point) (AB CD : Line), distinctPointsOnLine A B AB ∧ distinctPointsOnLine C D CD ∧ ¬ AB.intersectsLine CD ∧ between E A C ∧ coll B E D ∧ AB ≠ CD → similarTriangle E A B E C D := by
+  euclid_intros
+  euclid_apply line_from_points A C as AC
+  euclid_apply line_from_points B D as BD
+  have h1: ∠E:A:B = ∠E:C:D := by
+    euclid_apply parallel_eqAlternateExteriorAngle
+    euclid_finish
+  have h2: ∠E:B:A = ∠E:D:C := by
+    euclid_apply parallel_eqAlternateExteriorAngle
+    euclid_finish
+  euclid_apply similar_AA E A B E C D
+  euclid_finish
 
 
 
@@ -205,5 +254,25 @@ theorem obtuse_triangle_foot_between: ∀(A B C D: Point) (BC : Line), distinctP
   have h4: D ≠ C := by
     euclid_apply triangle_angleSum A B D
     euclid_finish
+  euclid_finish
+
+theorem rightTriangle_midLine_half: ∀ (A B C D: Point), rightTriangle A B C ∧ midpoint B D C → |(A─D)| = |(B─D)| := by
+  euclid_intros
+  euclid_apply exists_midpoint A C as E
+  euclid_apply line_from_points A C as CA
+  euclid_apply line_from_points A B as AB
+  euclid_apply line_from_points B C as BC
+  euclid_apply line_from_points D E as DE
+  have h1: ∠C:E:D = ∟ := by
+    euclid_apply triangle_median_line_parallel C A B E D  CA AB BC DE
+    euclid_apply parallel_eqAlternateExteriorAngle  D E B A C DE AB CA
+    euclid_finish
+  euclid_apply perp_bisector_eqSide D A C E
+  euclid_finish
+
+theorem acute_angle_foot_equal : ∀ (A B C D : Point) (BC: Line), distinctPointsOnLine B C BC ∧ ¬ (A.onLine BC) ∧ foot A D BC ∧ ∠A:B:C < ∟ → ∠A:B:C = ∠A:B:D := by
+  euclid_intros
+  euclid_apply line_from_points
+  euclid_apply triangle_angleSum
   euclid_finish
 end LeanGeo

@@ -96,4 +96,6 @@ theorem angle_bisector_between: ∀ (a b c d: Point), (triangle a b c) ∧ (coll
     euclid_apply between_angleSum a c b d
     euclid_finish
   euclid_finish
+
+
 end LeanGeo
