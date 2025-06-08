@@ -1,33 +1,70 @@
 import SystemE
 import LeanGeo.Abbre
+import Book
+
+open Elements.Book1
 
 namespace LeanGeo
+
+#check proposition_31
+-- proposition_31 used to construct a parallel line passing though a point
+-- that is given point P and line L, construct L' parrallel to L passing through P
+
+theorem transferline_angles : ∀ (a b c d e f g h : Point) (AB CD EF : Line),
+  distinctPointsOnLine a b AB ∧ distinctPointsOnLine c d CD ∧ distinctPointsOnLine e f EF ∧
+  (between a g b) ∧ (between c h d) ∧ (between e g h) ∧ (between g h f) ∧ (b.sameSide d EF) ∧ ¬(AB.intersectsLine CD)
+  → ∠ a:g:h = ∠ g:h:d ∧ ∠ e:g:b = ∠ g:h:d ∧ ∠ b:g:h + ∠ g:h:d = ∟ + ∟ := proposition_29
+
 theorem parallel_eqAlternateAngles :
 ∀ (L M T : Line) (A B C D : Point),
   (¬ L.intersectsLine M) ∧
   twoLinesIntersectAtPoint L T A ∧
   twoLinesIntersectAtPoint M T B ∧
   C.onLine L ∧
-  D.onLine M ∧ A ≠ C ∧ D ≠ B ∧
+  D.onLine M ∧ A ≠ C ∧ D ≠ B ∧ A ≠ B ∧
   C.opposingSides D T
-  → ∠ C:A:B = ∠ A:B:D
+  → ∠ C:A:B = ∠ D:B:A
 := by
-sorry
+  euclid_intros
+  obtain ⟨C', hC'1, hC'2⟩ := extend_point L C A (by euclid_finish)
+  have : A ≠ B := by tauto
+  obtain ⟨A', hA'⟩ := extend_point T B A (by euclid_finish)
+  obtain ⟨D', hD'⟩ := extend_point M D B (by euclid_finish)
+  obtain ⟨B', hB'⟩ := extend_point T A B (by euclid_finish)
+  have := transferline_angles C C' D' D A' B' A B  L M T (by euclid_finish)
+  euclid_finish
+
+theorem parallel_if : ∀ (a b c d e f g h : Point) (AB CD EF : Line),
+  distinctPointsOnLine a b AB ∧ distinctPointsOnLine c d CD ∧ distinctPointsOnLine e f EF ∧
+  (between a g b) ∧ (between c h d) ∧ (between e g h) ∧ (between g h f) ∧ (b.sameSide d EF) ∧
+  (∠ e:g:b = ∠ g:h:d ∨ ∠ b:g:h + ∠ g:h:d = ∟ + ∟) →
+  ¬(AB.intersectsLine CD) := proposition_28
+
 theorem eqAlternateExteriorAngle_parallel : ∀ (a b c d e : Point) (AB CD BD : Line),
   distinctPointsOnLine a b AB ∧ distinctPointsOnLine c d CD ∧ distinctPointsOnLine b d BD ∧
   (between e b d) ∧ (a.sameSide c BD) ∧
   (∠ e:b:a = ∠ e:d:c) →
   ¬(AB.intersectsLine CD) :=
 by
-  sorry
+  euclid_intros
+  obtain ⟨d', hd'⟩ := extend_point BD b d (by euclid_finish)
+  obtain ⟨c', hc'⟩ := extend_point CD c d (by euclid_finish)
+  obtain ⟨a', ha'⟩ := extend_point AB a b (by euclid_finish)
+  have := parallel_if a' a c' c e d' b d AB CD BD (by euclid_finish)
+  euclid_finish
 
 theorem parallel_eqAlternateExteriorAngle : ∀ (a b c d e : Point) (AB CD BD : Line),
   distinctPointsOnLine a b AB ∧ distinctPointsOnLine c d CD ∧ distinctPointsOnLine b d BD ∧
   (between e b d) ∧ (a.sameSide c BD) ∧
   ¬(AB.intersectsLine CD)  → (∠ e:b:a = ∠ e:d:c)
-   :=
-by
-  sorry
+   := by
+  euclid_intros
+  obtain ⟨d', hd'⟩ := extend_point BD b d (by euclid_finish)
+  obtain ⟨c', hc'⟩ := extend_point CD c d (by euclid_finish)
+  obtain ⟨a', ha'⟩ := extend_point AB a b (by euclid_finish)
+  have := transferline_angles a' a c' c e d' b d AB CD BD (by euclid_finish)
+  euclid_finish
+
 theorem parallel_supplementConsecutiveAngle :
 ∀ (L M T : Line) (A B C D : Point),
   (¬ L.intersectsLine M) ∧
@@ -35,10 +72,16 @@ theorem parallel_supplementConsecutiveAngle :
   twoLinesIntersectAtPoint M T B ∧
   C.onLine L ∧
   D.onLine M ∧
-  C.sameSide D T
+  C.sameSide D T ∧ A ≠ B
   → ∠ C:A:B + ∠ A:B:D = ∟ + ∟
 := by
-sorry
+  euclid_intros
+  obtain ⟨c', hc'⟩ := extend_point L C A (by euclid_finish)
+  obtain ⟨d', hd'⟩ := extend_point M D B (by euclid_finish)
+  obtain ⟨a', ha'⟩ := extend_point T B A (by euclid_finish)
+  obtain ⟨b', hb'⟩ := extend_point T A B (by euclid_finish)
+  have := transferline_angles c' C d' D a' b' A B L M T (by euclid_finish)
+  euclid_finish
 
 theorem supplementConsecutiveAngles_parallel :
 ∀ (L M T : Line) (A B C D : Point),
@@ -46,15 +89,21 @@ theorem supplementConsecutiveAngles_parallel :
   twoLinesIntersectAtPoint M T B ∧
   C.onLine L ∧
   D.onLine M ∧
-  C.sameSide D T
-  ∧ ∠ C:A:B + ∠ A:B:D = ∟ + ∟ → (¬ L.intersectsLine M)
-:= by
-sorry
+  C.sameSide D T ∧ A ≠ B
+  ∧ ∠ C:A:B + ∠ A:B:D = ∟ + ∟ → (¬ L.intersectsLine M) := by
+  euclid_intros
+  obtain ⟨c', hc'⟩ := extend_point L C A (by euclid_finish)
+  obtain ⟨d', hd'⟩ := extend_point M D B (by euclid_finish)
+  obtain ⟨a', ha'⟩ := extend_point T B A (by euclid_finish)
+  obtain ⟨b', hb'⟩ := extend_point T A B (by euclid_finish)
+  have := parallel_if c' C d' D a' b' A B L M T (by euclid_finish)
+  euclid_finish
 
 theorem perpLine_perpLine_parallel : ∀ (L1 L2 M : Line),
   (perpLine L1 M) ∧ (perpLine L2 M) ∧ L1 ≠ L2 →
   ¬(L1.intersectsLine L2) :=
-by sorry
+by
+  sorry
 
 theorem perpLine_parallel_perpLine:
   ∀ (M N L : Line),
