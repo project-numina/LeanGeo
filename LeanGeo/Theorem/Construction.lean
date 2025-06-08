@@ -53,7 +53,7 @@ theorem construct_perpBisector (a b : Point) : (a ≠ b) →  ∃ L, perpBisecto
   use L
   exact hL.1
 
-theorem centre_if_equidistant (a b c o : Point) (C : Circle) (ha : a.onCircle C) (hb : b.onCircle C) (hc : c.onCircle C) : |(o─a)| = |(o─b)| ∧ |(o─b)| = |(o─c)| → o.isCentre C := by sorry
+theorem centre_if_equidistant (a b c o : Point) (hab : a ≠ b) (hbc : b ≠ c) (hac : a ≠ c) (C : Circle) (ha : a.onCircle C) (hb : b.onCircle C) (hc : c.onCircle C) : |(o─a)| = |(o─b)| ∧ |(o─b)| = |(o─c)| → o.isCentre C := by sorry
 
 theorem exists_centre : ∀ (O: Circle), ∃ (C : Point), C.isCentre O := by
   euclid_intros
@@ -73,7 +73,7 @@ theorem exists_centre : ∀ (O: Circle), ∃ (C : Point), C.isCentre O := by
     sorry
   obtain ⟨E, hE⟩ := intersection_lines L' L this
   use E
-  euclid_apply centre_if_equidistant
+  have := centre_if_equidistant
   euclid_finish
 
 theorem exists_midpoint : ∀ (A B : Point), A ≠ B → ∃(P : Point), midpoint A P B := by
@@ -92,20 +92,47 @@ theorem midpoint_twice: ∀ (A B P : Point), midpoint A P B → |(A─B)| * 1/2 
   euclid_apply line_from_points
   euclid_finish
 
+
+#check between_points
+
 theorem exists_foot : ∀ (c: Point) (AB : Line),
    ¬(c.onLine AB) →
   ∃ h : Point, foot c h AB :=
 by
   intro P AB hh
-  obtain ⟨P1, hP1⟩ := line_nonempty AB
-  obtain ⟨PP1, hP, hP1'⟩ := line_from_points P P1 (by euclid_finish)
-  obtain ⟨P2, h1, h2, h3⟩ := extend_point_longer PP1 P P1 (P─P1) (by euclid_finish)
-  obtain ⟨C, hC⟩ := circle_from_points P P2 (by euclid_finish)
-  have := intersection_circle_line_2 P1 C AB (by euclid_finish)
-  obtain ⟨A, B, hA1, hA2, hB1, hB2⟩ := intersections_circle_line C AB this
-  obtain ⟨L, hL, ⟨M, hM⟩⟩ := construct_perpBisector' A B (by tauto)
-  use M
-  sorry
+  obtain ⟨A, hA⟩ := line_nonempty AB
+  obtain ⟨B, hAB, hB⟩ := exists_distincts_points_on_line AB A
+  obtain ⟨h, Hh1, Hh2⟩ := proposition_12 A B P AB (by euclid_finish)
+  use h
+  wlog q : ∠ A:h:P = ∟ with H
+  · have : ∠ B:h:P = ∟ := by tauto
+    exact H P AB hh B (by tauto) A (by tauto) (by tauto) h Hh1 (by tauto) this
+  use (by euclid_finish)
+  use (by euclid_finish)
+  intro x hx
+  have : h ≠ A ∨ h ≠ B := by euclid_finish
+  cases this with
+  | inl hl =>
+    have : between x A h ∨ between A x h ∨ between A h x ∨ x = A := by euclid_finish
+    rcases this with hh | hh | hh | hh | hh
+    · have : ∠ x:h:P = ∠ A:h:P := by sorry
+      euclid_finish
+    · have : ∠ x:h:P = ∠ A:h:P := by sorry
+      euclid_finish
+    · have : ∠ x:h:P + ∠ A:h:P = ∟ + ∟ := by sorry
+      euclid_finish
+    · euclid_finish
+  | inr hr =>
+    have : ∠ A:h:P + ∠ P:h:B = ∟ + ∟ := by sorry
+    have : between x B h ∨ between B x h ∨ between B h x ∨ x = B := by euclid_finish
+    rcases this with hh | hh | hh | hh | hh
+    · have : ∠ x:h:P = ∠ B:h:P := by sorry
+      euclid_finish
+    · have : ∠ x:h:P = ∠ B:h:P := by sorry
+      euclid_finish
+    · have : ∠ x:h:P + ∠ B:h:P = ∟ + ∟ := by sorry
+      euclid_finish
+    · euclid_finish
 
 theorem exists_angleBisection : ∀ (A B C : Point),
 (A ≠ B) ∧ (A ≠ C) ∧ ¬(coll A B C)
