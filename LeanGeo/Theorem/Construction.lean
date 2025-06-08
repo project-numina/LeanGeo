@@ -115,7 +115,9 @@ by
   | inl hl =>
     have : between x A h ∨ between A x h ∨ between A h x ∨ x = A := by euclid_finish
     rcases this with hh | hh | hh | hh | hh
-    · have : ∠ x:h:P = ∠ A:h:P := by sorry
+    · have : ∠ x:h:P = ∠ A:h:P := by
+        have : ¬ coll P x h := by euclid_finish
+        sorry
       euclid_finish
     · have : ∠ x:h:P = ∠ A:h:P := by sorry
       euclid_finish
@@ -182,6 +184,19 @@ theorem exists_inCentre : ∀ (A B C: Point), triangle A B C → ∃ (I : Point)
   have : L1.intersectsLine L2 := by sorry
   obtain ⟨I, hI⟩ := intersection_lines L1 L2 this
   use I
-  sorry
+  simp only [inCentre]
+  apply And.intro
+  · sorry
+  apply And.intro
+  · specialize hL2 I
+    have : I ≠ C := sorry
+    have := hL2.1 (by euclid_finish)
+    have : ∠ I:C:A = ∠ A:C:I := by euclid_finish
+    euclid_finish
+  · specialize hL1 I
+    have : I ≠ B := sorry
+    have := hL1.1 (by euclid_finish)
+    have : ∠ A:B:I = ∠ I:B:A := by euclid_finish
+    euclid_finish
 
 end LeanGeo
