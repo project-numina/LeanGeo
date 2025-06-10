@@ -24,6 +24,7 @@ theorem perpBisector_equiv : ∀ (A B : Point) (L: Line),
 perpBisector A B L ↔ ∃ (P :Point) (AB : Line), P.onLine L ∧ midpoint A P B ∧ perpLine AB L ∧ distinctPointsOnLine A B AB := by
   sorry
 
+
 theorem between_zeroAngle : ∀ (A B C : Point), between A B C → ∠B:A:C = 0 := by
   euclid_intros
   euclid_apply line_from_points A B as AB

@@ -1,7 +1,6 @@
 import SystemE
 import LeanGeo.Abbre
 import LeanGeo.Theorem.Angle
-
 import Book
 
 open Elements.Book1

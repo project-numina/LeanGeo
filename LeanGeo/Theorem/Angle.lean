@@ -2,20 +2,24 @@ import SystemE
 import LeanGeo.Abbre
 import LeanGeo.Theorem.BookTheorem
 namespace LeanGeo
+
 theorem angle_coincide_zero : ∀ (a o : Point), (a ≠ o) → ∠a:o:a = 0:= by
   euclid_intros
   euclid_apply line_from_points
   euclid_finish
+
 theorem supplementaryAngle_line : ∀ (d a b c: Point), (between a b c) ∧ (¬ coll a b d) → ∠d:b:a + ∠d:b:c = ∟ + ∟ := by
   euclid_intros
   euclid_apply line_from_points a b as AB
   euclid_apply line_from_points b d as BD
   euclid_apply Book_between_angleSum d b c a BD AB
   euclid_finish
+
 theorem between_zeroAngle : ∀ (A B C : Point), between A B C → ∠B:A:C = 0 := by
   euclid_intros
   euclid_apply line_from_points A B as AB
   euclid_finish
+
 theorem sameSide_eqAngle_coll : ∀(A B C D: Point) (AB : Line), distinctPointsOnLine A B AB ∧ (∠A:B:C = ∠A:B:D) ∧ D.sameSide C AB → coll B C D := by
   euclid_intros
   euclid_apply line_from_points B C as BC
@@ -29,7 +33,6 @@ theorem sameSide_eqAngle_coll : ∀(A B C D: Point) (AB : Line), distinctPointsO
     euclid_assert ∠D:B:C + ∠A:B:C = ∠D:B:A
     euclid_finish
   euclid_finish
-
 
 theorem between_straightAngle : ∀ (A B C : Point), between A B C → ∠A:B:C = ∟  + ∟ := by
   euclid_intros
@@ -46,6 +49,7 @@ A.onLine l ∧ B.onLine l ∧ C.onLine l := by
 theorem point_not_onLine : ∀(A B C : Point) (l :Line), ¬ coll A B C ∧ distinctPointsOnLine B C l → ¬ A.onLine l := by
   euclid_intros
   euclid_finish
+
 --theorem angle_positive_neq : ∀ (a o b : Point), (∠a:o:b>0) → (a ≠ b) ∧ (a ≠ o) ∧ (b ≠ o) := by
 --  sorry
 theorem angle_between_transfer : ∀ (a b c d : Point),between a b c ∧ ¬ coll a b d → ∠d:c:b = ∠d:c:a ∧ ∠d:b:c + ∠d:b:a = ∟ + ∟ ∧ ∠d:a:b = ∠d:a:c:= by
@@ -96,6 +100,5 @@ theorem angle_bisector_between: ∀ (a b c d: Point), (triangle a b c) ∧ (coll
     euclid_apply between_angleSum a c b d
     euclid_finish
   euclid_finish
-
 
 end LeanGeo

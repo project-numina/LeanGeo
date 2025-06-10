@@ -60,8 +60,8 @@ abbrev inCircle (Ω : Circle) (AB BC CA : Line) : Prop :=
 tangentLine AB Ω ∧ tangentLine BC Ω ∧ tangentLine CA Ω
 
 @[simp]
-abbrev tangentAtPoint (L : Line) (O :Circle) (P : Point) : Prop :=
-(P.onLine L) ∧ (P.onCircle O) ∧ ∃! (X : Point), (X.onLine L) ∧ (X.onCircle O)
+abbrev tangentAtPoint (P O: Point) (L: Line) (C :Circle) : Prop :=
+(O.isCentre C) ∧ (P.onCircle C) ∧ foot O P L
 
 @[simp]
 abbrev formPentagon (A B C D E : Point) (AB BC CD DE EA : Line): Prop :=
