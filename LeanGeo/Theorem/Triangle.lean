@@ -200,6 +200,14 @@ theorem self_fullAngle : ∀ (A B C O : Point) (AB BC CA: Line), formTriangle A 
   euclid_apply triangle_angleSum A B C
   euclid_finish
 
+theorem triangle_inside_angleSum: ∀ (A B C O : Point) (AB BC CA: Line), formTriangle A B C AB BC CA ∧ insideTriangle O A B C AB BC CA → ∠B:O:C = ∠O:B:A + ∠B:A:C + ∠A:C:O := by
+  euclid_intros
+  euclid_apply triangle_angleSum A O B
+  euclid_apply triangle_angleSum C O B
+  euclid_apply triangle_angleSum A O C
+  euclid_apply triangle_angleSum A B C
+  euclid_finish
+
 theorem opposingsides_inside_triangle :  ∀ (A B C I : Point) (AB BC CA AI BI CI : Line), (formTriangle A B C AB BC CA) ∧ (distinctPointsOnLine B I BI) ∧ (distinctPointsOnLine C I CI) ∧ A.opposingSides C BI ∧ B.opposingSides C AI → insideTriangle I A B C AB BC CA:= by
   euclid_intros
   sorry

@@ -63,16 +63,6 @@ theorem angle_between_transfer : ∀ (a b c d : Point),between a b c ∧ ¬ coll
     · euclid_apply line_from_points
       euclid_finish
 
-axiom rightAngle_eq_pi_div_two : ∟ = Real.pi / 2
-
-theorem sin_rightAngle : Real.sin ∟ = 1 := by
-  rw [rightAngle_eq_pi_div_two]
-  rw [Real.sin_pi_div_two]
-
-theorem cos_rightAngle : Real.cos ∟ = 0 := by
-  rw [rightAngle_eq_pi_div_two]
-  rw [Real.cos_pi_div_two]
-
 theorem between_angleSum : ∀(a b c d: Point), between b c d ∧ (¬ coll a b c) → ∠d:a:c + ∠c:a:b = ∠d:a:b:= by
   euclid_intros
   euclid_apply line_from_points

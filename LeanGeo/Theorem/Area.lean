@@ -39,6 +39,7 @@ theorem area_between_add: ∀(A B C D: Point), between B D C→ (△A:B:D).area 
   euclid_apply line_from_points
   euclid_finish
 
+
 --Slow but could compile
 theorem area_ratio_segment_ratio2: ∀ (a b c d e: Point), coll a e d ∧ coll b c d → (△a:b:e).area * |(d─c)| = (△c:a:e).area * |(d─b)|:= by
   euclid_intros
@@ -102,6 +103,9 @@ theorem Ceva : ∀ (A B C D E F O: Point), (triangle A B C) ∧ coll A F B ∧ c
     euclid_apply line_from_points A B as AB
     euclid_apply line_from_points B C as BC
     euclid_finish
+theorem Ceva_inverse : ∀ (A B C D E F O : Point), (triangle A B C) ∧ coll A F B ∧ coll A E C ∧ coll B D C ∧ coll A O D ∧ |(B─D)| * |(C─E)| * |(A─F)| = |(D─C)| * |(E─A)| * |(F─B)| ∧  coll C O F →  coll B O E := by
+  sorry
+
 
 theorem angle_bisector_theorem : ∀ (A B C D: Point), triangle A B C ∧ ∠D:A:B = ∠D:A:C ∧ coll B D C → |(A─C)| * |(B─D)| = |(A─B)| * |(C─D)|:= by
   euclid_intros

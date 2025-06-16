@@ -90,8 +90,8 @@ abbrev perpPoint (A B C D : Point) : Prop :=
 ∃ (P : Point), (coll P A B) ∧ (coll P C D) ∧ (∠ A:P:C = ∟)
 
 @[simp]
-abbrev orthoCentre (X A B C : Point) : Prop :=
-perpPoint X A B C ∧ perpPoint X B A C ∧ perpPoint X C A B
+abbrev orthoCentre (X A B C D E F: Point) (AB BC CA : Line): Prop :=
+formTriangle A B C AB BC CA ∧ foot A D BC ∧ foot B E CA ∧ foot C F AB ∧ coll A X D ∧ coll B X E ∧ coll C X F
 
 
 @[simp]

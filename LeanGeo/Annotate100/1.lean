@@ -2,8 +2,6 @@ import Mathlib
 import SystemE
 import LeanGeo
 namespace LeanGeo
-theorem triangle_area :∀ (a b c d: Point), (coll a b d) ∧ (triangle a b c) ∧ ((∠c:d:a = ∟) ∨ (∠c:d:b = ∟)) → (△a:b:c).area = |(c─d)| * |(a─b)| := by
-  sorry
 
 /--5. If two altitudes of a triangle are equal, then the triangle is isosceles.-/
 theorem Numina_Geometry_557 :

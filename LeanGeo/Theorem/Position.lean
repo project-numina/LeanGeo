@@ -18,4 +18,21 @@ theorem perp_foot: ∀ (A B C: Point) (l : Line), ¬ A.onLine l ∧ distinctPoin
   euclid_intros
   euclid_apply angle_between_transfer
   euclid_finish
+
+theorem eqAngle_sameSide_coll : ∀ (A B C D : Point)(AB: Line), distinctPointsOnLine A B AB ∧ ∠A:B:C = ∠A:B:D  ∧ C.sameSide D AB → coll B C D := by
+  euclid_intros
+  euclid_apply line_from_points
+  euclid_finish
+
+theorem eqAngle_perp_coll : ∀ (A B C D : Point), (A ≠ B) ∧ ∠A:B:D= ∟ ∧ ∠ A:B:C = ∟ → coll B C D := by
+  euclid_intros
+  euclid_apply line_from_points A B as AB
+  by_cases C.sameSide D AB
+  · euclid_apply line_from_points
+    euclid_finish
+  · by_cases C.opposingSides D AB
+    · euclid_apply line_from_points
+      sorry
+    · euclid_finish
+
 end LeanGeo
