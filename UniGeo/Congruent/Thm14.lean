@@ -1,6 +1,7 @@
 import SystemE
 import UniGeo.Relations
 
+open SystemE
 namespace UniGeo.Congruent
 
 theorem theorem_14 : ∀ (U V W X Y : Point) (UW VX UX VW : Line),

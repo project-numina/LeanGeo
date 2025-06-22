@@ -1,6 +1,7 @@
 import SystemE
 import UniGeo.Relations
 
+open SystemE
 namespace UniGeo.Triangle
 
 theorem theorem_17 : ∀ (U W X S T V : Point) (UW WX XU ST TV VS : Line),

@@ -7,6 +7,8 @@ import LeanGeo.Theorem.Triangle
 import LeanGeo.Theorem.Position
 import LeanGeo.Theorem.Construction
 import LeanGeo.Theorem.Parallel
+
+open SystemE
 namespace LeanGeo
 
 theorem triangle_two_foot_intersects : ∀ (A B C D E : Point) (AB BC CA AD BE: Line), formTriangle A B C AB BC CA ∧ foot A D BC ∧ foot B E CA ∧ distinctPointsOnLine A D AD ∧ distinctPointsOnLine B E BE → AD.intersectsLine BE := by

@@ -5,6 +5,7 @@ import Book
 
 open Elements.Book1
 
+open SystemE
 namespace LeanGeo
 theorem construct_perpBisector' (a b : Point) : (a ≠ b) →  ∃ L, perpBisector a b L ∧ ∃ M : Point, M.onLine L ∧ midpoint a M b := by
   intro hab
@@ -170,9 +171,6 @@ by
       euclid_finish
     intro x hx
     sorry
-
-example (A B : Prop) : (A ↔ B) ↔ ((A → B) ∧ (B → A)) :=
-  iff_iff_implies_and_implies A B
 
 theorem exists_inCentre : ∀ (A B C: Point), triangle A B C → ∃ (I : Point), inCentre I A B C := by
   intro A B C hABC

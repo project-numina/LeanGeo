@@ -3,6 +3,7 @@ import Book.Prop15
 import Book.Prop29
 import UniGeo.Relations
 
+open SystemE
 namespace UniGeo.Similarity
 
 theorem theorem_5 : ∀ (F G H I J : Point) (FI GH FH GI : Line),

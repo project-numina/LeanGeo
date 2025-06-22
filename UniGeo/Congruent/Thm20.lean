@@ -1,6 +1,7 @@
 import SystemE
 import UniGeo.Relations
 
+open SystemE
 namespace UniGeo.Congruent
 
 theorem theorem_20 : ∀ (F G H I J : Point) (FH FI IG GJ JH : Line),

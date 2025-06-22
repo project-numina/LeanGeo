@@ -2,6 +2,7 @@ import SystemE
 import Book.Prop15
 import UniGeo.Relations
 
+open SystemE
 namespace UniGeo.Congruent
 
 theorem theorem_12 : ∀ (Q R S T U : Point) (QS RT QT RS : Line),

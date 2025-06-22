@@ -1,5 +1,7 @@
 import SystemE.Theory.Sorts
 
+namespace SystemE
+
 opaque Point.onLine : Point → Line → Prop
 
 @[simp]
@@ -68,3 +70,5 @@ abbrev formRectilinearAngle (a b c : Point) (AB BC : Line) :=
 abbrev formParallelogram (a b c d : Point) (AB CD AC BD : Line) : Prop :=
     a.onLine AB ∧ b.onLine AB ∧ c.onLine CD ∧ d.onLine CD ∧ a.onLine AC ∧ c.onLine AC ∧ distinctPointsOnLine b d BD ∧
     (a.sameSide c BD) ∧ ¬(AB.intersectsLine CD) ∧ ¬(AC.intersectsLine BD)
+
+end SystemE

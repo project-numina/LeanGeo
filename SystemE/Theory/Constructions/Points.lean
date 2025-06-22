@@ -1,6 +1,7 @@
 import SystemE.Theory.Sorts
 import SystemE.Theory.Relations
 
+namespace SystemE
 
 axiom arbitrary_point :
   ∃ _ : Point, true
@@ -25,9 +26,9 @@ axiom exists_point_between_points_not_on_line :
 /--
 This rule is not in [Avigad et al., 2009] but is convenient for proving some propositions.
 -/
-axiom point_between_points_shorter_than : ∀ (L : Line) (b c : Point) (s : Segment),
-  distinctPointsOnLine b c L ∧ (|s| > 0) →
-  ∃ a : Point, (a.onLine L) ∧ (between b a c) ∧ |(b─a)| < |s|
+axiom point_between_points_shorter_than : ∀ (L : Line) (b c : Point) (s1 s2 : Point),
+  distinctPointsOnLine b c L ∧ (|(s1─s2)| > 0) →
+  ∃ a : Point, (a.onLine L) ∧ (between b a c) ∧ |(b─a)| < |(s1─s2)|
 
 axiom extend_point :
   ∀ (L : Line) (b c : Point), distinctPointsOnLine b c L
@@ -41,8 +42,8 @@ axiom extend_point_not_on_line :
 This rule is not in [Avigad et al., 2009] but is convenient for proving some propositions.
 -/
 axiom extend_point_longer :
-  ∀ (L : Line) (b c : Point) (s : Segment), distinctPointsOnLine b c L
-  → ∃ a : Point, (a.onLine L) ∧ (between b c a) ∧ |(c─a)| > |s|
+  ∀ (L : Line) (b c : Point) (s1 s2 : Point), distinctPointsOnLine b c L
+  → ∃ a : Point, (a.onLine L) ∧ (between b c a) ∧ |(c─a)| > |(s1─s2)|
 
 axiom point_same_side :
   ∀ (L : Line) (b : Point), ¬(b.onLine L) → ∃ a : Point, a.sameSide b L
@@ -80,3 +81,5 @@ axiom exists_point_outside_circle :
 
 axiom exists_distinct_point_outside_circle :
   ∀ (α : Circle) (b : Point),  ∃ a : Point, a ≠ b ∧ a.outsideCircle α
+
+end SystemE

@@ -1,6 +1,9 @@
 import SystemE
 import UniGeo.Relations
 import UniGeo.Abbre
+
+open SystemE
+
 theorem imo_2020_1:
   ∀ (A B C D P Q R Z X : Point) (AB BC CD DA DQ l CR: Line),
   (formQuadrilateral A B C D AB BC CD DA) ∧

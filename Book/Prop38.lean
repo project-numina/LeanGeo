@@ -1,10 +1,12 @@
 import SystemE
+import Smt.Real
 import Book.Prop31
 import Book.Prop34
 import Book.Prop36
 
 
 namespace Elements.Book1
+open SystemE
 
 theorem proposition_38 : ∀ (a b c d e f: Point) (AD BF AB AC DE DF : Line),
   a.onLine AD ∧ d.onLine AD ∧ formTriangle a b c AB BF AC ∧ formTriangle d e f DE BF DF ∧

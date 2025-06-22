@@ -1,4 +1,5 @@
 import SystemE
+import Smt.Real
 import Book.Prop01
 import Book.Prop03
 import Book.Prop05
@@ -6,13 +7,14 @@ import Book.Prop07
 import Book.Prop08
 
 namespace Elements.Book1
+open SystemE
 
 theorem proposition_9 : ∀ (a b c : Point) (AB AC : Line),
   formRectilinearAngle b a c AB AC ∧ AB ≠ AC →
   ∃ f : Point, f ≠ a ∧ (∠ b:a:f = ∠ c:a:f) :=
 by
   euclid_intros
-  euclid_apply point_between_points_shorter_than AB a b (a─c) as d
+  euclid_apply point_between_points_shorter_than AB a b a c as d
   euclid_apply (proposition_3 a c a d AC AB) as e
   euclid_apply (line_from_points d e) as DE
   euclid_apply (proposition_1' d e a DE) as f
@@ -38,7 +40,7 @@ theorem proposition_9' : ∀ (a b c : Point) (AB AC : Line),
   ∃ f : Point, (f.sameSide c AB) ∧ (f.sameSide b AC) ∧ (∠ b:a:f = ∠ c:a:f) :=
 by
   euclid_intros
-  euclid_apply (point_between_points_shorter_than AB a b (a─c)) as d
+  euclid_apply (point_between_points_shorter_than AB a b a c) as d
   euclid_apply (proposition_3 a c a d AC AB) as e
   euclid_apply (line_from_points d e) as DE
   euclid_apply (proposition_1' d e a DE) as f

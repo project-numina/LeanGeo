@@ -2,6 +2,7 @@ import SystemE
 import Book.Prop29
 import UniGeo.Relations
 
+open SystemE
 namespace UniGeo.Parallel
 
 theorem theorem_11 : ∀ (Q T R S U : Point) (QT RS QS RT : Line),

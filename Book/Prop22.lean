@@ -1,7 +1,9 @@
 import SystemE
+import Smt.Real
 import Book.Prop03
 
 namespace Elements.Book1
+open SystemE
 
 theorem proposition_22 : ∀ (a a' b b' c c' : Point) (A B C : Line),
   distinctPointsOnLine a a' A ∧ distinctPointsOnLine b b' B ∧ distinctPointsOnLine c c' C ∧
@@ -14,9 +16,9 @@ by
   euclid_apply arbitrary_point as d
   euclid_apply (distinct_points d) as e'
   euclid_apply (line_from_points d e') as DE
-  euclid_apply (extend_point_longer DE d e' (a─a')) as e''
-  euclid_apply (extend_point_longer DE d e'' (b─b')) as e'''
-  euclid_apply (extend_point_longer DE d e''' (c─c')) as e
+  euclid_apply (extend_point_longer DE d e' a a') as e''
+  euclid_apply (extend_point_longer DE d e'' b b') as e'''
+  euclid_apply (extend_point_longer DE d e''' c c') as e
   euclid_apply (proposition_3 d e a a' DE A ) as f
   euclid_apply (proposition_3 f e b b' DE B) as g
   euclid_apply (proposition_3 g e c c' DE C) as h
@@ -40,8 +42,8 @@ theorem proposition_22' : ∀ (a a' b b' c c' f e : Point) (A B C FE : Line),
   (|(f─k)| = |(a─a')|) ∧ (|(f─g)| = |(b─b')|) ∧ (|(k─g)| = |(c─c')|) :=
 by
   euclid_intros
-  euclid_apply (extend_point_longer FE f e (b─b')) as e'
-  euclid_apply (extend_point_longer FE f e' (c─c')) as e''
+  euclid_apply (extend_point_longer FE f e b b') as e'
+  euclid_apply (extend_point_longer FE f e' c c') as e''
   euclid_apply (proposition_3 f e'' a a' FE A) as d
   euclid_apply (proposition_3 f e'' b b' FE B) as g
   euclid_apply (proposition_3 g e'' c c' FE C) as h
@@ -64,8 +66,8 @@ theorem proposition_22'' : ∀ (a a' b b' c c' f e x : Point) (A B C FE : Line),
   (|(f─k)| = |(a─a')|) ∧ (|(f─g)| = |(b─b')|) ∧ (|(k─g)| = |(c─c')|) :=
 by
   euclid_intros
-  euclid_apply (extend_point_longer FE f e (b─b')) as e'
-  euclid_apply (extend_point_longer FE f e' (c─c')) as e''
+  euclid_apply (extend_point_longer FE f e b b') as e'
+  euclid_apply (extend_point_longer FE f e' c c') as e''
   euclid_apply (proposition_3 f e'' a a' FE A) as d
   euclid_apply (proposition_3 f e'' b b' FE B) as g
   euclid_apply (proposition_3 g e'' c c' FE C) as h

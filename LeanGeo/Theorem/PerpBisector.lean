@@ -1,7 +1,10 @@
 import SystemE
 import LeanGeo.Abbre
 import LeanGeo.Theorem.BookTheorem
+
+open SystemE
 namespace LeanGeo
+
 theorem perpBisector_property : ∀ (A B : Point) (L : Line),
   perpBisector A B L →
   (∀ (X : Point), X.onLine L → |(X─A)| = |(X─B)|) ∧

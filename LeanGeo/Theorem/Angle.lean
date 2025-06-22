@@ -1,6 +1,8 @@
 import SystemE
 import LeanGeo.Abbre
 import LeanGeo.Theorem.BookTheorem
+
+open SystemE
 namespace LeanGeo
 
 theorem angle_coincide_zero : ∀ (a o : Point), (a ≠ o) → ∠a:o:a = 0:= by

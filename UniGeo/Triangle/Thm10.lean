@@ -1,6 +1,7 @@
 import SystemE
 import UniGeo.Relations
 
+open SystemE
 namespace UniGeo.Triangle
 
 theorem theorem_10 : ∀ (Q S T R U V : Point) (QS ST TQ RU UV VR : Line),

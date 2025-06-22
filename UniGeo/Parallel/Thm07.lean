@@ -2,6 +2,7 @@ import SystemE
 import Book.Prop29
 import UniGeo.Relations
 
+open SystemE
 namespace UniGeo.Parallel
 
 theorem theorem_7 : ∀ (S U V X R Y T W : Point) (SU VX RY : Line),

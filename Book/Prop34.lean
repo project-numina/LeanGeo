@@ -1,9 +1,11 @@
 import SystemE
+import Smt.Real
 import Book.Prop26
 import Book.Prop29
 
 
 namespace Elements.Book1
+open SystemE
 
 theorem proposition_34 : ∀ (a b c d : Point) (AB CD AC BD BC : Line),
   formParallelogram a b c d AB CD AC BD ∧ distinctPointsOnLine b c BC →

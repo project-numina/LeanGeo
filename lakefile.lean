@@ -3,9 +3,13 @@ open Lake DSL
 
 package «lib» where
   leanOptions := #[⟨`relaxedAutoImplicit, true⟩]
+  supportInterpreter := true
 
 @[default_target]
 lean_lib SystemE {
+}
+
+lean_lib LeanGeo {
 }
 
 lean_lib Book {
@@ -14,16 +18,13 @@ lean_lib Book {
 lean_lib UniGeo {
 }
 
-lean_lib LeanGeo {
-}
-
 lean_lib E3 {
 
 }
 
-require mathlib from git "https://github.com/leanprover-community/mathlib4" @ "7906a8a3488af5112e84d792d0d394b6c49026f0"
+require mathlib from git "https://github.com/leanprover-community/mathlib4.git" @ "9837ca9d65d9de6fad1ef4381750ca688774e608"
 
-require smt from git "https://github.com/yangky11/lean-smt.git" @ "49f428c5e0feebae8afcf47b037a4f5a0e4bcc62"
+require smt from git "https://github.com/ufmg-smite/lean-smt.git" @ "9b81e91cc9ea3833203317a7f425267112083672"
 
 def tmpFileDir := "tmp"
 
@@ -65,8 +66,8 @@ script aggregate do
 
   return 0
 
-require checkdecls from git "https://github.com/PatrickMassot/checkdecls.git" @ "21a36f3c07a9229e1287483c16a0dd04e479ecc5"
+require checkdecls from git "https://github.com/PatrickMassot/checkdecls.git" @ "e2285d36490b9315a215564e6d34a2c88cccfc33"
 
-require «doc-gen4» from git "https://github.com/leanprover/doc-gen4" @ "b334278bbe691cb41af3e472ea0a85b6be81e98e"
-
-require REPL from git "https://github.com/augustepoiroux/repl.git" @ "f37162f91b3549b88569166b2dec9022197daf7f"
+meta if get_config? env = some "dev" then
+require «doc-gen4» from git
+  "https://github.com/leanprover/doc-gen4.git" @ "v4.15.0"

@@ -2,6 +2,7 @@ import SystemE
 import Book.Prop29
 import UniGeo.Relations
 
+open SystemE
 namespace UniGeo.Quadrilateral
 
 theorem theorem_10 : ∀ (T U V W : Point) (TU VW UV TW TV : Line),

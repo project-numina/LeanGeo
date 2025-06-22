@@ -1,9 +1,11 @@
 import SystemE
+import Smt.Real
 import Book.Prop08
 import Book.Prop20
 import Book.Prop22
 
 namespace Elements.Book1
+open SystemE
 
 theorem proposition_23 : ∀ (a b c d e : Point) (AB CD CE : Line),
   distinctPointsOnLine a b AB ∧ formRectilinearAngle d c e CD CE →

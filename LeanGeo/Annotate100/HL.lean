@@ -1,6 +1,8 @@
 import Mathlib
 import SystemE
 import LeanGeo
+
+open SystemE
 namespace LeanGeo
 theorem HL_congruent : ∀ (a b c d e f : Point) ,  rightTriangle a b c ∧ rightTriangle d e f ∧ |(a─b)| = |(d─e)| ∧ |(b─c)| = |(e─f)| → (△a:b:c).congruent_test (△d:e:f) := by
   euclid_intros

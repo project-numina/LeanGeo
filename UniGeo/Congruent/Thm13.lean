@@ -2,6 +2,7 @@ import SystemE
 import Book.Prop29
 import UniGeo.Relations
 
+open SystemE
 namespace UniGeo.Congruent
 
 theorem theorem_13 : ∀ (G H I J K : Point) (GI GJ JH HK KI : Line),

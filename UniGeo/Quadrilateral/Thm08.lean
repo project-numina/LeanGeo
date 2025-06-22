@@ -2,6 +2,7 @@ import SystemE
 import Book.Prop29
 import UniGeo.Relations
 
+open SystemE
 namespace UniGeo.Quadrilateral
 
 theorem theorem_8 : ∀ (V W X Y : Point) (VW XY WX VY VX : Line),

@@ -1,5 +1,5 @@
 import Lean
-import SystemE.Meta.Tactics.Util
+import SystemE.Tactic.Util
 
 
 open Lean Elab Tactic Meta

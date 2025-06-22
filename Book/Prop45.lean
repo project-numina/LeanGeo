@@ -1,4 +1,5 @@
 import SystemE
+import Smt.Real
 import Book.Prop14
 import Book.Prop29
 import Book.Prop30
@@ -7,8 +8,10 @@ import Book.Prop34
 import Book.Prop42
 import Book.Prop44
 
+set_option maxHeartbeats 0
 
 namespace Elements.Book1
+open SystemE
 
 theorem proposition_45 : ∀ (a b c d e₁ e₂ e₃ : Point) (AB BC CD AD DB E₁₂ E₂₃ : Line),
   formTriangle a b d AB DB AD ∧ formTriangle b c d BC CD DB ∧ a.opposingSides c DB ∧

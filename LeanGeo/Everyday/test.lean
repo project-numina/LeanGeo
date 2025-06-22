@@ -1,5 +1,8 @@
 import SystemE
 import LeanGeo.BookTheorem
+
+open SystemE
+
 theorem Parallel_Thm17 : ∀ (S V T U W : Point) (SV TU SU TV : Line),
 distinctPointsOnLine S V SV ∧
 distinctPointsOnLine T U TU ∧

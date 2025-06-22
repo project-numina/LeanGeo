@@ -1,6 +1,7 @@
 import SystemE
 import LeanGeo.Abbre
 
+open SystemE
 namespace LeanGeo
 
 

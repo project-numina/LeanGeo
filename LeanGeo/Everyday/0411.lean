@@ -2,6 +2,10 @@ import SystemE
 import UniGeo.Abbre
 import UniGeo.Theorem
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+
+
+open SystemE
+
 theorem eqChord_eqChord : ∀ (A D B C : Point)(AD DB BC CA : Line) (P : Circle), cyclicQuadrilateral A D B C AD DB BC CA P ∧ |(A─D)| = |(C─B)|→ |(A─B)| = |(C─D)| := by
   euclid_intros
   euclid_apply cyclic_property A D B C AD DB BC CA P

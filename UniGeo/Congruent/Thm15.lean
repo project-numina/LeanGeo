@@ -1,6 +1,7 @@
 import SystemE
 import UniGeo.Relations
 
+open SystemE
 namespace UniGeo.Congruent
 
 theorem theorem_15 : ∀ (S T U V : Point) (ST TU UV SV SU : Line),

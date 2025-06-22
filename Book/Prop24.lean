@@ -1,4 +1,5 @@
 import SystemE
+import Smt.Real
 import Book.Prop03
 import Book.Prop04
 import Book.Prop05
@@ -7,7 +8,10 @@ import Book.Prop17
 import Book.Prop19
 import Book.Prop23
 
+set_option maxHeartbeats 0
+
 namespace Elements.Book1
+open SystemE
 
 theorem proposition_24 : ∀ (a b c d e f : Point) (AB BC AC DE EF DF : Line),
   formTriangle a b c AB BC AC ∧ formTriangle d e f DE EF DF ∧
@@ -17,7 +21,7 @@ by
   euclid_intros
   euclid_apply (proposition_23' d e a b c f DE AB AC) as g'
   euclid_apply (line_from_points d g') as DG
-  euclid_apply (extend_point_longer DG d g' (a─c)) as g''
+  euclid_apply (extend_point_longer DG d g' a c) as g''
   euclid_apply (proposition_3 d g'' a c DG AC) as g
   euclid_apply (line_from_points e g) as EG
   euclid_apply (line_from_points f g) as FG

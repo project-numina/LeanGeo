@@ -1,6 +1,7 @@
 import SystemE
 import UniGeo.Relations
 
+open SystemE
 namespace UniGeo.Quadrilateral
 
 theorem theorem_3 : ∀ (W X Y Z : Point) (WX YZ XY WZ WY : Line),

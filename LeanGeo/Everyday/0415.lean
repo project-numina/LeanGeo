@@ -1,6 +1,9 @@
 import SystemE
 import UniGeo.Theorem
 
+
+open SystemE
+
 --theorem exists_centre : ∀ (O: Circle), ∃ (C : Point), C.isCentre O := by
 --  sorry
 

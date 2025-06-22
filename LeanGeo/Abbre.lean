@@ -1,5 +1,9 @@
 import SystemE
+import Smt.Real
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+import UniGeo
+
+open SystemE
 namespace LeanGeo
 @[simp]
 abbrev cyclic (A B C D: Point) : Prop :=
@@ -163,8 +167,9 @@ triangle A B C ∧ triangle D E F ∧ |(A─B)| = |(D─E)| ∧ |(B─C)| = |(E�
 abbrev similarTriangle (A B C D E F: Point) : Prop :=
 triangle A B C ∧ triangle D E F ∧ ∠A:B:C = ∠D:E:F ∧ ∠B:A:C = ∠E:D:F ∧ ∠A:C:B = ∠D:F:E ∧ |(A─B)| * |(E─F)| = |(B─C)| * |(D─E)| ∧ |(B─C)| * |(F─D)| = |(C─A)| * |(E─F)| ∧ |(C─A)| * |(D─E)| = |(A─B)| * |(F─D)|
 end LeanGeo
-namespace Triangle
 
+namespace SystemE
+namespace Triangle
 @[simp]
 abbrev congruent_test : Triangle → Triangle →  Prop
 | (Triangle.ofPoints A B C) ,(Triangle.ofPoints D E F) =>
@@ -191,6 +196,7 @@ axiom congruent_property (T1 T2: Triangle): congruent T1 T2 →
   match T1,T2 with
   | (Triangle.ofPoints A B C) ,(Triangle.ofPoints D E F) =>
     |(A─B)| = |(D─E)| ∧ |(B─C)| = |(E─F)| ∧ |(A─C)| = |(D─F)| ∧ ∠ A:B:C = ∠ D:E:F ∧ ∠ A:C:B = ∠ D:F:E ∧ ∠ B:A:C = ∠ E:D:F
+
 @[simp]
 abbrev similar_test (T1 T2: Triangle): Prop :=
   match T1, T2 with
@@ -217,3 +223,4 @@ axiom similar_property (T1 T2: Triangle):  T1.similar_test T2 →
    ∧ ∠ A:C:B = ∠ D:F:E ∧ ∠ B:A:C = ∠ E:D:F
 
 end Triangle
+end SystemE

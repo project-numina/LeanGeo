@@ -5,6 +5,7 @@ import LeanGeo.Theorem.Parallel
 import LeanGeo.Theorem.Triangle
 import LeanGeo.Theorem.Construction
 
+open SystemE
 namespace LeanGeo
 theorem triangle_area :∀ (a b c d: Point) , (coll a b d) ∧ (triangle a b c) ∧ ((∠c:d:a = ∟) ∨ (∠c:d:b = ∟)) → (△a:b:c).area = |(c─d)| * |(a─b)|/2 := by
   sorry

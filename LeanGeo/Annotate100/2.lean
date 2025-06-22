@@ -1,6 +1,8 @@
 import Mathlib
 import SystemE
 import LeanGeo
+
+open SystemE
 namespace LeanGeo
 /--9.5. Point $D$ outside an acute-angled triangle $ABC$ is such that $\angle ABC + \angle ABD = \angle ACB + \angle ACD = 180^{\circ}$. Prove that the center of the circumcircle of triangle $ABC$ lies on the segment
 ## $AD$. (6 points)-/

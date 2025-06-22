@@ -1,6 +1,8 @@
 import Mathlib
 import SystemE
 import LeanGeo
+
+open SystemE
 namespace LeanGeo
 
 

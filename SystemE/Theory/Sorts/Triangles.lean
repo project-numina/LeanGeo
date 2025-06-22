@@ -1,19 +1,25 @@
 import SystemE.Theory.Sorts.Segments
 
-/--
-Triangles are called "Areas" in [Avigad et al., 2009]
--/
+namespace SystemE
+
+opaque area' : Point → Point → Point → ℝ
+
 inductive Triangle
 | ofPoints (a b c : Point)
 
-namespace Triangle
+@[simp]
+abbrev Triangle.area : Triangle → ℝ :=
+  fun x =>
+    match x with
+    | ofPoints a b c => area' a b c
 
-opaque area : Triangle → ℝ
 
-notation:max "△" a ":" b ":" c:66 => ofPoints a b c
+notation:max "△" a ":" b ":" c:66 => Triangle.ofPoints a b c
 
-noncomputable instance : Coe Triangle Real := ⟨area⟩
+instance : Coe Triangle ℝ :=
+  ⟨Triangle.area⟩
 
-instance : LT Triangle := ⟨fun a b => area a < area b⟩
+-- example (a b c : Point) : Triangle.area (△ a:b:c) = 0 := by
+--   dsimp
 
-end Triangle
+end SystemE

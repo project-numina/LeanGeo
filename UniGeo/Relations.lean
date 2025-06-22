@@ -1,5 +1,7 @@
 import SystemE.Theory.Relations
 
+namespace SystemE
+
 @[simp]
 abbrev twoLinesIntersectAtPoint (AB BC : Line) (b: Point) : Prop :=
   AB.intersectsLine BC ∧ b.onLine AB ∧ b.onLine BC ∧ AB ≠ BC

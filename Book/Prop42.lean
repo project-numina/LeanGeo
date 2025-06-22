@@ -1,4 +1,5 @@
 import SystemE
+import Smt.Real
 import Book.Prop10
 import Book.Prop23
 import Book.Prop31
@@ -7,6 +8,8 @@ import Book.Prop41
 
 
 namespace Elements.Book1
+
+open SystemE
 
 theorem proposition_42 : ∀ (a b c d₁ d₂ d₃ : Point) (AB BC AC D₁₂ D₂₃: Line),
   formTriangle a b c AB BC AC ∧ formRectilinearAngle d₁ d₂ d₃ D₁₂ D₂₃ ∧
@@ -57,13 +60,13 @@ theorem proposition_42'' : ∀ (a b c d₁ d₂ d₃ h i : Point) (AB BC AC D₁
 by
   euclid_intros
   euclid_apply (proposition_10 b c BC) as e
-  euclid_apply (extend_point_longer HI h i (e─c)) as i''
+  euclid_apply (extend_point_longer HI h i e c) as i''
   euclid_apply (proposition_3 i i'' e c HI BC) as j
-  euclid_apply (extend_point_longer HI i h (e─c)) as h'
+  euclid_apply (extend_point_longer HI i h e c) as h'
   euclid_apply (proposition_3 i h' e c HI BC) as k
   euclid_apply (proposition_23 k j b a c HI AB BC) as l'
   euclid_apply (line_from_points k l') as KL
-  euclid_apply (extend_point_longer KL k l' (a─b)) as l''
+  euclid_apply (extend_point_longer KL k l' a b) as l''
   euclid_apply (proposition_3 k l'' b a KL AB) as l
   euclid_apply (line_from_points l j) as LJ
   euclid_apply (proposition_4 k j l b c a HI LJ KL BC AC AB)
@@ -79,13 +82,13 @@ theorem proposition_42''' : ∀ (a b c d₁ d₂ d₃ h i x : Point) (AB BC AC D
 by
   euclid_intros
   euclid_apply (proposition_10 b c BC) as e
-  euclid_apply (extend_point_longer HI h i (e─c)) as i''
+  euclid_apply (extend_point_longer HI h i e c) as i''
   euclid_apply (proposition_3 i i'' e c HI BC) as j
-  euclid_apply (extend_point_longer HI i h (e─c)) as h'
+  euclid_apply (extend_point_longer HI i h e c) as h'
   euclid_apply (proposition_3 i h' e c HI BC) as k
   euclid_apply (proposition_23' k j b a c x HI AB BC) as l'
   euclid_apply (line_from_points k l') as KL
-  euclid_apply (extend_point_longer KL k l' (a─b)) as l''
+  euclid_apply (extend_point_longer KL k l' a b) as l''
   euclid_apply (proposition_3 k l'' b a KL AB) as l
   euclid_apply (line_from_points l j) as LJ
   euclid_apply (proposition_4 k j l b c a HI LJ KL BC AC AB)

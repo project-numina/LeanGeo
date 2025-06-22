@@ -1,4 +1,5 @@
 import SystemE
+import Smt.Real
 import Book.Prop04
 import Book.Prop13
 import Book.Prop14
@@ -10,6 +11,7 @@ import Book.Prop41
 import Book.Prop46
 
 namespace Elements.Book1
+open SystemE
 
 -- WARNING: This proof is quite slow.
 set_option maxHeartbeats 0 in

@@ -1,6 +1,7 @@
 import SystemE
 import UniGeo.Relations
 
+open SystemE
 namespace UniGeo.Quadrilateral
 
 theorem theorem_14 : ∀ (G H I J : Point) (GH IJ HI GJ GI : Line),

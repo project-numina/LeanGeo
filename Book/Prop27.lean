@@ -1,7 +1,9 @@
 import SystemE
+import Smt.Real
 import Book.Prop16
 
 namespace Elements.Book1
+open SystemE
 
 theorem proposition_27 : ∀ (a d e f : Point) (AE FD EF : Line),
   distinctPointsOnLine a e AE ∧ distinctPointsOnLine f d FD ∧ distinctPointsOnLine e f EF ∧

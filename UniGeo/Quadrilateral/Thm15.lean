@@ -1,6 +1,7 @@
 import SystemE
 import UniGeo.Relations
 
+open SystemE
 namespace UniGeo.Quadrilateral
 
 theorem theorem_15 : ∀ (Q R S T : Point) (QR ST RS QT QS : Line),

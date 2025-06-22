@@ -2,6 +2,7 @@ import SystemE
 import Book.Prop15
 import UniGeo.Relations
 
+open SystemE
 namespace UniGeo.Congruent
 
 theorem theorem_6 : ∀ (R S T U V : Point) (RT SU ST RU : Line),

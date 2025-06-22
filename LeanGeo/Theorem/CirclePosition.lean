@@ -7,6 +7,8 @@ import LeanGeo.Theorem.Position
 import LeanGeo.Theorem.PerpBisector
 import LeanGeo.Theorem.Circle
 
+
+open SystemE
 namespace LeanGeo
 theorem angle_lt_outsideCircle: ∀ (A B C D : Point) (AB : Line) (Ω : Circle), A.onCircle Ω ∧ B.onCircle Ω ∧ distinctPointsOnLine A B AB ∧ C.onCircle Ω ∧ C ≠ A ∧ C ≠ B ∧ D.sameSide C AB ∧ ∠A:D:B < ∠A:C:B → D.outsideCircle Ω := by
   euclid_intros

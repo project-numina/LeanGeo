@@ -2,6 +2,8 @@ import SystemE
 import LeanGeo.Abbre
 import LeanGeo.Theorem.Position
 import LeanGeo.Theorem.Triangle
+
+open SystemE
 namespace LeanGeo
 theorem parallelogram_tests : ∀
   (A B C D : Point)

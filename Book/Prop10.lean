@@ -1,9 +1,11 @@
 import SystemE
+import Smt.Real
 import Book.Prop01
 import Book.Prop04
 import Book.Prop09
 
 namespace Elements.Book1
+open SystemE
 
 theorem proposition_10 : ∀ (a b : Point) (AB : Line), distinctPointsOnLine a b AB →
   ∃ d : Point, (between a d b) ∧ (|(a─d)| = |(d─b)|) :=

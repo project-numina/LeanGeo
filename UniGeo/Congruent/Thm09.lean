@@ -2,6 +2,7 @@ import SystemE
 import Book.Prop15
 import UniGeo.Relations
 
+open SystemE
 namespace UniGeo.Congruent
 
 theorem theorem_9 : ∀ (U V W X Y : Point) (UW VX VW UX : Line),

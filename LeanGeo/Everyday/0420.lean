@@ -1,5 +1,8 @@
 import SystemE
 import LeanGeo
+
+open SystemE
+
 namespace LeanGeo
 theorem day156 : ∀ (A B M N O P : Point) (AB NP OP : Line) (C: Circle),
 diameter A B C ∧ P.onCircle C ∧ O.isCentre C∧ ∠A:O:P = ∟ ∧ between A M O ∧ between N M P ∧ N.onCircle C ∧

@@ -3,6 +3,8 @@ import SystemE
 import LeanGeo.Abbre
 import LeanGeo.Theorem.Construction
 
+
+open SystemE
 namespace LeanGeo
 open Real
 axiom rightAngle_eq_pi_div_two : ∟ = Real.pi / 2

@@ -2,6 +2,7 @@ import SystemE
 import Book.Prop32
 import UniGeo.Relations
 
+open SystemE
 namespace UniGeo.Similarity
 
 theorem theorem_17 : ∀ (G H I J : Point) (GJ IJ GI HJ : Line),

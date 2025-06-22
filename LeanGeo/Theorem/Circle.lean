@@ -5,6 +5,9 @@ import LeanGeo.Theorem.Basic
 import LeanGeo.Theorem.Triangle
 import LeanGeo.Theorem.Position
 import LeanGeo.Theorem.PerpBisector
+
+
+open SystemE
 namespace LeanGeo
 theorem eqChord_eqCentralAngle : ∀ (a b c d o: Point) (O : Circle), a.onCircle O ∧ b.onCircle O ∧ c.onCircle O ∧ d.onCircle O ∧  o.isCentre O ∧ |(a─b)| = |(c─d)| → ∠a:o:b =∠ c:o:d := by
   euclid_intros

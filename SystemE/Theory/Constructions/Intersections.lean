@@ -1,5 +1,7 @@
 import SystemE.Theory.Constructions.Points
 
+open SystemE
+
 axiom intersection_lines : ∀ (L M : Line), L.intersectsLine M →
   ∃ a : Point, (a.onLine L) ∧ (a.onLine M)
 

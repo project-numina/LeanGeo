@@ -6,6 +6,9 @@ import LeanGeo.Theorem.CirclePosition
 import LeanGeo.Theorem.Triangle
 import LeanGeo.Theorem.Position
 import LeanGeo.Theorem.Construction
+
+
+open SystemE
 namespace LeanGeo
 
 --Theorem 1.3 (Inscribed Angle Theorem). If ∠A C B is inscribed in a circle, then it subtends an arc with measure 2∠A C B.

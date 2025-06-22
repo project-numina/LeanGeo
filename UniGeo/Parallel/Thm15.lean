@@ -3,6 +3,7 @@ import Book.Prop13
 import Book.Prop29
 import UniGeo.Relations
 
+open SystemE
 namespace UniGeo.Parallel
 
 theorem theorem_15 : ∀ (G I S U V X R Y H T W : Point) (GI SU VX RY : Line),

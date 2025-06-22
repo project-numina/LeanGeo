@@ -7,6 +7,8 @@ import UniGeo.Relations
 set_option maxHeartbeats 350000
 namespace UniGeo.Quadrilateral
 
+open SystemE
+
 theorem theorem_19 : ∀ (U V W X Y : Point) (UV WX VW UX UW VX UY XY : Line),
   formQuadrilateral U V X W UV WX UX VW ∧
   distinctPointsOnLine U W UW ∧

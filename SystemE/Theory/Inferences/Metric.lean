@@ -1,6 +1,10 @@
 import SystemE.Theory.Sorts
 import SystemE.Theory.Relations
+import SystemE.Tactic.Attr
+-- chaining imports is necessary for euclid attribute to work properly
+import SystemE.Theory.Inferences.Diagrammatic
 
+namespace SystemE
 --
 -- Metric inferences defined in Sec. 3.5 of Avigad et al., 2009
 -- Generally speaking, they are not used explicitly in the tactics written by humans.
@@ -18,10 +22,12 @@ import SystemE.Theory.Relations
 
 
 
+@[euclid, metric]
 axiom zero_segment_if :
   ∀ (a b : Point),  |(a ─ b)| = 0 → a = b
 
 
+@[euclid, metric]
 axiom zero_segment_onlyif : ∀ (a b : Point),
   a = b → |(a─b)| = 0
 
@@ -29,20 +35,22 @@ axiom zero_segment_onlyif : ∀ (a b : Point),
 -- 2.
 -- ab ≥ 0
 --
--- @[simp]
-axiom segment_gte_zero : ∀ (s : Segment),
-  0 ≤ s.length
+@[euclid, metric]
+axiom segment_gte_zero : ∀ (a b : Point),
+  0 ≤ length a b
 
 --
 -- 3.
 -- ab = ba.
 --
 -- @[simp]
+@[euclid, metric]
 axiom segment_symmetric : ∀ (a b : Point),
   |(a─b)| = |(b─a)|
 --
 
 
+@[euclid, metric]
 axiom angle_symm : ∀ (a b c : Point),
   (a ≠ b) ∧ (b ≠ c) → ((∠ a:b:c) = (∠ c:b:a))
 
@@ -51,34 +59,40 @@ axiom angle_symm : ∀ (a b c : Point),
 -- 0 ≤ \abc and \abc ≤ right-angle + right-angle.
 -- --
 -- @[simp]
-axiom angle_range : ∀ (ang : Angle),
-  (0 : ℝ) ≤ ang ∧ ang ≤ ∟ + ∟
+@[euclid, metric]
+axiom angle_range : ∀ (a b c : Point), a ≠ b ∧ b ≠ c → 0 ≤ ∠ a:b:c ∧ ∠ a:b:c ≤ ∟ + ∟
+-- this actually can't be proven because Angle.ofPoints don't require points to be distinct
+-- := fun a b c => angle_range (Angle.ofPoints a b c)
 
 --
 -- 6.
 -- △aab = 0. △
 --
 -- @[simp]
-axiom degenerated_area : ∀ (a b : Point), Triangle.area △ a:a:b = 0
+@[euclid, metric]
+axiom degenerated_area : ∀ (a b : Point), area' a a b = 0
 
 --
 -- 7.
 -- △abc ≥ 0.
 -- --
 -- @[simp]
-axiom area_gte_zero : ∀ (ar : Triangle), 0 ≤ Triangle.area ar
+@[euclid, metric]
+axiom area_gte_zero : ∀ a b c : Point, 0 ≤ area' a b c
 
 --
 -- 8.
 -- △abc = △cab and △abc = △acb.
 --
 -- @[simp]
+@[euclid, metric]
 axiom area_symm_1 : ∀ (a b c : Point),
-    Triangle.area (△a:b:c) = Triangle.area (△c:a:b)
+    area' a b c = area' c a b
 
 -- @[simp]
+@[euclid, metric]
 axiom area_symm_2 : ∀ (a b c : Point),
-    Triangle.area (△ a:b:c) = Triangle.area (△a:c:b)
+    area' a b c = area' a c b
 
 --
 -- 9.
@@ -86,6 +100,7 @@ axiom area_symm_2 : ∀ (a b c : Point),
 -- \cab = \c′a′b′, then △abc = △a′b′c′.
 --
 
+@[euclid, metric]
 axiom area_congruence : ∀ (a b c a' b' c' : Point),
     |(a─b)| = |(a'─b')| ∧
     |(b─c)| = |(b'─c')| ∧
@@ -93,4 +108,8 @@ axiom area_congruence : ∀ (a b c a' b' c' : Point),
     ∠ a:b:c = ∠ a':b':c' ∧
     ∠ b:c:a = ∠ b':c':a' ∧
     ∠ c:a:b = ∠ c':a':b'
-    → Triangle.area (△ a:b:c) = Triangle.area (△ a':b':c')
+    → area' a b c = area' a' b' c'
+
+#euclid_post
+
+end SystemE

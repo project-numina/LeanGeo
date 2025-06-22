@@ -2,6 +2,7 @@ import SystemE
 import Book.Prop29
 import UniGeo.Relations
 
+open SystemE
 namespace UniGeo.Congruent
 
 theorem theorem_7 : ∀ (W X Y Z : Point) (WX XY WY YZ WZ : Line),

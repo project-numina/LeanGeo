@@ -1,8 +1,10 @@
 import SystemE
+import Smt.Real
 import Book.Prop03
 import Book.Prop04
 
 namespace Elements.Book1
+open SystemE
 
 theorem proposition_6 : ∀ (a b c : Point) (AB BC AC : Line),
   formTriangle a b c AB BC AC ∧ (∠ a:b:c = ∠ a:c:b) →

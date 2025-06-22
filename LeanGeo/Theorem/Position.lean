@@ -1,6 +1,8 @@
 import SystemE
 import LeanGeo.Abbre
 import LeanGeo.Theorem.Angle
+
+open SystemE
 namespace LeanGeo
 theorem angleBisector_opposingsides : ∀ (A B C I : Point) (AI : Line), (distinctPointsOnLine A I AI)∧ triangle A B C ∧ ∠ I:A:B = ∠ I:A:C →  B.opposingSides C AI := by
   euclid_intros

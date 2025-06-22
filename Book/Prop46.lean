@@ -1,4 +1,5 @@
 import SystemE
+import Smt.Real
 import Book.Prop03
 import Book.Prop11
 import Book.Prop29
@@ -7,6 +8,7 @@ import Book.Prop34
 
 
 namespace Elements.Book1
+open SystemE
 
 theorem proposition_46 : ∀ (a b : Point) (AB : Line), distinctPointsOnLine a b AB →
   ∃ (d e : Point) (DE AD BE : Line), formParallelogram d e a b DE AB AD BE ∧
@@ -16,7 +18,7 @@ by
   euclid_intros
   euclid_apply (proposition_11'' a b AB) as c'
   euclid_apply (line_from_points a c') as AC
-  euclid_apply (extend_point_longer AC a c' (a─b)) as c
+  euclid_apply (extend_point_longer AC a c' a b) as c
   euclid_apply (proposition_3 a c a b AC AB) as d
   euclid_apply (proposition_31 d a b AB) as DE
   euclid_apply (proposition_31 b a d AC) as BE
@@ -35,7 +37,7 @@ by
   euclid_intros
   euclid_apply (proposition_11''' a b x AB) as c'
   euclid_apply (line_from_points a c') as AC
-  euclid_apply (extend_point_longer AC a c' (a─b)) as c
+  euclid_apply (extend_point_longer AC a c' a b) as c
   euclid_apply (proposition_3 a c a b AC AB) as d
   euclid_apply (proposition_31 d a b AB) as DE
   euclid_apply (proposition_31 b a d AC) as BE

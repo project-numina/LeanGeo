@@ -1,3 +1,9 @@
+import SystemE
+import LeanGeo.EvanChenTheorem
+
+open SystemE
+namespace LeanGeo
+
 --Theorem 1.3 (Inscribed Angle Theorem). If ∠A C B is inscribed in a circle, then it subtends an arc with measure 2∠A C B.
 --Draw in O C. Set α = ∠A C O and β = ∠B C O, and let θ = α + β. Because A O = C O we have ∠O A C = ∠O C A = α, so ∠A O C = 180° − 2α. Similarly ∠B O C = 180° − 2β. Hence ∠A O B = 360° − [(180° − 2α) + (180° − 2β)] = 2θ.
 theorem inscribed_angle_theorem :

@@ -1,8 +1,10 @@
 import SystemE
+import Smt.Real
 import Book.Prop03
 import Book.Prop04
 
 namespace Elements.Book1
+open SystemE
 
 theorem proposition_5 : ∀ (a b c d e : Point) (AB BC AC : Line),
   formTriangle a b c AB BC AC ∧ (|(a─b)| = |(a─c)|) ∧
@@ -10,7 +12,7 @@ theorem proposition_5 : ∀ (a b c d e : Point) (AB BC AC : Line),
   (∠ a:b:c = ∠ a:c:b) ∧ (∠ c:b:d = ∠ b:c:e) :=
 by
   euclid_intros
-  euclid_apply (point_between_points_shorter_than AB b d (c─e)) as f
+  euclid_apply (point_between_points_shorter_than AB b d c e) as f
   euclid_apply (proposition_3 a e f a AC AB) as g
   euclid_apply (line_from_points c f) as FC
   euclid_apply (line_from_points b g) as GB

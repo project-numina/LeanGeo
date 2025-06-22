@@ -2,6 +2,7 @@ import SystemE
 import Book.Prop15
 import UniGeo.Relations
 
+open SystemE
 namespace UniGeo.Similarity
 
 theorem theorem_14 : ∀ (V W X Y Z : Point) (VZ XY VY XZ : Line),

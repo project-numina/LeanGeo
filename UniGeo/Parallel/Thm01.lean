@@ -3,6 +3,9 @@ import Book.Prop13
 import Book.Prop28
 import UniGeo.Relations
 
+
+open SystemE
+
 namespace UniGeo.Parallel
 
 theorem theorem_1 : ∀ (T V W Y S Z U X : Point) (TV WY SZ : Line),

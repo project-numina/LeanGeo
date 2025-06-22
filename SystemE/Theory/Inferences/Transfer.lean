@@ -1,7 +1,10 @@
 import SystemE.Theory.Sorts
 import SystemE.Theory.Relations
+import SystemE.Tactic.Attr
+-- chaining imports is necessary for euclid attribute to work properly
+import SystemE.Theory.Inferences.Superposition
 
-
+namespace SystemE
 --
 -- Transfer inferences defined in Sec. 3.6 of Avigad et al. 2009
 --
@@ -13,6 +16,7 @@ import SystemE.Theory.Relations
 -- [between_if, equal_circles, point_on_circle_if, point_on_circle_onlyif, sum_angles_if, sum_angles_onlyif, perpendicudlar_if, sum_areas_if]
 
 -- Given any points a, b and c such that b is between a and c, then the straight-line from a to c is equal to the sum of the straight-lines from a to b and from b to c.
+@[euclid, transfer]
 axiom between_if : ∀ (a b c : Point),
   between a b c → |(a─b)| + |(b─c)| = |(a─c)|
 
@@ -22,6 +26,7 @@ axiom between_if : ∀ (a b c : Point),
 
 
 -- If a point x is the centre of two circles C and D, and given points b and d such that b is on C and c is on D and the straight-line from x to b is equal to the straight-line from x to c, then C is equal to D.
+@[euclid, transfer]
 axiom equal_circles : ∀ (a b c : Point) (α β : Circle),
   (a.isCentre α) ∧ (a.isCentre β) ∧ (b.onCircle α) ∧ (c.onCircle β) ∧ |(a─b)| = |(a─c)| → α = β
 
@@ -31,9 +36,12 @@ axiom equal_circles : ∀ (a b c : Point) (α β : Circle),
 
 
 -- If a point x is the centre of circle C and a point b is on C, then given some point c such that the straight-line from x to c is equal to the straight-line from x to b, then c is on C.
+@[euclid, transfer]
 axiom point_on_circle_if : ∀ (a b c : Point) (α : Circle),
   (a.isCentre α) ∧ (b.onCircle α) ∧ |(a─c)| = |(a─b)| → c.onCircle α
 
+-- @[aesop unsafe 80% [forward, apply]]
+@[euclid, transfer]
 -- If a point x is the centre of circle C and a point b is on C, then given some point c on C, the straight-line from x to c is equal to the straight-line from x to b
 axiom point_on_circle_onlyif : ∀ (a b c : Point) (α : Circle),
   (a.isCentre α) ∧ (b.onCircle α) ∧ (c.onCircle α) → |(a─c)| = |(a─b)|
@@ -43,11 +51,13 @@ axiom point_on_circle_onlyif : ∀ (a b c : Point) (α : Circle),
 -- If a is the centre of α and b is on α, and ac < ab if and only if c is in α.
 --
 -- -- Given any points b and c, and circle C, such that b is on C and the straight-line from the centre of C to c is less than the straight-line from the centre of C to b, then c is inside the circle C.
+@[euclid, transfer]
 axiom point_in_circle_if : ∀ (a b c : Point) (α : Circle),
   (a.isCentre α) ∧ (b.onCircle α) ∧ |(a─c)| < |(a─b)| → c.insideCircle α
 
 --
 -- -- Given any points b and c, and circle C, such that b is on C and c is inside the circle C, then the straight-line from the centre of C to c is less than the straight-line from the centre of C to b.
+@[euclid, transfer]
 axiom point_in_circle_onlyif : ∀ (a b c : Point) (α : Circle),
   (a.isCentre α) ∧ (b.onCircle α) ∧ (c.insideCircle α) → |(a─c)| < |(a─b)|
 
@@ -59,10 +69,12 @@ axiom point_in_circle_onlyif : ∀ (a b c : Point) (α : Circle),
 -- not  between b and c if and only if \bac = 0.
 --
 -- Given points a, b and c such that a is not equal to b and a is not equal to c, and line L such that a, b, and c are all on L, and a is not between b and c, then the angle bac has degree zero.
+@[euclid, transfer]
 axiom degenerated_angle_if : ∀ (a b c : Point) (L : Line),
   (a ≠ b) ∧ (a ≠ c) ∧ (a.onLine L) ∧ (b.onLine L) ∧ (c.onLine L) ∧ ¬(between b a c) → ∠ b:a:c = 0
 
 -- Given points a, b and c such that a is not equal to b and a is not equal to c, and line L such that a and b are on L, and the angle formed by b:a:c has degree zero,  then c is on L and a is not between b and c.
+@[euclid, transfer]
 axiom degenerated_angle_onlyif : ∀ (a b c : Point) (L : Line),
   (a ≠ b) ∧ (a ≠ c) ∧ (a.onLine L) ∧ (b.onLine L) ∧ (∠ b:a:c = 0)  → (c.onLine L) ∧ ¬(between b a c)
 --
@@ -79,6 +91,7 @@ axiom degenerated_angle_onlyif : ∀ (a b c : Point) (L : Line),
 
 -- Given point on a given lines L and M, point b  on L, and point c on M with a distinct from b, a distinct from c, point d  not on L or M, and L distinct from M, then the angle bac is equal to the sum of angles bad and dac only if b and d are on the same side of M and c and d are on the same side of L.
 -- Kaiyu: Jeremy's typo here.
+@[euclid, transfer]
 axiom sum_angles_if : ∀ (a b c d : Point) (L M : Line),
   (a.onLine L) ∧ (a.onLine M) ∧ (b.onLine L) ∧ (c.onLine M) ∧ (a ≠ b) ∧ (a ≠ c) ∧
   ¬(d.onLine L) ∧ ¬(d.onLine M) ∧ (L ≠ M) ∧ (∠ b:a:c) = (∠ b:a:d) + (∠ d:a:c) →
@@ -86,6 +99,7 @@ axiom sum_angles_if : ∀ (a b c d : Point) (L M : Line),
 
 
 -- Given point on a given lines L and M, point b  on L, and point c on M with a distinct from b, a distinct from c, point d  not on L or M, and L distinct from M, then b and d are on the same side of M and c and d are on the same side of L only if the angle bac is equal to the sum of angles bad and dac
+@[euclid, transfer]
 axiom sum_angles_onlyif : ∀ (a b c d : Point) (L M : Line),
 (a.onLine L) ∧ (a.onLine M) ∧ (b.onLine L) ∧ (c.onLine M) ∧ (a ≠ b) ∧ (a ≠ c) ∧
 ¬(d.onLine L) ∧ ¬(d.onLine M) ∧ (L ≠ M) ∧ (b.sameSide d M) ∧ (c.sameSide d L) →
@@ -98,11 +112,13 @@ axiom sum_angles_onlyif : ∀ (a b c d : Point) (L M : Line),
 --
 
 -- Given points a and b both lying on a given line L, and point c lying between a and b, and point d not on L such that the angle acd is equal to the angle dcb, then the angle acd is a right angle.
+@[euclid, transfer]
 axiom perpendicular_if : ∀ (a b c d : Point) (L : Line),
   (a.onLine L) ∧ (b.onLine L) ∧ (between a c b) ∧ ¬(d.onLine L) ∧ (∠ a:c:d = ∠ d:c:b) →
   ∠ a:c:d = ∟
 
 -- Given points a and b both lying on a given line L, and point c lying between a and b, and point d not on L such that the angle acd is a right angle, then the angle acd is equal to the angle dcb.
+@[euclid, transfer]
 axiom perpendicular_onlyif : ∀ (a b c d : Point) (L : Line),
   (a.onLine L) ∧ (b.onLine L) ∧ (between a c b) ∧ ¬(d.onLine L) ∧ (∠ a:c:d = ∟) →
   ∠ a:c:d = ∠ d:c:b
@@ -112,6 +128,7 @@ axiom perpendicular_onlyif : ∀ (a b c d : Point) (L : Line),
 -- Not in [Avigad et al., 2009]
 -- -/
 --
+@[euclid, transfer]
 axiom flat_angle_if : ∀ (a b c : Point),
   a ≠ b ∧ b ≠ c ∧ ∠ a:b:c = ∟ + ∟ → between a b c
 
@@ -121,6 +138,7 @@ axiom flat_angle_if : ∀ (a b c : Point),
 Not in [Avigad et al., 2009]
 -/
 --
+@[euclid, transfer]
 axiom flat_angle_onlyif : ∀ (a b c : Point),
   between a b c → ∠ a:b:c = ∟ + ∟
 
@@ -134,6 +152,7 @@ axiom flat_angle_onlyif : ∀ (a b c : Point),
 
 --
 -- -- Given points a, b, and b′ all on a given line L, and points c, c' such that a, c, and c′ are all on given line M, with b distinct from a, b′ distinct from a, c distinct from a, c' distinct from a, a is not  between b and b′, and a is not between c and c′, then angle bac is equal to angle b′ac′.
+@[euclid, transfer]
 axiom equal_angles : ∀ (a b b' c c' : Point) (L M : Line),
   (a.onLine L) ∧ (b.onLine L) ∧ (b'.onLine L) ∧ (a.onLine M) ∧ (c.onLine M) ∧ (c'.onLine M) ∧
   (b ≠ a) ∧ (b' ≠ a) ∧ (c ≠ a) ∧ (c' ≠ a) ∧ ¬(between b a b') ∧ ¬(between c a c') →
@@ -147,6 +166,7 @@ axiom equal_angles : ∀ (a b b' c c' : Point) (L M : Line),
 --
 --
 -- -- Given lines a,b,c and d such that a and b are both on a given line L, b and c are both on a given line M, c and d are both on a given line N, b is distinct from c, a and d are on the same side of M, and the sum of angles abc and bcd is less than the sum of two right angles, then there is a point e such that e is on L and N and e is on the same side of M as a.
+@[euclid]
 axiom lines_intersect : ∀ (a b c d : Point) (L M N : Line),
   (a.onLine L) ∧ (b.onLine L) ∧ (b.onLine M) ∧ (c.onLine M) ∧ (c.onLine N) ∧ (d.onLine N) ∧
   (b ≠ c) ∧ (a.sameSide d M) ∧ (∠ a:b:c) + (∠ b:c:d) < ∟ + ∟ →
@@ -158,25 +178,29 @@ axiom lines_intersect : ∀ (a b c d : Point) (L M N : Line),
 -- If a and b are on L and a != b, then △abc = 0 if and only if c is on L.
 --
 -- If a and b are two distinct points both lying on a given line L, with a given a point c such that the area of the triangle abc is zero, then c must also be on L.
+@[euclid, transfer]
 axiom degenerated_area_if : ∀ (a b c : Point) (L : Line),
-  distinctPointsOnLine a b L ∧ (Triangle.area △ a:b:c) = 0 →
+  distinctPointsOnLine a b L ∧ (area' a b c) = 0 →
   c.onLine L
 
 -- If a and b are two distinct points both lying on a given line L, with a given a point c also lying on L, then the area of the triangle abc is zero
+@[euclid, transfer]
 axiom degenerated_area_onlyif : ∀ (a b c : Point) (L : Line),
   distinctPointsOnLine a b L ∧ (c.onLine L) →
-  (Triangle.area △ a:b:c) = 0
+  area' a b c = 0
 
 
 -- If a, b, c are all on a given line point L and distinct from one another, and d is not on L, and  c is  between a and b, then the sum of the areas of triangles acd and dcb is equal to the area of triangle adb
+@[euclid, transfer]
 axiom sum_areas_if : ∀ (a b c d : Point) (L : Line),
   (a.onLine L) ∧ (b.onLine L) ∧ (c.onLine L) ∧ (a ≠ b) ∧ (a ≠ c) ∧ (b ≠ c) ∧ ¬(d.onLine L) ∧ (between a c b) →
-  (Triangle.area △ a:c:d + Triangle.area △ d:c:b = Triangle.area △ a:d:b)
+  (area' a c d + area' d c b = area' a d b)
 
 -- If a, b, c are all on a given line point L and distinct from one another, and d is not on L, and the sum of the areas of triangles acd and dcb is equal to the area of triangle adb, then c is between a and b.
+@[euclid, transfer]
 axiom sum_areas_onlyif : ∀ (a b c d : Point) (L : Line),
   (a.onLine L) ∧ (b.onLine L) ∧ (c.onLine L) ∧ (a ≠ b) ∧ (a ≠ c) ∧ (b ≠ c) ∧ ¬(d.onLine L) ∧
-  (Triangle.area △ a:c:d + Triangle.area △ d:c:b = Triangle.area △ a:d:b) →
+  (area' a c d + area' d c b = area' a d b) →
   between a c b
 
 --    parallelogram rules
@@ -185,22 +209,30 @@ axiom sum_areas_onlyif : ∀ (a b c d : Point) (L : Line),
 Not in [Avigad et al., 2009]
 -/
 -- Given a parallelogram formed from points a, b, c and d, the sum of the areas of the triangles acd and adb is equal to the sum of the areas of triangles bac and bcd
+@[euclid, transfer]
 axiom parallelogram_area : ∀ (a b c d : Point) (AB CD AC BD : Line), formParallelogram a b c d AB CD AC BD →
-  Triangle.area △ a:c:d + Triangle.area △ a:d:b = Triangle.area △ b:a:c + Triangle.area △ b:c:d
+  area' a c d + area' a d b = area' b a c + area' b c d
 
 -- /--
 -- Not in [Avigad et al., 2009]
 -- -/
 --
 -- Given a parallelogram formed from points a, b, c and d, and given points e and f such that e is betwen a and b and f is between c and d, then the sum of the areas of the triangles acf, afe, efd, and edb is equal to the sum of the areas of triangles acd and adb
+@[euclid, transfer]
 axiom sum_parallelograms_area : ∀ (a b c d e f : Point) (AB CD AC BD : Line),
   formParallelogram a b c d AB CD AC BD ∧ between a e b ∧ between c f d →
-  Triangle.area △ a:c:f + Triangle.area △ a:f:e + (Triangle.area △ e:f:d) + (Triangle.area △ e:d:b) = (Triangle.area △ a:c:d) + (Triangle.area △ a:d:b)
+  area' a c f + area' a f e + (area' e f d) + (area' e d b) = (area' a c d) + (area' a d b)
 
 
 /--
 Not in [Avigad et al., 2009] but required by Proposition 47
 -/
+@[transfer]
 axiom rectangle_area : ∀ (a b c d : Point) (AB CD AC BD : Line),
   formParallelogram a b c d AB CD AC BD ∧ (∠ a:c:d = ∟) →
-  (Triangle.area △ a:c:d + Triangle.area △ a:b:d = |(a─b)| * |(a─c)|) ∧ (Triangle.area △ b:a:c + Triangle.area △ b:d:c) = |(a─b)| * |(a─c)|
+  (area' a c d + area' a b d = |(a─b)| * |(a─c)|) ∧ (area' b a c + area' b d c) = |(a─b)| * |(a─c)|
+
+
+#euclid_post
+
+end SystemE

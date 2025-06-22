@@ -1,9 +1,11 @@
 import SystemE
+import Smt.Real
 import Book.Prop31
 import Book.Prop38
 
 
 namespace Elements.Book1
+open SystemE
 
 theorem proposition_40 : ∀  (a b c d e : Point) (AB BC AC CD DE AD : Line),
   formTriangle a b c AB BC AC ∧ formTriangle d c e CD BC DE ∧ a.sameSide d BC ∧ b ≠ e ∧ |(b─c)| = |(c─e)| ∧

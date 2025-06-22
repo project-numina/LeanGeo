@@ -1,6 +1,7 @@
 import SystemE
 import UniGeo.Relations
 
+open SystemE
 namespace UniGeo.Triangle
 
 theorem theorem_14 : ∀ (I G H F J K : Point) (IG GH HI FJ JK KF : Line),

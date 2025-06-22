@@ -3,6 +3,7 @@ import Book.Prop15
 import Book.Prop29
 import UniGeo.Relations
 
+open SystemE
 namespace UniGeo.Similarity
 
 theorem theorem_2 : ∀ (R S T U V : Point) (ST UV SV TU : Line),

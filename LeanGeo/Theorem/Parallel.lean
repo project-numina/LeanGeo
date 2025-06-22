@@ -3,7 +3,7 @@ import LeanGeo.Abbre
 import Book
 
 set_option maxHeartbeats 0
-
+open SystemE
 open Elements.Book1
 
 namespace LeanGeo

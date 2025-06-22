@@ -1,9 +1,11 @@
 import SystemE
+import Smt.Real
 import Book.Prop34
 import Book.Prop37
 
 
 namespace Elements.Book1
+open SystemE
 
 theorem proposition_41 : ∀ (a b c d e : Point) (AE BC AB CD BE CE : Line),
   formParallelogram a d b c AE BC AB CD ∧ formTriangle e b c BE BC CE ∧ e.onLine AE ∧ ¬(AE.intersectsLine  BC) →

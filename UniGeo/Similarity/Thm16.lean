@@ -1,6 +1,7 @@
 import SystemE
 import UniGeo.Relations
 
+open SystemE
 namespace UniGeo.Similarity
 
 theorem theorem_16 : ∀ (Q R S T U : Point) (QS SU QU RT : Line),

@@ -1,8 +1,10 @@
 import SystemE
+import Smt.Real
 import Book.Prop16
 import Book.Prop20
 
 namespace Elements.Book1
+open SystemE
 
 theorem proposition_21 : ∀ (a b c d : Point) (AB BC AC BD DC : Line),
   formTriangle a b c AB BC AC ∧ (a.sameSide d BC) ∧ (c.sameSide d AB) ∧ (b.sameSide d AC) ∧
