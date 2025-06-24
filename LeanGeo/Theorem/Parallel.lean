@@ -138,7 +138,30 @@ theorem perpLine_parallel_perpLine:
     (perpLine M N ∧ ¬L.intersectsLine M) →
     perpLine L N :=
 by
-  sorry
+  euclid_intros
+  obtain ⟨X, hX⟩ := left
+  have : L.intersectsLine N := by euclid_finish
+  obtain ⟨X', hX'⟩ := intersection_lines _ _ this
+  use X'
+  use (by euclid_finish)
+  intro A B hA hB hA' hB'
+  wlog h : X ≠ X' with H
+  · simp at h
+    euclid_finish
+  have : B.sameSide X L ∨ B.opposingSides X L := by euclid_finish
+  obtain ⟨A', hA'⟩ : ∃ A' : Point, A'.onLine M ∧ A'.opposingSides A N := by
+    obtain ⟨X'', hX''⟩ := exists_distincts_points_on_line M X
+    cases em (X''.sameSide A N) with
+    | inl hl =>
+      obtain ⟨A', hA'⟩ := extend_point M X'' X (by euclid_finish)
+      use A'
+      euclid_finish
+    | inr hr =>
+      use X''
+      euclid_finish
+  have := parallel_eqAlternateAngles
+  have : ∠ A':X:X' = ∠ A:X':X := by euclid_finish
+  euclid_finish
 
 theorem perp_same_line_coll : ∀ (A B C: Point) (l AB AC : Line), (perpLine l AB ∧ perpLine l AC) ∧ (distinctPointsOnLine A B AB) ∧ (distinctPointsOnLine A C AC) → coll A B C := by
   euclid_intros
