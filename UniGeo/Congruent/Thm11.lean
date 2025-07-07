@@ -2,7 +2,7 @@ import SystemE
 import Book.Prop29
 import UniGeo.Relations
 
-open SystemE
+open LeanGeo
 namespace UniGeo.Congruent
 
 theorem theorem_11 : ∀ (T U V W : Point) (TU UV VW TW TV : Line),

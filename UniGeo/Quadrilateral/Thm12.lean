@@ -1,7 +1,7 @@
 import SystemE
 import UniGeo.Relations
 
-open SystemE
+open LeanGeo
 namespace UniGeo.Quadrilateral
 
 theorem theorem_12 : ∀ (T U V W : Point) (TU VW UV TW TV : Line),

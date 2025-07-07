@@ -2,7 +2,7 @@ import SystemE
 import Book.Prop29
 import UniGeo.Relations
 
-open SystemE
+open LeanGeo
 namespace UniGeo.Congruent
 
 theorem theorem_18 : ∀ (E F G H I : Point) (EG FH EH FG : Line),

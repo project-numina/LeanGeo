@@ -8,8 +8,7 @@ import LeanGeo.Theorem.Position
 import LeanGeo.Theorem.PerpBisector
 import LeanGeo.Theorem.Construction
 
-
-open SystemE
+open LeanGeo
 namespace LeanGeo
 theorem exists_circumCentre: ∀(A B C : Point), triangle A B C → ∃(O : Point), circumCentre O A B C := by
   euclid_intros

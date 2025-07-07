@@ -3,7 +3,7 @@ import UniGeo.Relations
 import UniGeo.Abbre
 set_option maxHeartbeats 50000000
 
-open SystemE
+open LeanGeo
 
 theorem cyclic_eqangle : ∀ (A B C D : Point) (AB BC CD DA : Line), (formQuadrilateral A B C D AB BC CD DA) → (A ≠ C) → (∠ D:A:C = ∠ D:B:C) → ∠ C : B : A + ∠ C : D : A = ∟ + ∟ := by
   euclid_intros

@@ -7,8 +7,8 @@ import LeanGeo.Theorem.Position
 import LeanGeo.Theorem.PerpBisector
 import LeanGeo.Theorem.Circle
 
-
-open SystemE
+set_option maxHeartbeats 0
+open LeanGeo
 namespace LeanGeo
 theorem angle_lt_outsideCircle: ∀ (A B C D : Point) (AB : Line) (Ω : Circle), A.onCircle Ω ∧ B.onCircle Ω ∧ distinctPointsOnLine A B AB ∧ C.onCircle Ω ∧ C ≠ A ∧ C ≠ B ∧ D.sameSide C AB ∧ ∠A:D:B < ∠A:C:B → D.outsideCircle Ω := by
   euclid_intros
@@ -64,10 +64,10 @@ theorem angle_insideCircle_gt: ∀ (A B C D : Point) (AB : Line) (Ω : Circle), 
     euclid_apply angle_between_transfer A D E B
     euclid_finish
   have h6: ∠ D:B:E > 0 := by
-    euclid_apply line_from_points
-    sorry
-    --slow?
-    --euclid_finish
+    have h_tri_DBE: triangle D B E := by
+      euclid_finish
+    euclid_apply triangle_anglePositive D B E
+    euclid_finish
   rw[h4,h3,h5]
   euclid_finish
 

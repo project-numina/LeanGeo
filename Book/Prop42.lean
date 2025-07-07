@@ -9,7 +9,7 @@ import Book.Prop41
 
 namespace Elements.Book1
 
-open SystemE
+open LeanGeo
 
 theorem proposition_42 : ∀ (a b c d₁ d₂ d₃ : Point) (AB BC AC D₁₂ D₂₃: Line),
   formTriangle a b c AB BC AC ∧ formRectilinearAngle d₁ d₂ d₃ D₁₂ D₂₃ ∧

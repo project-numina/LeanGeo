@@ -1,7 +1,7 @@
 import SystemE
 import UniGeo.Relations
 
-open SystemE
+open LeanGeo
 namespace UniGeo.Triangle
 
 theorem theorem_7 : ∀ (T W Y U V X : Point) (TW WY YT UV VX XU : Line),

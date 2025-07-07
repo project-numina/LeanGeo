@@ -7,7 +7,7 @@ import Book.Prop07
 import Book.Prop08
 
 namespace Elements.Book1
-open SystemE
+open LeanGeo
 
 theorem proposition_9 : ∀ (a b c : Point) (AB AC : Line),
   formRectilinearAngle b a c AB AC ∧ AB ≠ AC →

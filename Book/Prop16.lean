@@ -6,7 +6,7 @@ import Book.Prop10
 import Book.Prop15
 set_option maxHeartbeats 1000000
 namespace Elements.Book1
-open SystemE
+open LeanGeo
 
 theorem proposition_16 : ∀ (a b c d : Point) (AB BC AC: Line),
   formTriangle a b c AB BC AC ∧ (between b c d) →

@@ -2,7 +2,7 @@ import SystemE
 import Book.Prop29
 import UniGeo.Relations
 
-open SystemE
+open LeanGeo
 namespace UniGeo.Parallel
 
 theorem theorem_14 : ∀ (H J W Y T V S Z I X U : Point) (HJ WY TV SZ : Line),

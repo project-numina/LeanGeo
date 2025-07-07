@@ -4,7 +4,7 @@ import SystemE.Tactic.Attr
 -- chaining imports is necessary for euclid attribute to work properly
 import SystemE.Theory.Inferences.Superposition
 
-namespace SystemE
+namespace LeanGeo
 --
 -- Transfer inferences defined in Sec. 3.6 of Avigad et al. 2009
 --
@@ -235,4 +235,4 @@ axiom rectangle_area : ∀ (a b c d : Point) (AB CD AC BD : Line),
 
 #euclid_post
 
-end SystemE
+end LeanGeo

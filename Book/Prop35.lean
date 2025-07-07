@@ -6,7 +6,7 @@ import Book.Prop34
 
 
 namespace Elements.Book1
-open SystemE
+open LeanGeo
 
 theorem proposition_35 : ∀ (a b c d e f g : Point) (AF BC AB CD EB FC : Line),
   formParallelogram a d b c AF BC AB CD ∧ formParallelogram e f b c AF BC EB FC ∧

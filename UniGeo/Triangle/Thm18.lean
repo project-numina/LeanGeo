@@ -1,7 +1,7 @@
 import SystemE
 import UniGeo.Relations
 
-open SystemE
+open LeanGeo
 namespace UniGeo.Triangle
 
 theorem theorem_18 : ∀ (S T V R U W : Point) (ST TV VS RU UW WR : Line),

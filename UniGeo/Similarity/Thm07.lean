@@ -2,7 +2,7 @@ import SystemE
 import Book.Prop15
 import UniGeo.Relations
 
-open SystemE
+open LeanGeo
 namespace UniGeo.Similarity
 
 theorem theorem_7 : ∀ (E F G H I : Point) (EF HI EI FH : Line),

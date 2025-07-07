@@ -3,7 +3,7 @@ import Book.Prop13
 import Book.Prop28
 import UniGeo.Relations
 
-open SystemE
+open LeanGeo
 namespace UniGeo.Parallel
 
 theorem theorem_9 : ∀ (R T U W Q X S V : Point) (RT UW QX : Line),

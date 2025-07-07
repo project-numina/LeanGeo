@@ -4,7 +4,7 @@ import SystemE.Tactic.Util
 
 open Lean Elab Tactic Meta
 
-namespace SystemE.Tactics
+namespace LeanGeo.Tactics
 
 /--
 The `euclid_intros` tactic is similar to `intros`, but it also destructs conjunctions.
@@ -24,6 +24,6 @@ def EuclidIntros : TacticM Unit := do
 
 syntax "euclid_intros" : tactic
 
-elab "euclid_intros" : tactic => SystemE.Tactics.EuclidIntros
+elab "euclid_intros" : tactic => LeanGeo.Tactics.EuclidIntros
 
-end SystemE.Tactics
+end LeanGeo.Tactics

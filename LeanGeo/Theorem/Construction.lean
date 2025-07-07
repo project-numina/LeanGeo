@@ -5,7 +5,7 @@ import Book
 
 open Elements.Book1
 
-open SystemE
+open LeanGeo
 namespace LeanGeo
 theorem construct_perpBisector' (a b : Point) : (a ≠ b) →  ∃ L, perpBisector a b L ∧ ∃ M : Point, M.onLine L ∧ midpoint a M b := by
   intro hab
@@ -153,6 +153,16 @@ theorem exists_angleBisection : ∀ (A B C : Point),
   · intro hh
     sorry
 
+theorem triangle_angleSum_c : ∀(A B C : Point) , triangle A B C → ∠A:B:C +∠B:C:A + ∠C:A:B = ∟ + ∟ := by
+  euclid_intros
+  euclid_apply line_from_points
+  euclid_apply line_from_points A B as AB
+  euclid_apply line_from_points B C as BC
+  euclid_apply line_from_points C A as CA
+  euclid_apply extend_point BC B C as D
+  euclid_apply Book_triangle_angleSum A B C D AB BC CA
+  euclid_finish
+
 theorem unique_perpLine : ∀ (A : Point) (L : Line),
   ¬(A.onLine L)
   → ∃! (M : Line),
@@ -170,7 +180,54 @@ by
     suffices ∀ x : Point, x.onLine M' → x.onLine M by
       euclid_finish
     intro x hx
-    sorry
+    -- M' is a line through A perpendicular to L. Let X be its intersection with L.
+    obtain ⟨X, hX⟩ := hM'.2
+    -- This setup implies that X is the foot of the perpendicular from A to L.
+    have h_foot_X: foot A X L := by
+      euclid_finish
+    -- We already have A' as the foot of the perpendicular from A to L.
+    -- The foot is unique, so X must be the same point as A'.
+    have h_X_is_A': X = A' := by
+      by_cases h_eq : X = A'
+      · assumption
+      · have h_neq : X ≠ A' := h_eq
+        -- A is not on L, but X and A' are on L. So A, X, A' form a triangle.
+        have h_tri : triangle A X A' := by euclid_finish
+        -- Since A' is the foot of the perpendicular from A to L, and X is on L, angle A:A':X is a right angle.
+        have h_ang_A' : ∠ A:A':X = ∟ := by
+          have h := hA'.2.2 X
+          have c : X.onLine L ∧ A' ≠ X := by euclid_finish
+          specialize h c
+          euclid_finish
+        -- Similarly, since X is the foot of the perpendicular from A to L, and A' is on L, angle A:X:A' is a right angle.
+        have h_ang_X : ∠ A:X:A' = ∟ := by
+          have h := h_foot_X.2.2 A'
+          have c : A'.onLine L ∧ X ≠ A' := by euclid_finish
+          specialize h c
+          euclid_finish
+        -- The sum of angles in triangle A-X-A' is 180 degrees.
+        have h_sum: ∠ A:X:A' + ∠ A:A':X + ∠ X:A:A' = ∟ + ∟ := by
+          euclid_apply triangle_angleSum_c A X A'
+          euclid_finish
+        -- This implies angle X:A:A' must be zero.
+        have h_ang_A_is_zero : ∠ X:A:A' = 0 := by
+          linarith
+        -- A zero angle between segments from a common point implies the three points are collinear.
+        have h_not_tri : ¬ triangle A X A' := by euclid_finish
+        contradiction
+    -- Now we know that X and A' are the same point.
+    -- We are given that M' passes through A (hM'.1) and X, so it must pass through A'.
+    have h_A_on_M' : A.onLine M' := by euclid_finish
+    have h_A'_on_M' : A'.onLine M' := by
+      have h_X_on_M' : X.onLine M' := by euclid_finish
+      have h_eq : X = A' := h_X_is_A'
+      euclid_finish
+    -- By hypothesis, x is on line M' (hx). Since A and A' are also on M', they are all collinear.
+    have h_coll : coll x A A' := by
+      euclid_finish
+    -- The line M was constructed as the line passing through A and A'.
+    -- Any point collinear with A and A' must lie on M.
+    euclid_finish
 
 theorem exists_inCentre : ∀ (A B C: Point), triangle A B C → ∃ (I : Point), inCentre I A B C := by
   intro A B C hABC

@@ -1,7 +1,7 @@
 import SystemE.Theory.Relations
 import SystemE.Tactic.Attr
 
-namespace SystemE
+namespace LeanGeo
 
 -- ********
 -- Diagrammatic inferences defined in Sec 3.4 of Avigad et al  2009
@@ -369,4 +369,4 @@ axiom parallelogram_same_side : ∀ (a b c d : Point) (AB CD AC BD : Line),
 
 #euclid_post
 
-end SystemE
+end LeanGeo

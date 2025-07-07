@@ -5,7 +5,7 @@ import Book.Prop29
 
 
 namespace Elements.Book1
-open SystemE
+open LeanGeo
 
 theorem proposition_30 : ∀ (AB CD EF : Line),
   AB ≠ CD ∧ CD ≠ EF ∧ EF ≠ AB ∧ ¬(AB.intersectsLine EF) ∧ ¬(CD.intersectsLine EF) →

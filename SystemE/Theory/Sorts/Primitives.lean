@@ -1,4 +1,4 @@
-namespace SystemE
+namespace LeanGeo
 
 /--
 The primitive sort of Points in Euclidean geometry.
@@ -15,4 +15,4 @@ The primitive sort of Circles in Euclidean geometry.
 -/
 axiom Circle : Type
 
-end SystemE
+end LeanGeo

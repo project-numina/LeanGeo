@@ -2,7 +2,7 @@ import SystemE
 import Book.Prop15
 import UniGeo.Relations
 
-open SystemE
+open LeanGeo
 namespace UniGeo.Similarity
 
 theorem theorem_10 : ∀ (P Q R S T : Point) (PQ ST PT QS : Line),

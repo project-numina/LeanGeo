@@ -3,7 +3,7 @@ import Smt.Real
 import Book.Prop05
 
 namespace Elements.Book1
-open SystemE
+open LeanGeo
 
 set_option maxHeartbeats 1000000
 theorem proposition_7 : ∀ (a b c d : Point) (AB AC CB AD DB : Line),

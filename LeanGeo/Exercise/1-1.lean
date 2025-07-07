@@ -1,7 +1,6 @@
 import SystemE
 import LeanGeo
 
-open SystemE
 namespace LeanGeo
 --Example 1.1. In quadrilateral W X Y Z with perpendicular diagonals (as in Figure 1.1A), we are given ∠W Z X = 30°, ∠X W Y = 40°, and ∠W Y Z = 50°.
 -- (a) Compute ∠Z.

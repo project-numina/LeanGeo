@@ -6,8 +6,8 @@ import LeanGeo.Theorem.Triangle
 import LeanGeo.Theorem.Position
 import LeanGeo.Theorem.PerpBisector
 
-
-open SystemE
+set_option maxHeartbeats 0
+open LeanGeo
 namespace LeanGeo
 theorem eqChord_eqCentralAngle : ∀ (a b c d o: Point) (O : Circle), a.onCircle O ∧ b.onCircle O ∧ c.onCircle O ∧ d.onCircle O ∧  o.isCentre O ∧ |(a─b)| = |(c─d)| → ∠a:o:b =∠ c:o:d := by
   euclid_intros
@@ -24,9 +24,11 @@ theorem eqChord_eqCentralAngle : ∀ (a b c d o: Point) (O : Circle), a.onCircle
       euclid_assert |(c─d)| = |(c─o)| + |(o─d)|
       euclid_apply triangle_ineqaulity_eql c d o
       euclid_finish
-    · euclid_assert (△ a:o:b).congruent_test (△ c:o:d)
-      euclid_apply Triangle.congruent_property (△ a:o:b) (△ c:o:d)
-      euclid_finish
+    · by_cases h3: coll c o d
+      · euclid_apply triangle_ineqaulity_eql a b o
+        euclid_finish
+      · euclid_apply congruent_SSS a o b c o d
+        euclid_finish
 
 theorem threePoints_existCircle : ∀ (A B C : Point),
   triangle A B C →
@@ -374,6 +376,7 @@ theorem length_of_tangent : ∀ (P A B O: Point) (Ω: Circle) (L1 L2: Line), A.o
   have h4: |(P─B)| > 0 := by
     euclid_finish
   nlinarith
+
 theorem inscribed_formtriangle : ∀ (A B C O : Point) (Γ : Circle),
   A.onCircle Γ ∧ B.onCircle Γ ∧ C.onCircle Γ ∧ O.isCentre Γ ∧ A ≠ B ∧ B ≠ C ∧ C ≠ A
   → triangle A B C := by
@@ -392,8 +395,12 @@ theorem tangent_circles_line_of_centers
   := by
 sorry
 
-theorem power_cyclic: ∀ (a b c d e: Point),distinctFourPoints a b c d ∧ (coll a b e) ∧ (coll c d e) ∧ |(e─a)| * |(e─b)| = |(e─c)| * |(e─d)| → cyclic a b c d := by
+theorem power_cyclic_out: ∀ (a b c d e: Point),distinctFourPoints a b c d ∧ (between a b e) ∧ (between c d e) ∧ |(e─a)| * |(e─b)| = |(e─c)| * |(e─d)| → cyclic a b c d := by
   sorry
+
+theorem power_cyclic_in: ∀ (a b c d e: Point),distinctFourPoints a b c d ∧ (between a e b) ∧ (between c e d) ∧ |(e─a)| * |(e─b)| = |(e─c)| * |(e─d)| → cyclic a b c d := by
+  sorry
+
 theorem cyclic_exists_circle : ∀ (A B C D : Point), cyclic A B C D → ∃ (O: Circle), A.onCircle O ∧ B.onCircle O ∧ C.onCircle O ∧ D.onCircle O:= by
   euclid_intros
   euclid_finish
@@ -446,30 +453,78 @@ theorem outside_power: ∀ (P O A B: Point) (C: Circle),O.isCentre C ∧ A.onCir
     euclid_finish
 
 
-theorem eqChord_eqInsctribedAngle : ∀
+theorem eqChord_eqInsctribedAngle: ∀
 (A B C A' B' C' : Point) (Ω : Circle), distinctThreePoints A B C ∧ distinctThreePoints A' B' C' ∧
   A.onCircle Ω ∧ B.onCircle Ω ∧ C.onCircle Ω
   ∧ A'.onCircle Ω ∧ B'.onCircle Ω ∧ C'.onCircle Ω
   ∧ (|(A─C)| = |(A'─C')|)
   → ∠ A:B:C = ∠ A':B':C' ∨ ∠ A:B:C + ∠ A':B':C' = ∟ + ∟
 := by
-sorry
+  euclid_intros
+  euclid_apply exists_centre Ω as O
+  have h_central_angles_eq : ∠ A:O:C = ∠ A':O:C' := by
+    euclid_apply eqChord_eqCentralAngle A C A' C' O Ω
+    euclid_finish
+  euclid_apply line_from_points A C as AC
+  euclid_apply line_from_points A' C' as A'C'
+  by_cases hO_on_AC : O.onLine AC
+  · have h_diam_AC : diameter A C O Ω := by
+      euclid_finish
+    have h_angle_ABC : ∠ A:B:C = ∟ := by
+      euclid_apply diameter_rightAngle A C B O Ω
+      euclid_finish
+    have h_diam_A'C' : diameter A' C' O Ω := by
+      euclid_finish
+    have h_angle_A'B'C' : ∠ A':B':C' = ∟ := by
+      euclid_apply diameter_rightAngle A' C' B' O Ω
+      euclid_finish
+    right
+    euclid_finish
+  · have hO_not_on_A'C' : ¬(O.onLine A'C') := by
+      by_contra h_contra
+      have h_O_on_AC_implied : O.onLine AC := by
+        euclid_finish
+      exact hO_on_AC h_O_on_AC_implied
+    have h_tri_ACB : triangle A C B := by
+      euclid_finish
+    have h_tri_A'C'B' : triangle A' C' B' := by
+      euclid_finish
+    by_cases hB_side : B.sameSide O AC
+    · have h_angle_ABC : ∠ A:O:C = ∠ A:B:C + ∠ A:B:C := by
+        euclid_apply inscribed_angle_theorem_sameSide A C B O AC Ω
+        euclid_finish
+      by_cases hB'_side : B'.sameSide O A'C'
+      · have h_angle_A'B'C' : ∠ A':O:C' = ∠ A':B':C' + ∠ A':B':C' := by
+          euclid_apply inscribed_angle_theorem_sameSide A' C' B' O A'C' Ω
+          euclid_finish
+        left
+        euclid_finish
+      · have hB'_opp : B'.opposingSides O A'C' := by
+          euclid_finish
+        have h_angle_A'B'C' : ∠ A':O:C' + (∠ A':B':C' + ∠ A':B':C') = ∟ + ∟ + ∟ + ∟ := by
+          euclid_apply inscribed_angle_theorem_opposingSide A' C' B' O A'C' Ω
+          euclid_finish
+        right
+        euclid_finish
+    · have hB_opp : B.opposingSides O AC := by
+        euclid_finish
+      have h_angle_ABC : ∠ A:O:C + (∠ A:B:C + ∠ A:B:C) = ∟ + ∟ + ∟ + ∟ := by
+        euclid_apply inscribed_angle_theorem_opposingSide A C B O AC Ω
+        euclid_finish
+      by_cases hB'_side : B'.sameSide O A'C'
+      · have h_angle_A'B'C' : ∠ A':O:C' = ∠ A':B':C' + ∠ A':B':C' := by
+          euclid_apply inscribed_angle_theorem_sameSide A' C' B' O A'C' Ω
+          euclid_finish
+        right
+        euclid_finish
+      · have hB'_opp : B'.opposingSides O A'C' := by
+          euclid_finish
+        have h_angle_A'B'C' : ∠ A':O:C' + (∠ A':B':C' + ∠ A':B':C') = ∟ + ∟ + ∟ + ∟ := by
+          euclid_apply inscribed_angle_theorem_opposingSide A' C' B' O A'C' Ω
+          euclid_finish
+        left
+        euclid_finish
 
-theorem eqInscribedAngle_eqChord : ∀
-(A B C A' B' C' : Point) (Ω : Circle), distinctThreePoints A B C ∧ distinctThreePoints A' B' C' ∧
-  A.onCircle Ω ∧ B.onCircle Ω ∧ C.onCircle Ω
-  ∧ A'.onCircle Ω ∧ B'.onCircle Ω ∧ C'.onCircle Ω
-  ∧ ∠A:B:C = ∠ A':B':C' ∨ ∠ A:B:C + ∠ A':B':C' = ∟ + ∟
-  → |(A─C)| = |(A'─C')|
-:= by
-sorry
 
-theorem intersecting_circles_perpendicular_bisector :
-  ∀ (C1 C2 : Circle) (O1 O2 A B : Point) (L : Line),
-  (circlesIntersectsAtTwoPoints C1 C2 A B) ∧ O1.isCentre C1 ∧ O2.isCentre C2
-  ∧ (O1.onLine L)
-  ∧ (O2.onLine L)
-  → perpBisector A B L :=
-by sorry
 
 end LeanGeo

@@ -1,7 +1,7 @@
 import SystemE
 import UniGeo.Relations
 
-open SystemE
+open LeanGeo
 namespace UniGeo.Quadrilateral
 
 theorem theorem_11 : ∀ (S T U V : Point) (ST UV TU SV SU : Line),

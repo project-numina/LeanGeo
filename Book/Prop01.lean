@@ -2,7 +2,7 @@ import SystemE
 import Smt.Real
 
 namespace Elements.Book1
-open SystemE
+open LeanGeo
 
 theorem proposition_1 : ∀ (a b : Point) (AB : Line),
   distinctPointsOnLine a b AB →

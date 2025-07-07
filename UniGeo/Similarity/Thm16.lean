@@ -1,7 +1,7 @@
 import SystemE
 import UniGeo.Relations
 
-open SystemE
+open LeanGeo
 namespace UniGeo.Similarity
 
 theorem theorem_16 : ∀ (Q R S T U : Point) (QS SU QU RT : Line),

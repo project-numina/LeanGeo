@@ -3,7 +3,7 @@ import Book.Prop13
 import UniGeo.Relations
 
 
-open SystemE
+open LeanGeo
 namespace UniGeo.Similarity
 
 theorem theorem_12 : ∀ (S T U V W : Point) (ST TW SW UV : Line),

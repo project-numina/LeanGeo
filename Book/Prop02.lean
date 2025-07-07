@@ -4,7 +4,7 @@ import Smt.Real
 import Book.Prop01
 
 namespace Elements.Book1
-open SystemE
+open LeanGeo
 
 theorem proposition_2 : ∀ (a b c : Point) (BC : Line),
   (distinctPointsOnLine b c BC) ∧ (a ≠ b) →

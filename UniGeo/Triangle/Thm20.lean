@@ -1,7 +1,7 @@
 import SystemE
 import UniGeo.Relations
 
-open SystemE
+open LeanGeo
 namespace UniGeo.Triangle
 
 theorem theorem_20 : ∀ (P R T S U Q : Point) (PR RT TP SU UQ QS : Line),

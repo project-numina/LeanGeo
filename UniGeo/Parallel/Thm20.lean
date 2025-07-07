@@ -2,7 +2,7 @@ import SystemE
 import Book.Prop29
 import UniGeo.Relations
 
-open SystemE
+open LeanGeo
 namespace UniGeo.Parallel
 
 theorem theorem_20 : ∀ (W X V Y Z : Point) (WX VY VX WY : Line),

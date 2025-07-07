@@ -1,9 +1,6 @@
 import Mathlib
 import SystemE
-import Smt.Real
 import LeanGeo
-
-open SystemE
 namespace LeanGeo
 
 /--5. If two altitudes of a triangle are equal, then the triangle is isosceles.-/

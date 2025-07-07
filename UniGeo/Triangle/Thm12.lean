@@ -1,7 +1,7 @@
 import SystemE
 import UniGeo.Relations
 
-open SystemE
+open LeanGeo
 namespace UniGeo.Triangle
 
 theorem theorem_12 : ∀ (I J K F G H : Point) (IJ JK KI FG GH HF : Line),

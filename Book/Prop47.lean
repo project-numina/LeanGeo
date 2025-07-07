@@ -11,7 +11,7 @@ import Book.Prop41
 import Book.Prop46
 
 namespace Elements.Book1
-open SystemE
+open LeanGeo
 
 -- WARNING: This proof is quite slow.
 set_option maxHeartbeats 0 in

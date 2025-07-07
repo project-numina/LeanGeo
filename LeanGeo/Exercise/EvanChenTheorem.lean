@@ -1,7 +1,6 @@
 import SystemE
 import LeanGeo
 
-open SystemE
 namespace LeanGeo
 
 --Lemma 1.3 (Self-full angle). If A, B, C are distinct points, then ∠A:O:C + ∠ C:O:B + ∠ B:O:A = ∟ + ∟ +  ∟ + ∟.

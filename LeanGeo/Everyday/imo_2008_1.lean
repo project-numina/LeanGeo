@@ -1,7 +1,5 @@
 import SystemE
 import LeanGeo
-
-open SystemE
 namespace LeanGeo
 set_option maxHeartbeats 0
 /-theorem power_cyclic: ∀ (a b c d e: Point),distinctFourPoints a b c d ∧ (coll a b e) ∧ (coll c d e) ∧ |(e─a)| * |(e─b)| = |(e─c)| * |(e─d)| → cyclic a b c d := by

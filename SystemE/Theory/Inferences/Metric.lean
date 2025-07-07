@@ -4,7 +4,7 @@ import SystemE.Tactic.Attr
 -- chaining imports is necessary for euclid attribute to work properly
 import SystemE.Theory.Inferences.Diagrammatic
 
-namespace SystemE
+namespace LeanGeo
 --
 -- Metric inferences defined in Sec. 3.5 of Avigad et al., 2009
 -- Generally speaking, they are not used explicitly in the tactics written by humans.
@@ -112,4 +112,4 @@ axiom area_congruence : ∀ (a b c a' b' c' : Point),
 
 #euclid_post
 
-end SystemE
+end LeanGeo

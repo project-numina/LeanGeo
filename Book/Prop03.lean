@@ -4,7 +4,7 @@ import Smt.Real
 import Book.Prop02
 
 namespace Elements.Book1
-open SystemE
+open LeanGeo
 
 theorem proposition_3 : ∀ (a b c₀ c₁ : Point) (AB C : Line),
   distinctPointsOnLine a b AB ∧ distinctPointsOnLine c₀ c₁ C ∧ |(a─b)| > |(c₀─c₁)| →

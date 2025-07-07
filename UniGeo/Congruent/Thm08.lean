@@ -1,7 +1,7 @@
 import SystemE
 import UniGeo.Relations
 
-open SystemE
+open LeanGeo
 namespace UniGeo.Congruent
 
 theorem theorem_8 : ∀ (P Q R S T : Point) (PQ QR RS ST PT PS QS : Line),

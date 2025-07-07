@@ -1,7 +1,7 @@
 import SystemE
 import UniGeo.Relations
 
-open SystemE
+open LeanGeo
 namespace UniGeo.Similarity
 
 theorem theorem_8 : ∀ (G H I J K : Point) (GH GI HI JK : Line),

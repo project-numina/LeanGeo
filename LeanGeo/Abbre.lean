@@ -1,9 +1,8 @@
 import SystemE
-import Smt.Real
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
 import UniGeo
 
-open SystemE
+open LeanGeo
 namespace LeanGeo
 @[simp]
 abbrev cyclic (A B C D: Point) : Prop :=
@@ -167,60 +166,3 @@ triangle A B C ∧ triangle D E F ∧ |(A─B)| = |(D─E)| ∧ |(B─C)| = |(E�
 abbrev similarTriangle (A B C D E F: Point) : Prop :=
 triangle A B C ∧ triangle D E F ∧ ∠A:B:C = ∠D:E:F ∧ ∠B:A:C = ∠E:D:F ∧ ∠A:C:B = ∠D:F:E ∧ |(A─B)| * |(E─F)| = |(B─C)| * |(D─E)| ∧ |(B─C)| * |(F─D)| = |(C─A)| * |(E─F)| ∧ |(C─A)| * |(D─E)| = |(A─B)| * |(F─D)|
 end LeanGeo
-
-namespace SystemE
-namespace Triangle
-@[simp]
-abbrev congruent_test : Triangle → Triangle →  Prop
-| (Triangle.ofPoints A B C) ,(Triangle.ofPoints D E F) =>
-  -- SSS
-  ((|(A─B)| = |(D─E)| ∧ |(B─C)| = |(E─F)| ∧ |(C─A)| = |(F─D)|) ∨
-  -- SAS
-  (|(A─B)| = |(D─E)| ∧ ∠ A:B:C = ∠ D:E:F ∧ |(B─C)| = |(E─F)|) ∨
-  (|(B─C)| = |(E─F)| ∧ ∠ B:C:A = ∠ E:F:D ∧ |(C─A)| = |(F─D)|) ∨
-  (|(C─A)| = |(F─D)| ∧ ∠ C:A:B = ∠ F:D:E ∧ |(A─B)| = |(D─E)|) ∨
---  ASA or AAS
-  (∠ A:B:C = ∠ D:E:F ∧ |(A─B)| = |(D─E)| ∧ ∠ B:C:A = ∠ E:F:D) ∨
-  (∠ B:C:A = ∠ E:F:D ∧ |(B─C)| = |(E─F)| ∧ ∠ C:A:B = ∠ F:D:E) ∨
-  (∠ C:A:B = ∠ F:D:E ∧ |(C─A)| = |(F─D)| ∧ ∠ A:B:C = ∠ D:E:F) ∨
-  (∠ A:B:C = ∠ D:E:F ∧ ∠ B:C:A = ∠ E:F:D ∧ |(B─C)| = |(E─F)|) ∨
-  (∠ B:C:A = ∠ E:F:D ∧ ∠ C:A:B = ∠ F:D:E ∧ |(C─A)| = |(F─D)|) ∨
-  (∠ C:A:B = ∠ F:D:E ∧ ∠ A:B:C = ∠ D:E:F ∧ |(A─B)| = |(D─E)|) ∨
-  (∠ C:A:B = ∠ F:D:E ∧ ∠ B:C:A = ∠ E:F:D ∧ |(A─B)| = |(D─E)|) ∨
-  (∠ A:B:C = ∠ D:E:F ∧ ∠ B:C:A = ∠ E:F:D ∧ |(C─A)| = |(F─D)|) ∨
-  (∠ A:B:C = ∠ D:E:F ∧ |(B─C)| = |(E─F)| ∧ ∠ C:A:B = ∠ F:D:E))
-  ∧ ((¬ LeanGeo.coll A B C) ∨ (¬ LeanGeo.coll D E F))
-
-@[simp]
-axiom congruent_property (T1 T2: Triangle): congruent T1 T2 →
-  match T1,T2 with
-  | (Triangle.ofPoints A B C) ,(Triangle.ofPoints D E F) =>
-    |(A─B)| = |(D─E)| ∧ |(B─C)| = |(E─F)| ∧ |(A─C)| = |(D─F)| ∧ ∠ A:B:C = ∠ D:E:F ∧ ∠ A:C:B = ∠ D:F:E ∧ ∠ B:A:C = ∠ E:D:F
-
-@[simp]
-abbrev similar_test (T1 T2: Triangle): Prop :=
-  match T1, T2 with
-  | (Triangle.ofPoints A B C) ,(Triangle.ofPoints D E F) =>
-  ((∠ A:B:C = ∠ D:E:F ∧ ∠ B:C:A = ∠ E:F:D) ∨
-  (∠ B:C:A = ∠ E:F:D ∧ ∠ C:A:B = ∠ F:D:E) ∨
-  (∠ C:A:B = ∠ F:D:E ∧ ∠ A:B:C = ∠ D:E:F) ∨
--- SAS criterion (with side ratios)
-  (|(A─B)| * |(E─F)| = |(B─C)| * |(D─E)| ∧ ∠ A:B:C = ∠ D:E:F) ∨
-  (|(B─C)| * |(F─D)| = |(C─A)| * |(E─F)| ∧ ∠ B:C:A = ∠ E:F:D) ∨
-  (|(C─A)| * |(D─E)| = |(A─B)| * |(F─D)| ∧ ∠ C:A:B = ∠ F:D:E) ∨
--- SSS criterion (with side ratios)
-  (|(A─B)| * |(E─F)| = |(B─C)| * |(D─E)| ∧ |(B─C)| * |(F─D)| = |(C─A)| * |(E─F)|)
-  ∧ (¬ LeanGeo.coll A B C))
-
-notation:50 a:51 "~" b:51 => similar a b
-
-@[simp]
-axiom similar_property (T1 T2: Triangle):  T1.similar_test T2 →
-  match T1,T2 with
-  | (Triangle.ofPoints A B C) ,(Triangle.ofPoints D E F) =>
-    |(A─B)| * |(E─F)| = |(B─C)| * |(D─E)| ∧ |(B─C)| * |(F─D)| = |(C─A)| * |(E─F)|
-   ∧ |(C─A)| * |(D─E)| = |(A─B)| * |(F─D)| ∧ ∠ A:B:C = ∠ D:E:F
-   ∧ ∠ A:C:B = ∠ D:F:E ∧ ∠ B:A:C = ∠ E:D:F
-
-end Triangle
-end SystemE

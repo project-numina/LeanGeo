@@ -3,7 +3,7 @@ import UniGeo.Relations
 import UniGeo.Abbre
 
 
-open SystemE
+open LeanGeo
 
 theorem imo_shortlist_p2021_g4 : ∀ (A B C D : Point) (L₁ L₂ : Line) (Γ : Circle),
 True → True

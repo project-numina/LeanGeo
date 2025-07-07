@@ -3,7 +3,7 @@ import Smt.Real
 import Book.Prop13
 
 namespace Elements.Book1
-open SystemE
+open LeanGeo
 
 theorem proposition_14 : ∀ (a b c d : Point) (AB BC BD : Line),
   distinctPointsOnLine a b AB ∧ distinctPointsOnLine b c BC ∧ distinctPointsOnLine b d BD ∧ (c.opposingSides d AB) ∧

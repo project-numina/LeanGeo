@@ -3,7 +3,7 @@ import Book.Prop15
 import Book.Prop29
 import UniGeo.Relations
 
-open SystemE
+open LeanGeo
 namespace UniGeo.Similarity
 
 theorem theorem_6 : ∀ (U V W X Y : Point) (VY WX VW XY : Line),

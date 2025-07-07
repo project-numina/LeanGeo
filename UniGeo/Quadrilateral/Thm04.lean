@@ -2,7 +2,7 @@ import SystemE
 import Book.Prop29
 import UniGeo.Relations
 
-open SystemE
+open LeanGeo
 namespace UniGeo.Quadrilateral
 
 theorem theorem_4 : ∀ (G H I J : Point) (GH IJ HI GJ GI : Line),

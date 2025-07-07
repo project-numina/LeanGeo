@@ -1,7 +1,7 @@
 import SystemE.Theory.Sorts
 import SystemE.Theory.Relations
 
-namespace SystemE
+namespace LeanGeo
 
 axiom arbitrary_point :
   ∃ _ : Point, true
@@ -82,4 +82,4 @@ axiom exists_point_outside_circle :
 axiom exists_distinct_point_outside_circle :
   ∀ (α : Circle) (b : Point),  ∃ a : Point, a ≠ b ∧ a.outsideCircle α
 
-end SystemE
+end LeanGeo

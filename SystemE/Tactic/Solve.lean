@@ -3,7 +3,7 @@ import Lean
 import Batteries
 import SystemE.Tactic.Util
 
-open Lean Meta Elab Tactic SystemE.Tactics
+open Lean Meta Elab Tactic LeanGeo.Tactics
 
 elab "euclid_finish" : tactic => do
   -- Try simp_all safely

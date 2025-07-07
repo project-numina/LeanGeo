@@ -1,6 +1,6 @@
 import SystemE.Theory.Relations
 
-namespace SystemE
+namespace LeanGeo
 
 @[simp]
 abbrev twoLinesIntersectAtPoint (AB BC : Line) (b: Point) : Prop :=

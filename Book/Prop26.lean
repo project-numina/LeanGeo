@@ -5,7 +5,7 @@ import Book.Prop04
 import Book.Prop16
 
 namespace Elements.Book1
-open SystemE
+open LeanGeo
 
 theorem proposition_26 : ∀ (a b c d e f : Point) (AB BC AC DE EF DF : Line),
   formTriangle a b c AB BC AC ∧ formTriangle d e f DE EF DF ∧

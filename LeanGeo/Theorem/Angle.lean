@@ -2,11 +2,12 @@ import SystemE
 import LeanGeo.Abbre
 import LeanGeo.Theorem.BookTheorem
 
-open SystemE
+open LeanGeo
 namespace LeanGeo
 
 theorem angle_coincide_zero : ∀ (a o : Point), (a ≠ o) → ∠a:o:a = 0:= by
   euclid_intros
+
   euclid_apply line_from_points
   euclid_finish
 
@@ -65,6 +66,19 @@ theorem angle_between_transfer : ∀ (a b c d : Point),between a b c ∧ ¬ coll
     · euclid_apply line_from_points
       euclid_finish
 
+theorem coll_equal_or_complement: ∀ (A B C D: Point), coll A B C  ∧ (B ≠ C) ∧ (B ≠ A) ∧ (C ≠ A) ∧ ¬ ( coll A B D)→
+  ∠ D:B:C = ∠ D:B:A ∨ ∠ D:B:C + ∠D:B:A = ∟ + ∟ := by
+  euclid_intros
+  euclid_apply line_from_points B C as L
+  by_cases between A B C
+  · euclid_apply angle_between_transfer A B C D
+    euclid_finish
+  · by_cases between A C B
+    · euclid_apply angle_between_transfer A C B D
+      euclid_finish
+    · euclid_apply angle_between_transfer C A B D
+      euclid_finish
+
 theorem between_angleSum : ∀(a b c d: Point), between b c d ∧ (¬ coll a b c) → ∠d:a:c + ∠c:a:b = ∠d:a:b:= by
   euclid_intros
   euclid_apply line_from_points
@@ -93,4 +107,12 @@ theorem angle_bisector_between: ∀ (a b c d: Point), (triangle a b c) ∧ (coll
     euclid_finish
   euclid_finish
 
+theorem opposite_angles_same : ∀ (A B C D E: Point), between A C E ∧ between B C D → ∠A:C:B = ∠ D:C:E := by
+  euclid_intros
+  by_cases coll A B C
+  · euclid_apply line_from_points
+    euclid_finish
+  · euclid_apply line_from_points
+    euclid_apply angle_between_transfer
+    euclid_finish
 end LeanGeo

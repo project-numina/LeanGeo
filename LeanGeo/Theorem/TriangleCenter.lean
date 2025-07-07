@@ -7,8 +7,8 @@ import LeanGeo.Theorem.Triangle
 import LeanGeo.Theorem.Position
 import LeanGeo.Theorem.Construction
 
-
-open SystemE
+set_option maxHeartbeats 0
+open LeanGeo
 namespace LeanGeo
 
 --Theorem 1.3 (Inscribed Angle Theorem). If ∠A C B is inscribed in a circle, then it subtends an arc with measure 2∠A C B.
@@ -53,20 +53,13 @@ theorem incenter_angle : ∀ (A B C I : Point), (triangle A B C) ∧ (inCentre I
   euclid_finish
 
 
-theorem circumcircle_circumcenter: ∀ (A B C O: Point) (Ω: Circle),
-  (circumCentre O A B C) ∧
-  (circumCircle Ω A B C) →
-  O.isCentre Ω := by
-  sorry
-
 theorem circumcenter_inscribed_angle_complementary : ∀ (A B C O : Point) (AB BC CA: Line) (Ω : Circle), (formTriangle A B C AB BC CA) ∧ (O.sameSide C AB) ∧ (A.onCircle Ω) ∧ (B.onCircle Ω) ∧ (C.onCircle Ω) ∧ (O.isCentre Ω)
   → ∠ O:B:A +  ∠ A:C:B= ∟ := by
-  sorry
-  --euclid_intros
-  --euclid_apply inscribed_angle_theorem A B C O AB BC CA Ω
-  --euclid_apply isoTriangle_eqAngle O A B
-  --euclid_apply triangle_angleSum O A B
-  --euclid_finish
+  euclid_intros
+  euclid_apply inscribed_angle_theorem_sameSide A B C O AB Ω
+  euclid_apply isoTriangle_eqAngle O A B
+  euclid_apply triangle_angleSum O A B
+  euclid_finish
 /--
 theorem circumcenter_orthocenter_eqAngle: ∀ (A B C O H : Point) (AB BC CA : Line)(Ω: Circle),
   (formAcuteTriangle A B C AB BC CA) ∧

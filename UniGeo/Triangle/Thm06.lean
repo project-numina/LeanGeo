@@ -3,7 +3,7 @@ import Book.Prop13
 import Book.Prop29
 import UniGeo.Relations
 
-open SystemE
+open LeanGeo
 namespace UniGeo.Triangle
 
 theorem theorem_6 : ∀ (G H I J K : Point) (GK HJ GI HK : Line),

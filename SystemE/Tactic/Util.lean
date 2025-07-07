@@ -4,7 +4,7 @@ import Batteries.Lean.Meta.UnusedNames
 
 open Lean Elab Tactic Meta
 
-namespace SystemE.Tactics
+namespace LeanGeo.Tactics
 
 /--
 Return if the weak head norm form of `e` is a conjunction.
@@ -91,4 +91,4 @@ def traceUnsolved (unsolved : List Format) : TacticM Unit := do
     let unsolved := ",".intercalate (unsolved.map Format.pretty)
     logInfo s!"unsolved goals: {unsolved}"
 
-end SystemE.Tactics
+end LeanGeo.Tactics

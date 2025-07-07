@@ -4,7 +4,7 @@ import Book.Prop08
 import Book.Prop10
 
 namespace Elements.Book1
-open SystemE
+open LeanGeo
 
 theorem proposition_12 : ∀ (a b c : Point) (AB : Line),
   distinctPointsOnLine a b AB ∧ ¬(c.onLine AB) →

@@ -3,8 +3,10 @@ import LeanGeo.Abbre
 import LeanGeo.Theorem.Angle
 import LeanGeo.Theorem.Parallel
 import LeanGeo.Theorem.Construction
+import LeanGeo.Theorem.Position
 
-open SystemE
+set_option maxHeartbeats 0
+open LeanGeo
 namespace LeanGeo
 
 theorem triangle_anglePositive : ∀(A B C : Point) , triangle A B C → ∠A:B:C > 0 ∧ ∠A:C:B >0 ∧ ∠C:A:B >0 := by
@@ -20,7 +22,14 @@ by
 
 theorem pythagorean_point : ∀ (a b c: Point), (triangle a b c) ∧ (∠ b:a:c : ℝ) = ∟ →
   |(b─c)| * |(b─c)| = |(b─a)| * |(b─a)| + |(a─c)| * |(a─c)| := by
-  sorry
+  euclid_intros
+  euclid_apply line_from_points a b as AB
+  euclid_apply line_from_points b c as BC
+  euclid_apply line_from_points c a as CA
+  have h_form_tri : formTriangle a b c AB BC CA := by
+    euclid_finish
+  euclid_apply pythagorean a b c AB BC CA
+  euclid_finish
 
 theorem triangle_angleSum : ∀(A B C : Point) , triangle A B C → ∠A:B:C +∠B:C:A + ∠C:A:B = ∟ + ∟ := by
   euclid_intros
@@ -90,8 +99,7 @@ theorem HL_congruent : ∀ (a b c d e f : Point) ,  rightTriangle a b c ∧ righ
     have h6 : |(a─c)| * |(a─c)| = |(d─f)| * |(d─f)| := by linarith
     have h7 : |(a─c)| > 0 := by euclid_finish
     have h8 : |(d─f)| > 0 := by euclid_finish
-    --nlinarith [h6, h7, h8]
-    sorry
+    euclid_finish
   euclid_apply congruent_SSS a b c d e f
   euclid_finish
 
@@ -99,8 +107,8 @@ theorem isoTriangle_eqAngle : ∀ (A B C : Point), isoTriangle A B C → ∠ A:B
   euclid_intros
   euclid_apply exists_midpoint B C as D
   euclid_apply line_from_points B C as BC
-  euclid_assert Triangle.congruent_test (△ D:A:B) (△ D:A:C)
-  euclid_apply Triangle.congruent_property (△ D:A:B) (△ D:A:C)
+  euclid_apply angle_between_transfer
+  euclid_apply congruent_SSS D B A D C A
   euclid_apply angle_between_transfer
   euclid_finish
 
@@ -210,10 +218,6 @@ theorem triangle_inside_angleSum: ∀ (A B C O : Point) (AB BC CA: Line), formTr
   euclid_apply triangle_angleSum A B C
   euclid_finish
 
-theorem opposingsides_inside_triangle :  ∀ (A B C I : Point) (AB BC CA AI BI CI : Line), (formTriangle A B C AB BC CA) ∧ (distinctPointsOnLine B I BI) ∧ (distinctPointsOnLine C I CI) ∧ A.opposingSides C BI ∧ B.opposingSides C AI → insideTriangle I A B C AB BC CA:= by
-  euclid_intros
-  sorry
-
 theorem para_similar_in : ∀ (A B C D E : Point) (AB CD : Line), distinctPointsOnLine A B AB ∧ distinctPointsOnLine C D CD ∧ ¬ AB.intersectsLine CD ∧ between A E C ∧ coll B E D ∧ AB ≠ CD → similarTriangle A B E C D E := by
   euclid_intros
   euclid_apply line_from_points B D as BD
@@ -292,4 +296,8 @@ theorem foot_shortest : ∀ (A B C : Point) (L : Line), foot A B L ∧ distinctP
   euclid_apply rightTriangle_hypotenuse_longest B A C
   euclid_finish
 
+theorem foot_square_difference: ∀ (A B C H: Point) (BC : Line), triangle A B C ∧ distinctPointsOnLine B C BC ∧ (foot A H BC) → |(A─B)| * |(A─B)| - |(H─B)| * |(H─B)| = |(A─C)| * |(A─C)| - |(C─H)| * |(C─H)| := by
+  euclid_intros
+  euclid_apply pythagorean_point
+  euclid_finish
 end LeanGeo

@@ -2,7 +2,7 @@ import SystemE
 import Book.Prop32
 import UniGeo.Relations
 
-open SystemE
+open LeanGeo
 namespace UniGeo.Similarity
 
 theorem theorem_19 : ∀ (H I J K : Point) (HI IJ HJ IK : Line),

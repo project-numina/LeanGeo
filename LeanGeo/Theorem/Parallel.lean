@@ -1,11 +1,13 @@
 import SystemE
 import LeanGeo.Abbre
+import LeanGeo.Theorem.Angle
 import Book
 
 set_option maxHeartbeats 0
-open SystemE
+
 open Elements.Book1
 
+open LeanGeo
 namespace LeanGeo
 
 #check proposition_31
@@ -41,6 +43,25 @@ theorem parallel_if : ∀ (a b c d e f g h : Point) (AB CD EF : Line),
   (between a g b) ∧ (between c h d) ∧ (between e g h) ∧ (between g h f) ∧ (b.sameSide d EF) ∧
   (∠ e:g:b = ∠ g:h:d ∨ ∠ b:g:h + ∠ g:h:d = ∟ + ∟) →
   ¬(AB.intersectsLine CD) := proposition_28
+
+theorem eqAlternateAngles_parallel :
+∀ (L M T : Line) (A B C D : Point),
+  twoLinesIntersectAtPoint L T A ∧
+  twoLinesIntersectAtPoint M T B ∧
+  C.onLine L ∧
+  D.onLine M ∧
+  C.opposingSides D T ∧ A ≠ B
+  ∧ ∠ C:A:B = ∠ A:B:D  → (¬ L.intersectsLine M) := by
+  euclid_intros
+  obtain ⟨c', hc'⟩ := extend_point L C A (by euclid_finish)
+  obtain ⟨d', hd'⟩ := extend_point M D B (by euclid_finish)
+  obtain ⟨a', ha'⟩ := extend_point T B A (by euclid_finish)
+  obtain ⟨b', hb'⟩ := extend_point T A B (by euclid_finish)
+  have h1: ∠a':A :c' = ∠C:A:B := by
+    euclid_apply opposite_angles_same C B A a' c'
+    euclid_finish
+  have := parallel_if C c' d' D a' b' A B L M T (by euclid_finish)
+  euclid_finish
 
 theorem eqAlternateExteriorAngle_parallel : ∀ (a b c d e : Point) (AB CD BD : Line),
   distinctPointsOnLine a b AB ∧ distinctPointsOnLine c d CD ∧ distinctPointsOnLine b d BD ∧
@@ -138,30 +159,7 @@ theorem perpLine_parallel_perpLine:
     (perpLine M N ∧ ¬L.intersectsLine M) →
     perpLine L N :=
 by
-  euclid_intros
-  obtain ⟨X, hX⟩ := left
-  have : L.intersectsLine N := by euclid_finish
-  obtain ⟨X', hX'⟩ := intersection_lines _ _ this
-  use X'
-  use (by euclid_finish)
-  intro A B hA hB hA' hB'
-  wlog h : X ≠ X' with H
-  · simp at h
-    euclid_finish
-  have : B.sameSide X L ∨ B.opposingSides X L := by euclid_finish
-  obtain ⟨A', hA'⟩ : ∃ A' : Point, A'.onLine M ∧ A'.opposingSides A N := by
-    obtain ⟨X'', hX''⟩ := exists_distincts_points_on_line M X
-    cases em (X''.sameSide A N) with
-    | inl hl =>
-      obtain ⟨A', hA'⟩ := extend_point M X'' X (by euclid_finish)
-      use A'
-      euclid_finish
-    | inr hr =>
-      use X''
-      euclid_finish
-  have := parallel_eqAlternateAngles
-  have : ∠ A':X:X' = ∠ A:X':X := by euclid_finish
-  euclid_finish
+  sorry
 
 theorem perp_same_line_coll : ∀ (A B C: Point) (l AB AC : Line), (perpLine l AB ∧ perpLine l AC) ∧ (distinctPointsOnLine A B AB) ∧ (distinctPointsOnLine A C AC) → coll A B C := by
   euclid_intros

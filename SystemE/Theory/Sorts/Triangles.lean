@@ -1,6 +1,6 @@
 import SystemE.Theory.Sorts.Segments
 
-namespace SystemE
+namespace LeanGeo
 
 opaque area' : Point → Point → Point → ℝ
 
@@ -22,4 +22,4 @@ instance : Coe Triangle ℝ :=
 -- example (a b c : Point) : Triangle.area (△ a:b:c) = 0 := by
 --   dsimp
 
-end SystemE
+end LeanGeo

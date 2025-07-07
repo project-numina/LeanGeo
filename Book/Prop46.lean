@@ -8,7 +8,7 @@ import Book.Prop34
 
 
 namespace Elements.Book1
-open SystemE
+open LeanGeo
 
 theorem proposition_46 : ∀ (a b : Point) (AB : Line), distinctPointsOnLine a b AB →
   ∃ (d e : Point) (DE AD BE : Line), formParallelogram d e a b DE AB AD BE ∧

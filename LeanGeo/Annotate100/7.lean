@@ -1,8 +1,6 @@
 import Mathlib
 import SystemE
 import LeanGeo
-
-open SystemE
 namespace LeanGeo
 
 set_option maxHeartbeats 0

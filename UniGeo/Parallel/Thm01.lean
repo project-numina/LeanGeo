@@ -4,7 +4,7 @@ import Book.Prop28
 import UniGeo.Relations
 
 
-open SystemE
+open LeanGeo
 
 namespace UniGeo.Parallel
 
