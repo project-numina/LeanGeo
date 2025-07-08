@@ -1,8 +1,5 @@
 import SystemE
 import UniGeo.Theorem
-
-open SystemE
-
 theorem day137: ∀ (A B C D O : Point) (P : Circle),
 midpoint A O B ∧ O.isCentre P ∧ A.onCircle P ∧ B.onCircle P ∧ C.onCircle P ∧ C ≠ B ∧ C ≠ A ∧ D.onCircle P ∧ D ≠ A ∧ D ≠ B ∧ D ≠ C ∧ |(A─D)| =|(A─C)| →
 ∠C:A:B=∠D:A:B := by

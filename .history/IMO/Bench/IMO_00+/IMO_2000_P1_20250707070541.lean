@@ -1,0 +1,43 @@
+import Mathlib
+import SystemE
+import LeanGeo
+namespace LeanGeo
+
+--Two circles $G_1$ and $G_2$ intersect at two points $M$ and $N$. Let $AB$ be the line tangent to these circles at $A$ and $B$, respectively, so that $M$ lies closer to $AB$ than $N$. Let $CD$ be the line parallel to $AB$ and passing through the point $M$, with $C$ on $G_1$ and $D$ on $G_2$. Lines $AC$ and $BD$ meet at $E$; lines $AN$ and $CD$ meet at $P$; lines $BN$ and $CD$ meet at $Q$. Show that $EP = EQ$.
+theorem IMO_2000_P1 :
+  ∀ (M N A B C D E P Q O1 O2 : Point) (G1 G2 : Circle) (AB CD AC BD AN BN : Line),
+    circlesIntersectsAtTwoPoints G1 G2 M N ∧
+    distinctPointsOnLine A B AB ∧
+    tangentAtPoint A O1 AB G1 ∧
+    tangentAtPoint B O2 AB G2 ∧
+    ¬ AB.intersectsLine CD ∧
+    distinctPointsOnLine M C CD ∧
+    C.onCircle G1 ∧ C ≠ M ∧ C ≠ N ∧
+    D.onCircle G2 ∧ D.onLine CD ∧ D ≠ M ∧
+    distinctPointsOnLine A C AC ∧
+    distinctPointsOnLine B D BD ∧
+    twoLinesIntersectAtPoint AC BD E ∧
+    distinctPointsOnLine A N AN ∧
+    twoLinesIntersectAtPoint AN CD P ∧
+    distinctPointsOnLine B N BN ∧
+    twoLinesIntersectAtPoint BN CD Q →
+    |(E─P)| = |(E─Q)| := by
+    euclid_intros
+    euclid_apply line_from_points M N as MN
+    euclid_apply intersection_lines MN AB as T
+    have midP_ATB: midpoint A T B := by
+      sorry
+    have midP_PMQ : midpoint P M Q := by
+      sorry
+    euclid_apply line_from_points E M as EM
+    have h_congr: congruentTriangle A M B A E B := by
+      sorry
+    have perp_EM_CD: perpLine EM CD := by
+      have h1: perpBisector E M AB := by
+        euclid_apply perpBisector_construction E M A B AB
+        euclid_finish
+      euclid_apply perpLine_parallel_perpLine AB EM CD
+    have perpB: perpBisector P Q EM := by
+      euclid_apply (perpBisector_equiv P Q EM).mpr
+      euclid_finish
+    euclid_finish

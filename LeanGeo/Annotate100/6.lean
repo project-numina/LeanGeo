@@ -1,8 +1,6 @@
 import Mathlib
 import SystemE
 import LeanGeo
-
-open SystemE
 namespace LeanGeo
 
 /--2. In a convex quadrilateral $A B C D$, point $K$ is the midpoint of $A B$, point $L$ is the midpoint of $B C$, point $M$ is the midpoint of $C D$, and point $N$ is the midpoint of $D A$. For some point $S$ lying inside the quadrilateral $A B C D$, it turns out that $K S=L S$ and $N S=M S$. Prove that $\angle K S N=\angle M S L$.-/

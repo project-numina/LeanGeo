@@ -1,8 +1,6 @@
 import Mathlib
 import SystemE
 import LeanGeo
-
-open SystemE
 namespace LeanGeo
 /--4. A square $O M K N$ is inscribed in a circle such that vertex $O$ coincides with the center of the circle, and vertex $K$ lies on the circle. Chord $A B$ of the circle passes through vertex $M$, and chord $\mathrm{CD}$ passes through vertex $\mathrm{N}$. Prove that $A M \cdot M B=C N \cdot N D$.-/
 theorem Numina_Geometry_925 :
