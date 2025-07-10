@@ -91,10 +91,20 @@ perpBisector A B L ↔ ∃ (P :Point) (AB : Line), P.onLine L ∧ midpoint A P B
       · euclid_finish
       · intro X Y h11 h12 h13 h14
         euclid_assert isoTriangle Y A B
-
-        sorry
+        euclid_apply isoTriangle_threeLine_concidence_midpoint Y A B P
+        euclid_finish
     euclid_finish
-  · sorry
+  · intro h
+    simp
+    constructor
+    · euclid_finish
+    · intro x hx
+      rcases h with ⟨P, AB, hx⟩
+      by_cases x = P
+      · euclid_finish
+      · euclid_assert rightTriangle P x A
+        euclid_apply congruent_SAS x P A x P B
+        euclid_finish
 
 
 

@@ -204,6 +204,20 @@ by
     -- Any point collinear with A and A' must lie on M.
     euclid_finish
 
+theorem foot_unique: ∀ (c h g: Point) (AB : Line), foot c h AB ∧ foot c g AB → h = g := by
+  euclid_intros
+  by_contra
+  have h1: ∠c:h:g = ∟ := by
+    euclid_finish
+  have h2: ∠c:g:h = ∟ := by
+    euclid_finish
+  have h3: triangle c g h := by
+    euclid_finish
+  euclid_apply triangle_angleSum_c c g h
+  euclid_apply line_from_points
+  euclid_finish
+
+
 theorem exists_inCentre : ∀ (A B C: Point), triangle A B C → ∃ (I : Point), inCentre I A B C := by
   sorry
   /-

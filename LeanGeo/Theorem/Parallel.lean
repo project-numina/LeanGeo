@@ -1,6 +1,7 @@
 import SystemE
 import LeanGeo.Abbre
 import LeanGeo.Theorem.Angle
+import LeanGeo.Theorem.Construction
 import Book
 
 set_option maxHeartbeats 0
@@ -120,50 +121,70 @@ theorem supplementConsecutiveAngles_parallel :
   obtain ⟨b', hb'⟩ := extend_point T A B (by euclid_finish)
   have := parallel_if c' C d' D a' b' A B L M T (by euclid_finish)
   euclid_finish
+theorem perpLine_perp : ∀ (P Q R: Point) (L1 L2 : Line), perpLine L1 L2 ∧ twoLinesIntersectAtPoint L1 L2 P ∧ Q.onLine L1 ∧ R.onLine L2 ∧ Q ≠ P ∧ R ≠ P → ∠Q:P:R = ∟ := by
+  euclid_intros
+  euclid_finish
 
-theorem coll_of_rayAngleEq (A B C C' : Point) (hAB : A ≠ B) (hC : ¬ coll A B C) (hC' : ¬ coll A B C') : ∠ A:B:C = ∠ A:B:C' → coll B C C' := sorry
+theorem perp_perp_coll : ∀ (A B C D: Point), A ≠ B ∧ C ≠ B  ∧ B ≠ D ∧  ∠A:B:C = ∟ ∧ ∠A:B:D = ∟ → coll B C D := by
+  euclid_intros
+  euclid_apply line_from_points A B as AB
+  by_cases C.sameSide D AB
+  · euclid_apply sameSide_eqAngle_coll A B C D AB
+    euclid_finish
+  · euclid_assert ¬ C.onLine AB
+    euclid_apply opposingSides_complement_coll A B C D AB
+    euclid_finish
+
 theorem perpLine_perpLine_parallel : ∀ (L1 L2 M : Line),
   (perpLine L1 M) ∧ (perpLine L2 M) ∧ L1 ≠ L2 →
-  ¬(L1.intersectsLine L2) :=
-by
-  euclid_intros
-  obtain ⟨X, hX⟩ := left
-  obtain ⟨Y, hY⟩ := left_1
-  obtain ⟨E1, hE1⟩ := intersection_lines L1 M hX.1.1
-  obtain ⟨E2, hE2⟩ := intersection_lines L2 M hY.1.1
-  have : E1 ≠ E2 := by
-    intro h
-    rw [← h] at hE2
-    obtain ⟨E1', hE1'⟩ := exists_distincts_points_on_line M E1
-    obtain ⟨E1'', hE1''⟩ := exists_distincts_points_on_line L1 E1
-    obtain ⟨E1''', hE1'''⟩ := exists_distincts_points_on_line L2 E1
-    have := hX.2 E1'' E1' (by euclid_finish) (by euclid_finish) (by euclid_finish) (by euclid_finish)
-    have : E1 = X := by euclid_finish
-    have : E1 = Y := by euclid_finish
-    have : twoLinesIntersectAtPoint L2 L1 Y := by euclid_finish
-    have := hY.2 E1''' E1' (by euclid_finish) (by euclid_finish) (by euclid_finish) (by euclid_finish)
-    have : coll E1 E1'' E1''' := by
-      have := coll_of_rayAngleEq
+  ¬(L1.intersectsLine L2) := by
+    euclid_intros
+    euclid_apply intersection_lines L1 M as P
+    euclid_apply intersection_lines L2 M as Q
+    have h1: P ≠ Q := by
+      by_contra
+      euclid_apply exists_distincts_points_on_line L1 P as R
+      euclid_apply exists_distincts_points_on_line L2 P as S
+      euclid_apply exists_distincts_points_on_line M P as T
+      euclid_assert ∠R:P:T = ∟
+      euclid_assert ∠S:P:T = ∟
+      have h1: coll T P S := by
+        euclid_apply perp_perp_coll T P R S
+        euclid_finish
       euclid_finish
-    euclid_finish
-  obtain ⟨E1', hE1'⟩ := exists_distincts_points_on_line L1 E1
-  obtain ⟨M', hM'⟩ := proposition_31 E1' E1 E2 M (by euclid_finish)
-  have : M'.intersectsLine L2 := by euclid_finish
-  obtain ⟨E2', hE2'⟩ := intersection_lines M' L2 this
-  have := supplementConsecutiveAngles_parallel L1 L2 M E1 E2 E1' E2' (by euclid_finish)
-  euclid_finish
+    simp_all
+    euclid_apply exists_distincts_points_on_line L1 P as R
+    euclid_apply exists_distincts_points_on_line L2 Q as T
+    euclid_assert ∠ R:P:Q = ∟
+    by_cases R.sameSide T M
+    · euclid_apply supplementConsecutiveAngles_parallel
+      euclid_finish
+    · euclid_apply eqAlternateAngles_parallel
+      euclid_finish
 
 theorem perpLine_parallel_perpLine:
   ∀ (M N L : Line),
     (perpLine M N ∧ ¬L.intersectsLine M) →
     perpLine L N :=
 by
-  sorry
-
-theorem perp_same_line_coll : ∀ (A B C: Point) (l AB AC : Line), (perpLine l AB ∧ perpLine l AC) ∧ (distinctPointsOnLine A B AB) ∧ (distinctPointsOnLine A C AC) → coll A B C := by
   euclid_intros
-  euclid_apply intersection_lines AB l as P
-  euclid_apply exists_distincts_points_on_line l P as Q
-  sorry
+  euclid_apply intersection_lines N M as T
+  euclid_apply exists_distincts_points_on_line M T as R
+  euclid_apply intersection_lines N L as P
+  by_cases P = T
+  · euclid_finish
+  · use P
+    constructor
+    · euclid_finish
+    · intro A B hAP hBP hAL hBL
+      euclid_assert ∠P:T:R = ∟
+      have h1: ∠T:P:A = ∟ := by
+        by_cases A.sameSide R N
+        · euclid_apply parallel_supplementConsecutiveAngle
+          euclid_finish
+        · euclid_apply parallel_eqAlternateAngles
+          euclid_finish
+      euclid_finish
+
 
 end LeanGeo
