@@ -126,7 +126,13 @@ theorem exists_angleBisection : ∀ (A B C : Point),
     · euclid_finish
     · euclid_finish
   · intros
-    sorry
+    euclid_apply line_from_points P B as PB
+    by_cases P.sameSide P' AB
+    · euclid_apply sameSide_eqAngle_coll A B P' P AB
+      euclid_finish
+    · euclid_apply point_on_line_same_side AB PB P' as P''
+      euclid_apply sameSide_eqAngle_coll A B P' P'' AB
+      euclid_finish
 
 theorem triangle_angleSum_c : ∀(A B C : Point) , triangle A B C → ∠A:B:C +∠B:C:A + ∠C:A:B = ∟ + ∟ := by
   euclid_intros
