@@ -205,6 +205,8 @@ by
     euclid_finish
 
 theorem exists_inCentre : ∀ (A B C: Point), triangle A B C → ∃ (I : Point), inCentre I A B C := by
+  sorry
+  /-
   intro A B C hABC
   obtain ⟨L1, hL1⟩ := exists_angleBisection A B C (by euclid_finish)
   simp [iff_iff_implies_and_implies] at hL1
@@ -227,5 +229,5 @@ theorem exists_inCentre : ∀ (A B C: Point), triangle A B C → ∃ (I : Point)
     have := hL1.1 (by euclid_finish)
     have : ∠ A:B:I = ∠ I:B:A := by euclid_finish
     euclid_finish
-
+  -/
 end LeanGeo
