@@ -112,3 +112,52 @@ theorem complementary_cyclic : ∀ (A B C D: Point) (AB:Line) (Ω : Circle), dis
     euclid_finish
   euclid_apply eqAngle_cyclic A B E D AB Ω
   euclid_finish
+
+theorem opposite_angle_similar: ∀ (a b c d e: Point),¬ coll a b c ∧ (between a c e) ∧ (between b c d) ∧ |(e─c)| * |(a─c)| = |(b─c)| * |(c─d)| → similarTriangle a c b d c e := by
+  euclid_intros
+  euclid_apply line_from_points a c as AC
+  euclid_apply line_from_points b d as BD
+  euclid_assert triangle a b c
+  euclid_apply opposite_angles_same a b c d e
+  euclid_apply similar_SAS a c b d c e
+  euclid_finish
+
+theorem same_angle_similar: ∀ (a b c d e: Point),¬ coll a b c ∧ (between e a b) ∧ (between e c d) ∧ |(e─a)| * |(e─b)| = |(e─c)| * |(e─d)| → similarTriangle e a c e d b := by
+  euclid_intros
+  euclid_apply line_from_points a b as AB
+  euclid_apply line_from_points c d as CD
+  euclid_assert triangle e a c
+  have h1: ∠a:e:c = ∠d:e:b := by
+    euclid_apply angle_between_transfer
+    euclid_finish
+  euclid_apply similar_SAS a e c d e b
+  euclid_finish
+
+theorem power_cyclic_out: ∀ (a b c d e: Point),¬ coll a b c ∧ (between e a b) ∧ (between e c d) ∧ |(e─a)| * |(e─b)| = |(e─c)| * |(e─d)| → cyclic a b c d := by
+  euclid_intros
+  euclid_apply line_from_points a b as AB
+  euclid_apply line_from_points c d as CD
+  euclid_apply threePoints_existCircle a b c as Ω
+  euclid_apply line_from_points b c as BC
+  euclid_assert a.opposingSides d BC
+  have h1:∠ b:a:c + ∠b:d:c = ∟ + ∟ := by
+    euclid_apply same_angle_similar a b c d e
+    euclid_apply angle_between_transfer
+    euclid_finish
+  euclid_apply complementary_cyclic b c a d BC Ω
+  euclid_finish
+
+theorem power_cyclic_in: ∀ (a b c d e: Point),¬ coll a b c ∧ (between a e b) ∧ (between c e d) ∧ |(e─a)| * |(e─b)| = |(e─c)| * |(e─d)| → cyclic a b c d := by
+  euclid_intros
+  euclid_apply line_from_points a b as AB
+  euclid_apply line_from_points c d as CD
+  euclid_assert triangle a b d
+  euclid_apply threePoints_existCircle a b d as Ω
+  euclid_apply line_from_points b d as BD
+  euclid_assert a.sameSide c BD
+  have h1:∠ d:a:b = ∠d:c:b := by
+    euclid_apply opposite_angle_similar d a e b c
+    euclid_apply angle_between_transfer
+    euclid_finish
+  euclid_apply eqAngle_cyclic b d a c BD Ω
+  euclid_finish

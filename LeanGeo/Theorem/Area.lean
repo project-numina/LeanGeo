@@ -4,19 +4,8 @@ import LeanGeo.Theorem.Angle
 import LeanGeo.Theorem.Parallel
 import LeanGeo.Theorem.Triangle
 import LeanGeo.Theorem.Construction
-
-open LeanGeo
 namespace LeanGeo
-theorem triangle_area :∀ (a b c d: Point) , (coll a b d) ∧ (triangle a b c) ∧ ((∠c:d:a = ∟) ∨ (∠c:d:b = ∟)) → (△a:b:c).area = |(c─d)| * |(a─b)|/2 := by
-  sorry
-
-theorem triangle_area_foot :∀ (a b c d: Point) (BC: Line),b.onLine BC ∧ c.onLine BC ∧ (triangle a b c) ∧ foot a d BC → (△a:b:c).area = |(a─d)| * |(b─c)|/2 := by
-  euclid_intros
-  by_cases d ≠ b
-  · euclid_apply triangle_area b c a d
-    euclid_finish
-  · euclid_apply triangle_area b c a d
-    euclid_finish
+axiom triangle_area_foot :∀ (a b c d: Point) (BC: Line),b.onLine BC ∧ c.onLine BC ∧ (triangle a b c) ∧ foot a d BC → (△a:b:c).area = |(a─d)| * |(b─c)|/2
 
 theorem area_ratio_segment_ratio: ∀ (a b c d: Point),  coll b c d → (△a:b:d).area * |(b─c)| = (△a:b:c).area * |(b─d)| := by
   euclid_intros

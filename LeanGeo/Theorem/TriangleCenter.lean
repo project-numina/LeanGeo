@@ -53,13 +53,7 @@ theorem incenter_angle : ∀ (A B C I : Point), (triangle A B C) ∧ (inCentre I
   euclid_finish
 
 
-theorem circumcenter_inscribed_angle_complementary : ∀ (A B C O : Point) (AB BC CA: Line) (Ω : Circle), (formTriangle A B C AB BC CA) ∧ (O.sameSide C AB) ∧ (A.onCircle Ω) ∧ (B.onCircle Ω) ∧ (C.onCircle Ω) ∧ (O.isCentre Ω)
-  → ∠ O:B:A +  ∠ A:C:B= ∟ := by
-  euclid_intros
-  euclid_apply inscribed_angle_theorem_sameSide A B C O AB Ω
-  euclid_apply isoTriangle_eqAngle O A B
-  euclid_apply triangle_angleSum O A B
-  euclid_finish
+
 /--
 theorem circumcenter_orthocenter_eqAngle: ∀ (A B C O H : Point) (AB BC CA : Line)(Ω: Circle),
   (formAcuteTriangle A B C AB BC CA) ∧

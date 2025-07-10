@@ -1,7 +1,5 @@
 
 import SystemE
-
-open LeanGeo
 namespace LeanGeo
 theorem Book_proposition_33 : ∀ (a b c d : Point) (AB CD AC BD : Line),
   distinctPointsOnLine a b AB ∧ distinctPointsOnLine c d CD ∧

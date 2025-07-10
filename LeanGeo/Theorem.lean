@@ -10,3 +10,5 @@ import LeanGeo.Theorem.Area
 import LeanGeo.Theorem.Circle
 import LeanGeo.Theorem.Quadrilateral
 import LeanGeo.Theorem.TriangleCenter
+import LeanGeo.Theorem.CircumCenter
+import LeanGeo.Theorem.OrthoCenter

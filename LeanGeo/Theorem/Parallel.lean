@@ -10,7 +10,6 @@ open Elements.Book1
 open LeanGeo
 namespace LeanGeo
 
-#check proposition_31
 -- proposition_31 used to construct a parallel line passing though a point
 -- that is given point P and line L, construct L' parrallel to L passing through P
 

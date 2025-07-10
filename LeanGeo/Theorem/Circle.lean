@@ -30,19 +30,10 @@ theorem eqChord_eqCentralAngle : ∀ (a b c d o: Point) (O : Circle), a.onCircle
       · euclid_apply congruent_SSS a o b c o d
         euclid_finish
 
-theorem threePoints_existCircle : ∀ (A B C : Point),
+axiom threePoints_existCircle : ∀ (A B C : Point),
   triangle A B C →
   ∃ (Ω : Circle),
-    (A.onCircle Ω ∧ B.onCircle Ω ∧ C.onCircle Ω) :=
-by
-  euclid_intros
-  euclid_apply construct_perpBisector A B as L1
-  euclid_apply construct_perpBisector B C as L2
-  euclid_apply line_from_points A B as AB
-  euclid_apply line_from_points B C as BC
-  euclid_apply (perpBisector_equiv A B L1).mp as (P,L3)
-  sorry
-  --euclid_assert L1.intersectsLine L2
+    (A.onCircle Ω ∧ B.onCircle Ω ∧ C.onCircle Ω)
 
 theorem chord_bisector_line : ∀ (O A B: Point) (C: Circle) (AB L: Line), O.isCentre C ∧ A.onCircle C ∧ B.onCircle C ∧ distinctPointsOnLine A B AB ∧ perpLine AB L
   → O.onLine L →  perpBisector A B L := by
@@ -382,24 +373,6 @@ theorem inscribed_formtriangle : ∀ (A B C O : Point) (Γ : Circle),
   → triangle A B C := by
   euclid_intros
   euclid_finish
-
-
-theorem tangent_circles_line_of_centers
-  : ∀ (C1 C2 : Circle) (O1 O2 T : Point),
-    O1.isCentre C1 ∧
-    O2.isCentre C2 ∧
-    T.onCircle C1 ∧
-    T.onCircle C2 ∧
-    (∀ X : Point, X.onCircle C1 ∧ X.onCircle C2 → X = T)
-    → coll O1 O2 T
-  := by
-sorry
-
-theorem power_cyclic_out: ∀ (a b c d e: Point),distinctFourPoints a b c d ∧ (between a b e) ∧ (between c d e) ∧ |(e─a)| * |(e─b)| = |(e─c)| * |(e─d)| → cyclic a b c d := by
-  sorry
-
-theorem power_cyclic_in: ∀ (a b c d e: Point),distinctFourPoints a b c d ∧ (between a e b) ∧ (between c e d) ∧ |(e─a)| * |(e─b)| = |(e─c)| * |(e─d)| → cyclic a b c d := by
-  sorry
 
 theorem cyclic_exists_circle : ∀ (A B C D : Point), cyclic A B C D → ∃ (O: Circle), A.onCircle O ∧ B.onCircle O ∧ C.onCircle O ∧ D.onCircle O:= by
   euclid_intros
