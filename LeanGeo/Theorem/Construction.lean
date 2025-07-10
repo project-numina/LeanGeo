@@ -1,12 +1,16 @@
 import SystemE
 import LeanGeo.Abbre
 import LeanGeo.Theorem.Angle
+import LeanGeo.Theorem.Position
 import Book
 
 open Elements.Book1
 
 open LeanGeo
 namespace LeanGeo
+
+axiom exists_centre : ∀ (O: Circle), ∃ (C : Point), C.isCentre O
+
 theorem construct_perpBisector' (a b : Point) : (a ≠ b) →  ∃ L, perpBisector a b L ∧ ∃ M : Point, M.onLine L ∧ midpoint a M b := by
   intro hab
   obtain ⟨AB, ha, hb⟩ := line_from_points a b hab
@@ -54,27 +58,12 @@ theorem construct_perpBisector (a b : Point) : (a ≠ b) →  ∃ L, perpBisecto
   exact hL.1
 
 theorem centre_if_equidistant (a b c o : Point) (hab : a ≠ b) (hbc : b ≠ c) (hac : a ≠ c) (C : Circle) (ha : a.onCircle C) (hb : b.onCircle C) (hc : c.onCircle C) : |(o─a)| = |(o─b)| ∧ |(o─b)| = |(o─c)| → o.isCentre C := by sorry
-
-theorem exists_centre : ∀ (O: Circle), ∃ (C : Point), C.isCentre O := by
+  /-
   euclid_intros
-  obtain ⟨A, hA⟩ : ∃ A : Point, A.onCircle O := exists_point_on_circle O
-  obtain ⟨B, hAB, hB⟩ := exists_distinct_point_on_circle O A
-  obtain ⟨AB, hAB1, hAB2⟩ := line_from_points A B hAB.symm
-  obtain ⟨L, ⟨hL, M, hM⟩⟩ := construct_perpBisector' A B hAB.symm
-  have : M.insideCircle O := by euclid_finish
-  have := intersection_circle_line_2 M O L (by euclid_finish)
-  obtain ⟨C1, C2, hC11, hC12, hC21, hC22, hC1C2⟩ := intersections_circle_line O L this
-  obtain ⟨L', ⟨hL',M', hM'⟩⟩ := construct_perpBisector' C1 B (by euclid_finish)
-  obtain ⟨C1B, hC1, hB⟩ := line_from_points C1 B (by euclid_finish)
-  have : L'.intersectsLine L := by
-    apply by_contra
-    intro hh
-    -- have : ∠ B:C1:M < ∟ := by euclid_finish
-    sorry
-  obtain ⟨E, hE⟩ := intersection_lines L' L this
-  use E
-  have := centre_if_equidistant
-  euclid_finish
+  euclid_apply exists_centre C as w
+  euclid_apply point_on_circle_onlyif w a b C
+  euclid_apply point_on_circle_onlyif w b c C
+  -/
 
 theorem exists_midpoint : ∀ (A B : Point), A ≠ B → ∃(P : Point), midpoint A P B := by
   intro A B h
@@ -99,58 +88,44 @@ theorem exists_foot : ∀ (c: Point) (AB : Line),
    ¬(c.onLine AB) →
   ∃ h : Point, foot c h AB :=
 by
-  intro P AB hh
-  obtain ⟨A, hA⟩ := line_nonempty AB
-  obtain ⟨B, hAB, hB⟩ := exists_distincts_points_on_line AB A
-  obtain ⟨h, Hh1, Hh2⟩ := proposition_12 A B P AB (by euclid_finish)
-  use h
-  wlog q : ∠ A:h:P = ∟ with H
-  · have : ∠ B:h:P = ∟ := by tauto
-    exact H P AB hh B (by tauto) A (by tauto) (by tauto) h Hh1 (by tauto) this
-  use (by euclid_finish)
-  use (by euclid_finish)
-  intro x hx
-  have : h ≠ A ∨ h ≠ B := by euclid_finish
-  cases this with
-  | inl hl =>
-    have : between x A h ∨ between A x h ∨ between A h x ∨ x = A := by euclid_finish
-    rcases this with hh | hh | hh | hh | hh
-    · have : ∠ x:h:P = ∠ A:h:P := by
-        have : ¬ coll P x h := by euclid_finish
-        sorry
-      euclid_finish
-    · have : ∠ x:h:P = ∠ A:h:P := by sorry
-      euclid_finish
-    · have : ∠ x:h:P + ∠ A:h:P = ∟ + ∟ := by sorry
-      euclid_finish
-    · euclid_finish
-  | inr hr =>
-    have : ∠ A:h:P + ∠ P:h:B = ∟ + ∟ := by sorry
-    have : between x B h ∨ between B x h ∨ between B h x ∨ x = B := by euclid_finish
-    rcases this with hh | hh | hh | hh | hh
-    · have : ∠ x:h:P = ∠ B:h:P := by sorry
-      euclid_finish
-    · have : ∠ x:h:P = ∠ B:h:P := by sorry
-      euclid_finish
-    · have : ∠ x:h:P + ∠ B:h:P = ∟ + ∟ := by sorry
-      euclid_finish
-    · euclid_finish
+  euclid_intros
+  euclid_apply line_nonempty AB as a
+  euclid_apply exists_distincts_points_on_line AB a as b
+  euclid_apply proposition_12' a b c AB as h
+  by_cases (h ≠ a ∧ ∠ a:h:c = ∟)
+  · euclid_apply perp_foot c h a AB
+    euclid_finish
+  · euclid_apply perp_foot c h b AB
+    euclid_finish
 
 theorem exists_angleBisection : ∀ (A B C : Point),
-(A ≠ B) ∧ (A ≠ C) ∧ ¬(coll A B C)
-→ ∃ (L : Line), ∀ (P: Point), P.onLine L ↔ ∠ A:B:P = ∠ P:B:C
+(A ≠ B) ∧ (B ≠ C) ∧ ¬(coll A B C)
+→ ∃ (L : Line), ∀ (P: Point), P ≠ B → (P.onLine L ↔ ∠ A:B:P = ∠ P:B:C)
 := by
   euclid_intros
-  obtain ⟨AB, hA, hB⟩ := line_from_points A B (by euclid_finish)
-  obtain ⟨AC, hA', hC⟩ := line_from_points A C (by euclid_finish)
-  obtain ⟨f, hf⟩ := proposition_9' A B C AB AC (by euclid_finish)
-  obtain ⟨L, hL⟩ := line_from_points B f (by euclid_finish)
+  euclid_apply line_from_points A B as AB
+  euclid_apply line_from_points B C as BC
+  euclid_apply proposition_9' B A C AB BC as P'
+  euclid_apply line_from_points P' B as L
   use L
-  intro P
-  apply Iff.intro
-  · intro hh
-    sorry
-  · intro hh
+  euclid_intros
+  constructor
+  · intros
+    have h0 : between P B P' ∨ between B P P' ∨ between B P' P ∨ P = B ∨ P = P' := by
+      euclid_finish
+    rcases h0 with h1|h2|h3|h4|h5
+    · euclid_apply angle_between_transfer P B P' A
+      euclid_apply angle_between_transfer P B P' C
+      euclid_finish
+    · euclid_apply angle_between_transfer B P P' A
+      euclid_apply angle_between_transfer B P P' C
+      euclid_finish
+    · euclid_apply angle_between_transfer B P' P A
+      euclid_apply angle_between_transfer B P' P C
+      euclid_finish
+    · euclid_finish
+    · euclid_finish
+  · intros
     sorry
 
 theorem triangle_angleSum_c : ∀(A B C : Point) , triangle A B C → ∠A:B:C +∠B:C:A + ∠C:A:B = ∟ + ∟ := by
