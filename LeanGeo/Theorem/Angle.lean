@@ -64,6 +64,15 @@ theorem angle_between_transfer : ∀ (a b c d : Point),between a b c ∧ ¬ coll
     · euclid_apply line_from_points
       euclid_finish
 
+theorem opposingSides_complement_coll : ∀(A B C D: Point) (AB : Line), distinctPointsOnLine A B AB ∧ (∠A:B:C + ∠A:B:D = ∟ + ∟ ) ∧ D.opposingSides C AB → between C B D := by
+  euclid_intros
+  euclid_apply line_from_points B D as BD
+  euclid_apply extend_point BD D B as E
+  euclid_apply angle_between_transfer
+  euclid_assert E.sameSide C AB
+  euclid_apply sameSide_eqAngle_coll A B C E
+  euclid_finish
+
 theorem coll_equal_or_complement: ∀ (A B C D: Point), coll A B C  ∧ (B ≠ C) ∧ (B ≠ A) ∧ (C ≠ A) ∧ ¬ ( coll A B D)→
   ∠ D:B:C = ∠ D:B:A ∨ ∠ D:B:C + ∠D:B:A = ∟ + ∟ := by
   euclid_intros

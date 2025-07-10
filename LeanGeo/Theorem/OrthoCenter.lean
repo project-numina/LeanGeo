@@ -26,18 +26,7 @@ theorem triangle_two_foot_intersects : ∀ (A B C D E : Point) (AB BC CA AD BE: 
     euclid_apply triangle_anglePositive E B C
     euclid_finish
 
-theorem foot_unique: ∀ (c h g: Point) (AB : Line), foot c h AB ∧ foot c g AB → h = g := by
-  euclid_intros
-  by_contra
-  have h1: ∠c:h:g = ∟ := by
-    euclid_finish
-  have h2: ∠c:g:h = ∟ := by
-    euclid_finish
-  have h3: triangle c g h := by
-    euclid_finish
-  euclid_apply triangle_angleSum c g h
-  euclid_apply triangle_anglePositive c g h
-  euclid_finish
+
 
 theorem foot_coll_foot: ∀ (A B H : Point) (l : Line), (foot A H l) ∧ (coll A B H) ∧ (B ≠ H) → foot B H l := by
   euclid_intros
