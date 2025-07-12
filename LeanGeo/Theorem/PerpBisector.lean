@@ -106,6 +106,9 @@ perpBisector A B L ↔ ∃ (P :Point) (AB : Line), P.onLine L ∧ midpoint A P B
         euclid_apply congruent_SAS x P A x P B
         euclid_finish
 
-
+theorem perpBisector_perpLine : ∀(A B: Point) (AB L: Line), distinctPointsOnLine A B AB ∧  (perpBisector A B L) → perpLine AB L := by
+  euclid_intros
+  euclid_apply (perpBisector_equiv A B L).mp as (P,L2)
+  euclid_finish
 
 end LeanGeo

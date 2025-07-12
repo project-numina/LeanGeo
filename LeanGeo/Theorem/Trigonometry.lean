@@ -4,7 +4,7 @@ import LeanGeo.Abbre
 import LeanGeo.Theorem.Construction
 import LeanGeo.Theorem.Area
 import LeanGeo.Theorem.Angle
-open LeanGeo LeanGeo Real
+open LeanGeo Real
 
 @[simp]
 theorem sin_zero : sin 0 = 0 := by simp [Real.sin]

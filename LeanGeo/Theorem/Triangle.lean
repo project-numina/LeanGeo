@@ -6,7 +6,7 @@ import LeanGeo.Theorem.Construction
 import LeanGeo.Theorem.Position
 
 set_option maxHeartbeats 0
-open LeanGeo
+open LeanGeo Elements.Book1
 namespace LeanGeo
 
 theorem triangle_anglePositive : ∀(A B C : Point) , triangle A B C → ∠A:B:C > 0 ∧ ∠A:C:B >0 ∧ ∠C:A:B >0 := by
@@ -18,7 +18,9 @@ theorem pythagorean : ∀ (a b c: Point) (AB BC AC : Line),
   formTriangle a b c AB BC AC ∧ (∠ b:a:c : ℝ) = ∟ →
   |(b─c)| * |(b─c)| = |(b─a)| * |(b─a)| + |(a─c)| * |(a─c)| :=
 by
-  sorry
+  euclid_intros
+  euclid_apply proposition_47
+  euclid_finish
 
 theorem pythagorean_point : ∀ (a b c: Point), (triangle a b c) ∧ (∠ b:a:c : ℝ) = ∟ →
   |(b─c)| * |(b─c)| = |(b─a)| * |(b─a)| + |(a─c)| * |(a─c)| := by
@@ -299,5 +301,102 @@ theorem foot_shortest : ∀ (A B C : Point) (L : Line), foot A B L ∧ distinctP
 theorem foot_square_difference: ∀ (A B C H: Point) (BC : Line), triangle A B C ∧ distinctPointsOnLine B C BC ∧ (foot A H BC) → |(A─B)| * |(A─B)| - |(H─B)| * |(H─B)| = |(A─C)| * |(A─C)| - |(C─H)| * |(C─H)| := by
   euclid_intros
   euclid_apply pythagorean_point
+  euclid_finish
+
+theorem triangle_para_similar : ∀ (A B C D E: Point) (BC DE : Line), triangle A B C ∧ distinctPointsOnLine B C BC ∧ distinctPointsOnLine D E DE ∧ ¬ BC.intersectsLine DE ∧ coll A B D ∧ coll A C E → similarTriangle A B C A D E := by
+  euclid_intros
+  euclid_apply line_from_points A B as AB
+  euclid_apply line_from_points A C as AC
+  have h1: between A D B ∨ between A B D ∨ between B A D ∨ D = B := by
+    euclid_finish
+  rcases h1 with h2|h3|h4|h5
+  · euclid_apply parallel_eqAlternateExteriorAngle E D C B A DE BC AB
+    euclid_apply similar_AA A D E A B C
+    euclid_finish
+  · euclid_apply parallel_eqAlternateExteriorAngle C B E D A BC DE AB
+    euclid_apply similar_AA A D E A B C
+    euclid_finish
+  · euclid_apply parallel_eqAlternateAngles BC DE AB B D C E
+    have h6: ∠ E:A:D = ∠B:A:C := by
+      euclid_apply opposite_angles_same D E A C B
+      euclid_finish
+    euclid_apply similar_AA A D E A B C
+    euclid_finish
+  · euclid_finish
+
+theorem greater_side_greater_angle : ∀ (a b c : Point) ,
+  triangle a b c ∧ (|(a─c)| > |(a─b)|) →
+  (∠ a:b:c > ∠ b:c:a) :=
+by
+  euclid_intros
+  euclid_apply line_from_points a b as AB
+  euclid_apply line_from_points b c as BC
+  euclid_apply line_from_points c a as CA
+  euclid_apply Book_greater_side_greater_angle a b c AB BC CA
+  euclid_finish
+
+theorem apollonius_on_isoceles :
+  ∀ (A B C D : Point) (BC : Line),
+    isoTriangle A B C ∧
+    distinctPointsOnLine B C BC ∧
+    coll B D C ∧
+    between B D C
+    → |(A─B)| * |(A─B)| - |(A─D)| * |(A─D)| = |(B─D)| * |(C─D)| := by
+  euclid_intros
+  have h_A_not_on_line : ¬(A.onLine BC) := by
+    euclid_apply point_not_onLine A B C BC
+    euclid_finish
+  euclid_apply exists_foot A BC h_A_not_on_line as H
+  have h_midpoint_H : midpoint B H C := by
+    euclid_apply isoTriangle_threeLine_concidence_foot A B C H BC
+    euclid_finish
+  by_cases h_D_eq_H : D = H
+  · have h_tri_AHB : triangle H A B := by
+      have h_H_neq_B: H ≠ B := by
+        by_contra h_eq
+        have h_midpointBHC := h_midpoint_H
+        euclid_assert midpoint B B C
+        euclid_finish
+      euclid_finish
+    have h_pyth_AB : |(A─B)| * |(A─B)| = |(A─H)| * |(A─H)| + |(B─H)| * |(B─H)| := by
+      euclid_apply pythagorean_point H A B
+      euclid_finish
+    euclid_finish
+  · have h_tri_AHB : triangle H A B := by
+      have h_H_neq_B: H ≠ B := by
+        by_contra h_eq
+        have h_midpointBHC := h_midpoint_H
+        euclid_assert midpoint B B C
+        euclid_finish
+      euclid_finish
+    have h_tri_AHD : triangle H A D := by
+      euclid_finish
+    have h_pyth_AB : |(A─B)| * |(A─B)| = |(A─H)| * |(A─H)| + |(B─H)| * |(B─H)| := by
+      euclid_apply pythagorean_point H A B
+      euclid_finish
+    have h_pyth_AD : |(A─D)| * |(A─D)| = |(A─H)| * |(A─H)| + |(D─H)| * |(D─H)| := by
+      euclid_apply pythagorean_point H A D
+      euclid_finish
+    have h_lhs_is_diff_of_squares : |(A─B)| * |(A─B)| - |(A─D)| * |(A─D)| = |(B─H)| * |(B─H)| - |(D─H)| * |(D─H)| := by
+      euclid_finish
+    have h_rhs_is_diff_of_squares : |(B─D)| * |(C─D)| = |(B─H)| * |(B─H)| - |(D─H)| * |(D─H)| := by
+      euclid_finish
+    euclid_finish
+
+theorem triangle_para_sameRatio: ∀ (A B C D E F G: Point) (BC DE : Line), triangle A B C ∧ distinctPointsOnLine B C BC ∧ distinctPointsOnLine D E DE ∧ ¬ BC.intersectsLine DE ∧ coll A B D ∧ coll A C E ∧ F.onLine BC ∧ G.onLine DE ∧ coll A G F ∧ F ≠ B ∧ F ≠ C ∧ G ≠ D ∧ G ≠ E → |(D─G)| * |(B─C)|  =|(D─E)| *|(B─F)| := by
+  euclid_intros
+  euclid_apply triangle_para_similar A B C D E BC DE
+  euclid_apply triangle_para_similar A B F D G BC DE
+  have h1: |(D─G)| * |(A─B)| = |(B─F)| * |(A─D)| := by
+    euclid_finish
+  have h2: |(D─E)| * |(A─B)| = |(B─C)| * |(A─D)| := by
+    euclid_finish
+  have h3: |(A─B)| * |(A─D)| > 0 := by
+    euclid_finish
+  have h5: |(D─G)| * |(B─C)| * (|(A─B)| * |(A─D)|) =|(D─E)| * |(B─F)| * (|(A─B)| * |(A─D)|) := by
+    calc
+      _ = (|(D─G)| * |(A─B)|) * (|(B─C)| * |(A─D)|) := by linarith
+      _ = (|(B─F)| * |(A─D)|) * (|(D─E)| * |(A─B)|) := by rw[h1,h2]
+      _ = _ := by linarith
   euclid_finish
 end LeanGeo

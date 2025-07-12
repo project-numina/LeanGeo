@@ -326,7 +326,7 @@ theorem inscribedAngle_eq_tangentAngle : ∀ (A B C D O: Point) (Ω : Circle) (A
       · euclid_apply diameter_rightAngle A B C O
         euclid_finish
 
-theorem secant_tangent_theorem:∀ (P A B C O: Point) (Ω: Circle)(L:Line), A.onCircle Ω ∧ B.onCircle Ω ∧ C.onCircle Ω ∧ between P B C ∧ distinctPointsOnLine P A L ∧ tangentAtPoint A O L Ω → |(P─A)| * |(P─A)| = |(P─B)| * |(P─C)| := by
+theorem secant_tangent_theorem_between:∀ (P A B C O: Point) (Ω: Circle)(L:Line), A.onCircle Ω ∧ B.onCircle Ω ∧ C.onCircle Ω ∧ between P B C ∧ distinctPointsOnLine P A L ∧ tangentAtPoint A O L Ω → |(P─A)| * |(P─A)| = |(P─B)| * |(P─C)| := by
   euclid_intros
   have h1: A ≠ B := by
     by_contra
@@ -348,6 +348,19 @@ theorem secant_tangent_theorem:∀ (P A B C O: Point) (Ω: Circle)(L:Line), A.on
     euclid_finish
   euclid_apply similar_AA A P B C P A
   euclid_finish
+
+theorem secant_tangent_theorem:∀ (P A B C O: Point) (Ω: Circle)(L:Line), A.onCircle Ω ∧ B.onCircle Ω ∧ C.onCircle Ω ∧ B ≠ C ∧ coll P B C ∧ distinctPointsOnLine P A L ∧ tangentAtPoint A O L Ω → |(P─A)| * |(P─A)| = |(P─B)| * |(P─C)| := by
+  euclid_intros
+  have h1: P.outsideCircle Ω := by
+    euclid_apply tangentLine_outsideCircle A P O Ω L
+    euclid_finish
+  have h2: between P B C ∨ between P C B := by
+    euclid_finish
+  rcases h2 with h3|h4
+  · euclid_apply secant_tangent_theorem_between P A B C O Ω L
+    euclid_finish
+  · euclid_apply secant_tangent_theorem_between P A C B O Ω L
+    euclid_finish
 
 theorem length_of_tangent : ∀ (P A B O: Point) (Ω: Circle) (L1 L2: Line), A.onCircle Ω ∧ B.onCircle Ω ∧ distinctPointsOnLine P A L1 ∧ distinctPointsOnLine P B L2 ∧ tangentAtPoint A O L1 Ω ∧ tangentAtPoint B O L2 Ω → |(P─A)| = |(P─B)| := by
   euclid_intros

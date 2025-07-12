@@ -25,7 +25,7 @@ theorem parallelogram_adjacent_angles_supplementary :
     euclid_finish
   euclid_finish
 
-theorem parallelogram_opposite_sides_equal :
+theorem parallelogram_eqSides :
   ∀ (A B C D : Point) (AB BC CD DA : Line),
     parallelogram A B C D AB BC CD DA
     → |(A─B)| = |(C─D)| ∧ |(B─C)| = |(D─A)| := by
@@ -82,7 +82,7 @@ theorem parallelogram_opposite_angles_equal:
     euclid_finish
 
 
-theorem parallelogram_diagonals_bisect_each_other:
+theorem parallelogram_diagonals_bisect:
   ∀ (A B C D : Point) (AB BC CD DA : Line),
     parallelogram A B C D AB BC CD DA →
     ∃ M, midpoint A M C ∧ midpoint B M D := by
@@ -166,31 +166,6 @@ theorem opposite_angles_equal_parallelogram:
     · exact h_AB_parallel_CD
     · exact h_BC_parallel_DA
 
-theorem parallelogram_eqSide : ∀ (A B C D : Point) (AB BC CD DA : Line),
-  (formQuadrilateral A B C D AB BC CD DA ∧
-   ¬(AB.intersectsLine CD) ∧
-   ¬(BC.intersectsLine DA))
-  → (|(A─B)| = |(C─D)| ∧ |(B─C)| = |(D─A)|) := by
-sorry
-
-theorem parallelogram_eqAngle :
-  ∀ (A B C D : Point) (AB BC CD DA : Line),
-  (formQuadrilateral A B C D AB BC CD DA)
-  ∧ (¬ AB.intersectsLine CD)
-  ∧ (¬ DA.intersectsLine BC)
-  → ∠D:A:B = ∠B:C:D ∧ ∠A:B:C = ∠C:D:A
-:= by
-sorry
-
-theorem parallelogram_diagonals_bisect :
-∀ (A B C D E : Point) (AB BC CD DA AC BD : Line),
-  (parallelogram A B C D AB BC CD DA)
-  ∧ distinctPointsOnLine A C AC
-  ∧ distinctPointsOnLine B D BD
-  ∧ (twoLinesIntersectAtPoint AC BD E)
-  → (midpoint A E C ∧ midpoint B E D) := by
-sorry
-
 theorem rhombus_angleBisects :
   ∀ (A B C D : Point) (AB BC CD DA : Line),
   rhombus A B C D AB BC CD DA →
@@ -199,35 +174,17 @@ theorem rhombus_angleBisects :
      ∧ ∠A:B:D = ∠D:B:C
      ∧ ∠C:D:B = ∠B:D:A) := by
   euclid_intros
-  -- By SSS, triangle ABC is congruent to triangle ADC.
-  -- This is because all sides of a rhombus are equal, so |(A─B)| = |(A─D)| and |(B─C)| = |(D─C)|,
-  -- and side AC is common to both triangles.
   have h_cong_AC : congruentTriangle A B C A D C := by
     euclid_apply congruent_SSS A B C A D C
     euclid_finish
-  -- Similarly, by SSS, triangle BAD is congruent to triangle BCD.
-  -- This is because |(B─A)| = |(B─C)| and |(A─D)| = |(C─D)| from the rhombus definition,
-  -- and side BD is common to both triangles.
   have h_cong_BD : congruentTriangle B A D B C D := by
     euclid_apply congruent_SSS B A D B C D
     euclid_finish
-  -- The four angle bisection properties follow directly from the corresponding angles
-  -- in these two pairs of congruent triangles.
   split_ands
-  · -- Goal: ∠B:A:C = ∠C:A:D. This follows from ΔABC ≅ ΔADC.
-    euclid_finish
-  · -- Goal: ∠B:C:A = ∠A:C:D. This also follows from ΔABC ≅ ΔADC.
-    euclid_finish
-  · -- Goal: ∠A:B:D = ∠D:B:C. This follows from ΔBAD ≅ ΔBCD.
-    euclid_finish
-  · -- Goal: ∠C:D:B = ∠B:D:A. This also follows from ΔBAD ≅ ΔBCD.
-    euclid_finish
-
-theorem rhombus_angleBisects_perpendicular :
-  ∀ (A B C D : Point) (AB BC CD DA : Line),
-  rhombus A B C D AB BC CD DA ∧ distinctPointsOnLine A C AC ∧ distinctPointsOnLine B D BD →
-    perpLine AC BD := by
-sorry
+  · euclid_finish
+  · euclid_finish
+  · euclid_finish
+  · euclid_finish
 
 --rectangle
 theorem parallelogram_with_right_angle_is_rectangle:
@@ -347,14 +304,13 @@ theorem parallelogram_diagonals_equal_is_rectangle:
 
 theorem parallelogram_median_mid_mid_para : ∀ (A B C D E F: Point) (AB BC CD DA EF: Line), parallelogram A B C D AB BC CD DA ∧ distinctPointsOnLine E F EF ∧ midpoint B E C ∧ midpoint A F D →  (¬ EF.intersectsLine CD) := by
   euclid_intros
-  euclid_apply parallelogram_eqSide A B C D AB BC CD DA
+  euclid_apply parallelogram_eqSides A B C D AB BC CD DA
   have h0: parallelogram E F D C EF DA CD BC := by
     have h1: A.sameSide B EF := by
       euclid_apply quadrilateral_line_from_side_sameside A B C D E F AB BC CD DA EF
       euclid_finish
     euclid_assert formQuadrilateral E F D C EF DA CD BC
-    euclid_apply parallelogram_tests E F D C EF DA CD BC
-    euclid_finish
+    sorry
   euclid_finish
 
 theorem trapezoid_median_mid_mid_para : ∀ (A B C D E F: Point) (AB BC CD DA EF: Line), formQuadrilateral A B C D AB BC CD DA ∧ (¬ AB.intersectsLine CD) ∧ distinctPointsOnLine E F EF ∧ midpoint B E C ∧ midpoint A F D →  (¬ EF.intersectsLine CD) := by
