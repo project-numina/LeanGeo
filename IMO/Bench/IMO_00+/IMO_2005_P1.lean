@@ -9,16 +9,13 @@ theorem IMO_2005_P1 :
     (AB BC CA A1B2 B1C2 C1A2 : Line),
     formTriangle A B C AB BC CA ∧
     |(A─B)| = |(B─C)| ∧ |(B─C)| = |(C─A)| ∧
-    distinctPointsOnLine A1 A2 BC ∧
-    distinctPointsOnLine B1 B2 CA ∧
-    distinctPointsOnLine C1 C2 AB ∧
+    between B A1 A2 ∧ between A1 A2 C ∧
+    between C B1 B2 ∧ between B1 B2 A ∧
+    between A C1 C2 ∧ between C1 C2 B ∧
     distinctPointsOnLine A1 B2 A1B2 ∧
     distinctPointsOnLine B1 C2 B1C2 ∧
     distinctPointsOnLine C1 A2 C1A2 ∧
-    |(A1─A2)| = |(A2─B1)| ∧
-    |(A2─B1)| = |(B1─B2)| ∧
-    |(B1─B2)| = |(B2─C1)| ∧
-    |(B2─C1)| = |(C1─C2)| ∧
-    |(C1─C2)| = |(C2─A1)| →
+    |(A1─A2)| = |(B1─B2)| ∧
+    |(B1─B2)| = |(C1─C2)| →
     concurrent A1B2 B1C2 C1A2 := by
   sorry

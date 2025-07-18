@@ -5,8 +5,9 @@ namespace LeanGeo
 
 --Let $ABCD$ be a cyclic quadrilateral. Let $P$, $Q$, $R$ be the feet of the perpendiculars from $D$ to the lines $BC$, $CA$, $AB$, respectively. Show that $PQ=QR$ if and only if the bisectors of $\angle ABC$ and $\angle ADC$ are concurrent with $AC$.
 theorem IMO_2003_P4 :
-  ∀ (A B C D P Q R X : Point) (BC CA AB : Line),
+  ∀ (A B C D P Q R X : Point) (BC CA AB CD DA: Line),
     cyclic A B C D ∧
+    formQuadrilateral A B C D AB BC CD DA ∧
     distinctPointsOnLine B C BC ∧
     distinctPointsOnLine C A CA ∧
     distinctPointsOnLine A B AB ∧

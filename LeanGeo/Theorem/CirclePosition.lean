@@ -1,5 +1,6 @@
 import SystemE
 import LeanGeo.Abbre
+import LeanGeo.Axiom
 import LeanGeo.Theorem.Angle
 import LeanGeo.Theorem.Basic
 import LeanGeo.Theorem.Triangle

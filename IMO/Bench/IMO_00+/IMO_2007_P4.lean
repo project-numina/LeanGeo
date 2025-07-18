@@ -14,5 +14,5 @@ theorem IMO_2007_P4 :
     perpBisector B C L1 ∧ P.onLine L1 ∧ ∠ B:C:P = ∠ P:C:A ∧
     perpBisector A C L2 ∧ Q.onLine L2 ∧ ∠ B:C:Q = ∠ Q:C:A ∧
     midpoint B K C ∧ midpoint A L C
-    → (△ R P K).area = (△ R Q L).area := by
+    → (△ R:P:K).area = (△ R:Q:L).area := by
   sorry

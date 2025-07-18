@@ -1,11 +1,11 @@
 import SystemE
 import LeanGeo.Abbre
-import LeanGeo.Theorem.BookTheorem
+import LeanGeo.Axiom
 namespace LeanGeo
+open Elements.Book1
 
 theorem angle_coincide_zero : ∀ (a o : Point), (a ≠ o) → ∠a:o:a = 0:= by
   euclid_intros
-
   euclid_apply line_from_points
   euclid_finish
 
@@ -13,7 +13,7 @@ theorem supplementaryAngle_line : ∀ (d a b c: Point), (between a b c) ∧ (¬ 
   euclid_intros
   euclid_apply line_from_points a b as AB
   euclid_apply line_from_points b d as BD
-  euclid_apply Book_between_angleSum d b c a BD AB
+  euclid_apply proposition_13 d b c a BD AB
   euclid_finish
 
 theorem between_zeroAngle : ∀ (A B C : Point), between A B C → ∠B:A:C = 0 := by
@@ -51,8 +51,6 @@ theorem point_not_onLine : ∀(A B C : Point) (l :Line), ¬ coll A B C ∧ disti
   euclid_intros
   euclid_finish
 
---theorem angle_positive_neq : ∀ (a o b : Point), (∠a:o:b>0) → (a ≠ b) ∧ (a ≠ o) ∧ (b ≠ o) := by
---  sorry
 theorem angle_between_transfer : ∀ (a b c d : Point),between a b c ∧ ¬ coll a b d → ∠d:c:b = ∠d:c:a ∧ ∠d:b:c + ∠d:b:a = ∟ + ∟ ∧ ∠d:a:b = ∠d:a:c:= by
   euclid_intros
   constructor

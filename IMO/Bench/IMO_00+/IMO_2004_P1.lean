@@ -3,8 +3,7 @@ import SystemE
 import LeanGeo
 namespace LeanGeo
 
---Let $ABC$ be an acute-angled triangle with $AB
-eq AC$. The circle with diameter $BC$ intersects the sides $AB$ and $AC$ at $M$ and $N$ respectively. Denote by $O$ the midpoint of the side $BC$. The bisectors of the angles $\angle BAC$ and $\angle MON$ intersect at $R$. Prove that the circumcircles of the triangles $BMR$ and $CNR$ have a common point lying on the side $BC$.
+--Let $ABC$ be an acute-angled triangle with $AB≠AC$. The circle with diameter $BC$ intersects the sides $AB$ and $AC$ at $M$ and $N$ respectively. Denote by $O$ the midpoint of the side $BC$. The bisectors of the angles $\angle BAC$ and $\angle MON$ intersect at $R$. Prove that the circumcircles of the triangles $BMR$ and $CNR$ have a common point lying on the side $BC$.
 theorem IMO_2004_P1 :
   ∀ (A B C M N O R X : Point) (AB BC CA : Line) (Ω : Circle),
     formAcuteTriangle A B C AB BC CA ∧

@@ -11,16 +11,25 @@ theorem IMO_2000_P6 :
     foot A H1 BC ∧
     foot B H2 CA ∧
     foot C H3 AB ∧
-    T1.onLine BC ∧ T1.onCircle Ω ∧
-    T2.onLine CA ∧ T2.onCircle Ω ∧
-    T3.onLine AB ∧ T3.onCircle Ω ∧
+    inCentre I A B C ∧
+    tangentAtPoint T1 I BC Ω ∧
+    tangentAtPoint T2 I CA Ω ∧
+    tangentAtPoint T3 I AB Ω ∧
     distinctPointsOnLine T1 T2 T12 ∧
     distinctPointsOnLine T2 T3 T23 ∧
     distinctPointsOnLine T3 T1 T31 ∧
-    symmetricLine H1H2 T12 L12 ∧
-    symmetricLine H2H3 T23 L23 ∧
-    symmetricLine H3H1 T31 L31 →
-    twoLinesIntersectAtPoint L12 L23 X ∧ X.onCircle Ω ∧
-    twoLinesIntersectAtPoint L23 L31 Y ∧ Y.onCircle Ω ∧
-    twoLinesIntersectAtPoint L31 L12 Z ∧ Z.onCircle Ω := by
+    distinctPointsOnLine H1 H2 H12 ∧
+    distinctPointsOnLine H2 H3 H23 ∧
+    distinctPointsOnLine H3 H1 H31 ∧
+    twoLinesIntersectAtPoint T12 H12 P1 ∧
+    twoLinesIntersectAtPoint T23 H23 P2 ∧
+    twoLinesIntersectAtPoint T31 H31 P3 ∧
+    P1.onLine L1 ∧ P2.onLine L2 ∧ P3.onLine L3 ∧
+    (∀ (P: Point), P.onLine L1 ∧ P ≠ P1 → ∠P:P1:T1 = ∠ T1:P1:H1 ∨ ∠P:P1:T1 + ∠ T1:P1:H1 = ∟ + ∟) ∧
+    (∀ (P: Point), P.onLine L2 ∧ P ≠ P2 → ∠P:P2:T2 = ∠ T1:P2:H2 ∨ ∠P:P2:T2 + ∠ T3:P3:H3 = ∟ + ∟) ∧
+    (∀ (P: Point), P.onLine L3 ∧ P ≠ P3 → ∠P:P3:T3 = ∠ T1:P3:H3 ∨ ∠P:P3:T3 + ∠ T3:P3:H3 = ∟ + ∟)
+     ∧
+    twoLinesIntersectAtPoint L12 L23 X ∧
+    twoLinesIntersectAtPoint L23 L31 Y ∧
+    twoLinesIntersectAtPoint L31 L12 Z → X.onCircle Ω ∧ Y.onCircle Ω ∧ Z.onCircle Ω:= by
   sorry

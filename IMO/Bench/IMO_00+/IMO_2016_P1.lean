@@ -9,7 +9,7 @@ theorem IMO_2016_P1 :
     (BC CF FB AM MX XE EA BD FX ME : Line),
     formTriangle B C F BC CF FB ∧
     ∠ C:B:F = ∟ ∧
-    A.onLine CF ∧ between A F C ∧ |(F─A)| = |(F─B)| ∧
+    between A F C ∧ |(F─A)| = |(F─B)| ∧
     |(D─A)| = |(D─C)| ∧ ∠ D:A:C = ∠ C:A:B ∧
     |(E─A)| = |(E─D)| ∧ ∠ E:A:D = ∠ D:A:C ∧
     between C M F ∧ |(C─M)| = |(M─F)| ∧

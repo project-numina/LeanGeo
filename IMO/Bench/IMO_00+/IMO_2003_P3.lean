@@ -9,8 +9,12 @@ theorem IMO_2003_P3 :
     (AB BC CD DE EF FA : Line),
     distinctPointsOnLine A B AB ∧ distinctPointsOnLine B C BC ∧ distinctPointsOnLine C D CD ∧
     distinctPointsOnLine D E DE ∧ distinctPointsOnLine E F EF ∧ distinctPointsOnLine F A FA ∧
-    A.sameSide C DE ∧ B.sameSide D EF ∧ C.sameSide E FA ∧
-    D.sameSide F AB ∧ E.sameSide A BC ∧ F.sameSide B CD ∧
+    F.sameSide A DE ∧ A.sameSide B DE ∧ B.sameSide C DE ∧
+    A.sameSide B EF ∧ B.sameSide C EF ∧ C.sameSide D EF ∧
+    B.sameSide C FA ∧ C.sameSide D FA ∧ D.sameSide E FA ∧
+    C.sameSide D AB ∧ D.sameSide E AB ∧ E.sameSide F AB ∧
+    D.sameSide E BC ∧ E.sameSide F BC ∧ F.sameSide A BC ∧
+    E.sameSide F CD ∧ F.sameSide A CD ∧ A.sameSide B CD ∧
     midpoint A M1 B ∧ midpoint D M2 E ∧ |(M1─M2)| = (√3/2) * (|(A─B)| + |(D─E)|) ∧
     midpoint B M3 C ∧ midpoint E M4 F ∧ |(M3─M4)| = (√3/2) * (|(B─C)| + |(E─F)|) ∧
     midpoint C M5 D ∧ midpoint F M6 A ∧ |(M5─M6)| = (√3/2) * (|(C─D)| + |(F─A)|) →

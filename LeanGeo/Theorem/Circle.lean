@@ -1,5 +1,6 @@
 import SystemE
 import LeanGeo.Abbre
+import LeanGeo.Axiom
 import LeanGeo.Theorem.Angle
 import LeanGeo.Theorem.Basic
 import LeanGeo.Theorem.Triangle
@@ -29,11 +30,6 @@ theorem eqChord_eqCentralAngle : ∀ (a b c d o: Point) (O : Circle), a.onCircle
         euclid_finish
       · euclid_apply congruent_SSS a o b c o d
         euclid_finish
-
-axiom threePoints_existCircle : ∀ (A B C : Point),
-  triangle A B C →
-  ∃ (Ω : Circle),
-    (A.onCircle Ω ∧ B.onCircle Ω ∧ C.onCircle Ω)
 
 theorem chord_bisector_line : ∀ (O A B: Point) (C: Circle) (AB L: Line), O.isCentre C ∧ A.onCircle C ∧ B.onCircle C ∧ distinctPointsOnLine A B AB ∧ perpLine AB L
   → O.onLine L →  perpBisector A B L := by

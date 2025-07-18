@@ -13,10 +13,10 @@ theorem IMO_2020_P1 :
     ∠ B:A:P = 2 * ∠ C:B:P ∧
     ∠ B:P:C = 3 * ∠ C:B:P ∧
     D.onLine l1 ∧
-    (∀ (X : Point), X.onLine l1 → ∠ A:D:X = ∠ P:D:X) ∧
+    (∀ (X : Point), X.onLine l1 ∧ X ≠ D → ∠ A:D:X = ∠ P:D:X) ∧
     A.opposingSides P l1 ∧
     C.onLine l2 ∧
-    (∀ (X : Point), X.onLine l2 → ∠ P:C:X = ∠ B:C:X) ∧
+    (∀ (X : Point), X.onLine l2 ∧ X ≠ C → ∠ P:C:X = ∠ B:C:X) ∧
     P.opposingSides B l2 ∧
     perpBisector A B l3 →
   concurrent l1 l2 l3 := by

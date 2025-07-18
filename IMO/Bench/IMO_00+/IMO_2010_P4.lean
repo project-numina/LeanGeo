@@ -3,8 +3,7 @@ import SystemE
 import LeanGeo
 namespace LeanGeo
 
---Let $P$ be a point interior to triangle $ABC$ (with $CA 
-eq CB$). The lines $AP$, $BP$ and $CP$ meet again its circumcircle $\Gamma$ at $K$, $L$, respectively $M$. The tangent line at $C$ to $\Gamma$ meets the line $AB$ at $S$. Show that from $SC = SP$ follows $MK = ML$.
+--Let $P$ be a point interior to triangle $ABC$ (with $CA ≠ CB$). The lines $AP$, $BP$ and $CP$ meet again its circumcircle $\Gamma$ at $K$, $L$, respectively $M$. The tangent line at $C$ to $\Gamma$ meets the line $AB$ at $S$. Show that from $SC = SP$ follows $MK = ML$.
 theorem IMO_2010_P4 :
   ∀ (A B C P K L M S O : Point) (t : Line) (Γ : Circle) (AB BC CA : Line),
     formTriangle A B C AB BC CA ∧

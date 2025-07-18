@@ -14,11 +14,10 @@ theorem IMO_2014_P3 :
     foot A H BD ∧
     between A S B ∧
     between A T D ∧
-    distinctPointsOnLine S C SC ∧
-    distinctPointsOnLine C T CT ∧
-    distinctPointsOnLine T S ST ∧
+    formTriangle S C T SC CT ST ∧
     insideTriangle H S C T SC CT ST ∧
     ∠ C:H:S = ∠ C:S:B + ∟ ∧
-    ∠ T:H:C = ∠ D:T:C + ∟ →
-    circumCircle Ω T S H ∧ circumCentre O T S H ∧ tangentAtPoint H O BD Ω := by
+    ∠ T:H:C = ∠ D:T:C + ∟ ∧
+    circumCircle Ω T S H ∧ circumCentre O T S H
+    → (∃(P: Point), P.onLine BD ∧ tangentAtPoint H O BD Ω) := by
   sorry

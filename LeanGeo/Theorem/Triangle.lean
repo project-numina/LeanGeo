@@ -1,5 +1,6 @@
 import SystemE
 import LeanGeo.Abbre
+import LeanGeo.Axiom
 import LeanGeo.Theorem.Angle
 import LeanGeo.Theorem.Parallel
 import LeanGeo.Theorem.Construction
@@ -40,7 +41,7 @@ theorem triangle_angleSum : ∀(A B C : Point) , triangle A B C → ∠A:B:C +�
   euclid_apply line_from_points B C as BC
   euclid_apply line_from_points C A as CA
   euclid_apply extend_point BC B C as D
-  euclid_apply Book_triangle_angleSum A B C D AB BC CA
+  euclid_apply proposition_32 A B C D AB BC CA
   euclid_finish
 
 theorem triangle_exteriorAngle : ∀ (a b c d: Point), (triangle a b c) ∧ (between a b d) → ∠d:b:c = ∠b:c:a + ∠c:a:b := by
@@ -62,26 +63,50 @@ theorem acute_triangle_foot_between : ∀(A B C D: Point) (BC: Line), distinctPo
     euclid_finish
   euclid_finish
 
-theorem congruent_SSS : ∀ (A B C D E F : Point), triangle A B C ∧ triangle D E F ∧ |(A─B)| = |(D─E)| ∧ |(B─C)| = |(E─F)| ∧ |(C─A)| = |(F─D)| → congruentTriangle A B C D E F := by
-  sorry
-
 theorem congruent_SAS : ∀ (A B C D E F : Point), triangle A B C ∧ triangle D E F ∧ |(A─B)| = |(D─E)| ∧ ∠ A:B:C = ∠ D:E:F ∧ |(B─C)| = |(E─F)| → congruentTriangle A B C D E F := by
-  sorry
+  euclid_intros
+  euclid_apply line_from_points A B as AB
+  euclid_apply line_from_points B C as BC
+  euclid_apply line_from_points C A as CA
+  euclid_apply line_from_points D E as DE
+  euclid_apply line_from_points E F as EF
+  euclid_apply line_from_points F D as FD
+  euclid_apply proposition_4 B A C E D F AB CA BC DE FD EF
+  euclid_finish
+
+theorem congruent_SSS : ∀ (A B C D E F : Point), triangle A B C ∧ triangle D E F ∧ |(A─B)| = |(D─E)| ∧ |(B─C)| = |(E─F)| ∧ |(C─A)| = |(F─D)| → congruentTriangle A B C D E F := by
+  euclid_intros
+  euclid_apply line_from_points A B as AB
+  euclid_apply line_from_points B C as BC
+  euclid_apply line_from_points C A as CA
+  euclid_apply line_from_points D E as DE
+  euclid_apply line_from_points E F as EF
+  euclid_apply line_from_points F D as FD
+  euclid_apply proposition_8 A B C D E F AB BC CA DE EF FD
+  euclid_apply congruent_SAS B A C E D F
+  euclid_finish
 
 theorem congruent_ASA : ∀ (A B C D E F : Point), triangle A B C ∧ triangle D E F ∧ |(A─B)| = |(D─E)| ∧ ∠ A:B:C = ∠ D:E:F ∧ ∠ B:A:C = ∠ E:D:F → congruentTriangle A B C D E F := by
-  sorry
+  euclid_intros
+  euclid_apply line_from_points A B as AB
+  euclid_apply line_from_points B C as BC
+  euclid_apply line_from_points C A as CA
+  euclid_apply line_from_points D E as DE
+  euclid_apply line_from_points E F as EF
+  euclid_apply line_from_points F D as FD
+  euclid_apply proposition_26 C B A F E D BC AB CA EF DE FD
+  euclid_finish
 
 theorem congruent_AAS : ∀ (A B C D E F : Point), triangle A B C ∧ triangle D E F ∧ |(A─B)| = |(D─E)| ∧ ∠ A:B:C = ∠ D:E:F ∧ ∠ A:C:B = ∠ D:F:E → congruentTriangle A B C D E F := by
-  sorry
-
-theorem similar_AA : ∀ (A B C D E F : Point), triangle A B C ∧ triangle D E F ∧  ∠ A:B:C = ∠ D:E:F ∧ ∠ B:A:C = ∠ E:D:F → similarTriangle A B C D E F := by
-  sorry
-
- theorem similar_SAS : ∀ (A B C D E F : Point), triangle A B C ∧ triangle D E F ∧  ∠ A:B:C = ∠ D:E:F ∧ |(A─B)| * |(E─F)| = |(B─C)| * |(D─E)| → similarTriangle A B C D E F := by
-  sorry
-
-theorem similar_SSS : ∀ (A B C D E F : Point), triangle A B C ∧ triangle D E F ∧ |(A─B)| * |(E─F)| = |(B─C)| * |(D─E)| ∧ |(B─C)| * |(F─D)| = |(C─A)| * |(E─F)| → similarTriangle A B C D E F := by
-  sorry
+  euclid_intros
+  euclid_apply line_from_points A B as AB
+  euclid_apply line_from_points B C as BC
+  euclid_apply line_from_points C A as CA
+  euclid_apply line_from_points D E as DE
+  euclid_apply line_from_points E F as EF
+  euclid_apply line_from_points F D as FD
+  euclid_apply proposition_26 A B C D E F AB BC CA DE EF FD
+  euclid_finish
 
 --nlinarith makes it very slow in this proof.
 theorem HL_congruent : ∀ (a b c d e f : Point) ,  rightTriangle a b c ∧ rightTriangle d e f ∧ |(a─b)| = |(d─e)| ∧ |(b─c)| = |(e─f)| → congruentTriangle a b c d e f := by
@@ -332,7 +357,7 @@ by
   euclid_apply line_from_points a b as AB
   euclid_apply line_from_points b c as BC
   euclid_apply line_from_points c a as CA
-  euclid_apply Book_greater_side_greater_angle a b c AB BC CA
+  euclid_apply proposition_18 a b c AB BC CA
   euclid_finish
 
 theorem apollonius_on_isoceles :

@@ -1,15 +1,12 @@
 import SystemE
 import LeanGeo.Abbre
+import LeanGeo.Axiom
 import LeanGeo.Theorem.Angle
 import LeanGeo.Theorem.Position
 import Book
 
 open Elements.Book1
-
-open LeanGeo
 namespace LeanGeo
-
-axiom exists_centre : ∀ (O: Circle), ∃ (C : Point), C.isCentre O
 
 theorem construct_perpBisector' (a b : Point) : (a ≠ b) →  ∃ L, perpBisector a b L ∧ ∃ M : Point, M.onLine L ∧ midpoint a M b := by
   intro hab
@@ -73,16 +70,10 @@ theorem exists_midpoint : ∀ (A B : Point), A ≠ B → ∃(P : Point), midpoin
   use M
   euclid_finish
 
---theorem exists_foot : ∀ (A : Point) (l : Line), ∃(P : Point), P.onLine l ∧
---(∀ Q:Point, Q.onLine l → ∠A:P:Q = ∟) := by
---  sorry
 theorem midpoint_twice: ∀ (A B P : Point), midpoint A P B → |(A─B)| * 1/2 = |(P─B)|  := by
   euclid_intros
   euclid_apply line_from_points
   euclid_finish
-
-
-#check between_points
 
 theorem exists_foot : ∀ (c: Point) (AB : Line),
    ¬(c.onLine AB) →
@@ -141,7 +132,7 @@ theorem triangle_angleSum_c : ∀(A B C : Point) , triangle A B C → ∠A:B:C +
   euclid_apply line_from_points B C as BC
   euclid_apply line_from_points C A as CA
   euclid_apply extend_point BC B C as D
-  euclid_apply Book_triangle_angleSum A B C D AB BC CA
+  euclid_apply proposition_32 A B C D AB BC CA
   euclid_finish
 
 theorem unique_perpLine : ∀ (A : Point) (L : Line),

@@ -1,6 +1,7 @@
 import Mathlib
 import SystemE
 import LeanGeo.Abbre
+import LeanGeo.Axiom
 import LeanGeo.Theorem.Construction
 import LeanGeo.Theorem.Area
 import LeanGeo.Theorem.Angle
@@ -90,10 +91,6 @@ theorem sin_sq : sin x ^ 2 = 1 - cos x ^ 2 := by simp [  Real.sin_sq]
 
 lemma sin_sq_eq_half_sub : sin x ^ 2 = 1 / 2 - cos (2 * x) / 2 := by simp [  Real.sin_sq_eq_half_sub]
 
-
-axiom rightAngle_eq_pi_div_two : ∟ = Real.pi / 2
-
-
 theorem sin_rightAngle : sin ∟ = 1 := by
   rw [rightAngle_eq_pi_div_two]
   rw [Real.sin_pi_div_two]
@@ -105,9 +102,6 @@ theorem cos_rightAngle : cos ∟ = 0 := by
 theorem straightAngle_eq_pi: ∟ + ∟ = Real.pi := by
   rw[rightAngle_eq_pi_div_two]
   linarith
-
-axiom rightTriangle_sin : ∀ (A B C : Point), rightTriangle A B C → sin (∠A:B:C) = |(A─C)| / |(B─C)|
-axiom rightTriangle_cos : ∀ (A B C : Point), rightTriangle A B C → cos (∠A:B:C) = |(A─B)| / |(B─C)|
 
 theorem sameLine_sameSine: ∀ (A B C D: Point), coll A B C  ∧ (B ≠ C) ∧ (B ≠ A) ∧ (C ≠ A) ∧ ¬ (coll A B D) →  sin (∠ D:B:C) = sin (∠ D:B:A) := by
   euclid_intros
@@ -228,31 +222,7 @@ theorem triangle_coll_sin: ∀ (A B C D : Point), triangle A B C ∧ coll B C D 
       euclid_finish
     euclid_finish
 
-/--theorem cor1_1 : ∀ (A B C D : Point) (BC : Line), triangle A B C ∧ distinctPointsOnLine B C BC ∧ D.onLine BC ∧ (∠D:A:B = ∠D:A:C) → |(D─C)| * |(A─B)| = |(D─B)| * |(A─C)| := by sorry -/
-
 theorem triangle_midpoint_sin : ∀ (A B C D : Point), triangle A B C ∧ midpoint B D C → |(A─B)| * sin (∠D:A:B) = |(A─C)| * sin (∠D:A:C) := by
   euclid_intros
   euclid_apply triangle_coll_sin A B C D
   euclid_finish
-
-
-theorem Ceva_sin : ∀ (A B C D E F O: Point), (triangle A B C) ∧ coll A F B ∧ coll A E C ∧ coll B D C ∧ coll A O D ∧ coll C O F ∧ coll B O E → sin (∠D:A:B) * sin (∠E:B:C) * sin (∠F:C:A) = sin (∠D:A:C) * sin (∠E:B:A) * sin (∠F:C:B) := by
-  euclid_intros
-  euclid_apply triangle_coll_sin A B C D
-  euclid_apply triangle_coll_sin B C A E
-  euclid_apply triangle_coll_sin C A B F
-  sorry
-
-theorem cor2_1 : ∀ (A B C D E F O: Point), (triangle A B C) ∧ coll A F B ∧ coll A E C ∧ coll B D C ∧ coll A O D ∧ coll C O F ∧ sin (∠D:A:B) * sin (∠E:B:C) * sin (∠F:C:A) = sin (∠D:A:C) * sin (∠E:B:A) * sin (∠F:C:B) → coll B O E:= by sorry
-
-theorem thm3 : ∀ (A B C D E F O P: Point), (triangle A B C) ∧ coll A F B ∧ coll A E C ∧ coll B D C ∧ coll A O D ∧ coll C O F ∧ coll B O E ∧ ¬ P = D ∧ ¬ P = E ∧ ¬ P = F → sin (∠D:P:B) * sin (∠E:P:C) * sin (∠F:P:A) = sin (∠D:P:C) * sin (∠E:P:A) * sin (∠F:P:B) := by sorry
-
-theorem cor3_1 : ∀ (A B C D E F O P: Point), (triangle A B C) ∧ coll A F B ∧ coll A E C ∧ coll B D C ∧ coll A O D ∧ coll C O F ∧ ¬ P = D ∧ ¬ P = E ∧ ¬ P = F ∧ sin (∠D:P:B) * sin (∠E:P:C) * sin (∠F:P:A) = sin (∠D:P:C) * sin (∠E:P:A) * sin (∠F:P:B) → coll B O E:= by sorry
-
-theorem thm4 : ∀ (A B C L M N: Point) (AB BC CA l :Line), formTriangle A B C AB BC CA  ∧  L.onLine l ∧ L.onLine BC ∧ M.onLine l ∧ M.onLine CA ∧ N.onLine l ∧ N.onLine AB → sin (∠N:C:A) * sin (∠L:A:B) * sin (∠M:B:C) = sin (∠N:C:B) * sin (∠L:A:C) * sin (∠M:B:A) := by sorry
-
-/-theorem cor4_1 :-/
-
-theorem thm5 : ∀ (A B C L M N P: Point) (AB BC CA l :Line), formTriangle A B C AB BC CA  ∧  L.onLine l ∧ L.onLine BC ∧ M.onLine l ∧ M.onLine CA ∧ N.onLine l ∧ N.onLine AB ∧ ¬ P = L ∧ ¬ P = M ∧ ¬ P = N → sin (∠N:P:A) * sin (∠L:P:B) * sin (∠M:P:C) = sin (∠N:P:B) * sin (∠L:P:C) * sin (∠M:P:A) := by sorry
-
-/-theorem cor5_1 :-/

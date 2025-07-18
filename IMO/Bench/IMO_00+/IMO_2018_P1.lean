@@ -23,5 +23,5 @@ theorem IMO_2018_P1 :
     G.opposingSides B AC ∧
     distinctPointsOnLine D E DE ∧
     distinctPointsOnLine F G FG →
-    ¬(DE.intersectsLine FG) ∨ (coll D E F ∧ coll D E G) := by
+    ¬(DE.intersectsLine FG) := by
   sorry

@@ -1,11 +1,11 @@
 import SystemE
 import LeanGeo.Abbre
+import LeanGeo.Axiom
 import LeanGeo.Theorem.Angle
 import LeanGeo.Theorem.Parallel
 import LeanGeo.Theorem.Triangle
 import LeanGeo.Theorem.Construction
 namespace LeanGeo
-axiom triangle_area_foot :∀ (a b c d: Point) (BC: Line),b.onLine BC ∧ c.onLine BC ∧ (triangle a b c) ∧ foot a d BC → (△a:b:c).area = |(a─d)| * |(b─c)|/2
 
 theorem area_ratio_segment_ratio: ∀ (a b c d: Point),  coll b c d → (△a:b:d).area * |(b─c)| = (△a:b:c).area * |(b─d)| := by
   euclid_intros
@@ -93,6 +93,7 @@ theorem Ceva : ∀ (A B C D E F O: Point), (triangle A B C) ∧ coll A F B ∧ c
     euclid_apply line_from_points A B as AB
     euclid_apply line_from_points B C as BC
     euclid_finish
+
 theorem Ceva_inverse : ∀ (A B C D E F O : Point), (triangle A B C) ∧ coll A F B ∧ coll A E C ∧ coll B D C ∧ coll A O D ∧ |(B─D)| * |(C─E)| * |(A─F)| = |(D─C)| * |(E─A)| * |(F─B)| ∧  coll C O F →  coll B O E := by
   sorry
 

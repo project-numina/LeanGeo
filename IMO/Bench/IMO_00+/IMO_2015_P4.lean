@@ -9,12 +9,10 @@ theorem IMO_2015_P4 :
     formTriangle A B C AB BC CA ∧
     circumCentre O A B C ∧
     circumCircle Ω A B C ∧
-    O.isCentre Ω ∧
-    A.isCentre Γ ∧
-    distinctPointsOnLine B C BC ∧
-    D.onLine BC ∧ E.onLine BC ∧
-    between B D C ∧ between B E C ∧ D ≠ E ∧
+    A.isCentre Γ ∧ D.onCircle Γ ∧ E.onCircle Γ ∧
+    between B D E ∧ between D E C ∧
     circlesIntersectsAtTwoPoints Γ Ω F G ∧
+    C.opposingSides F AB ∧ G.opposingSides B CA ∧
     cyclic B D F K ∧ between A K B ∧
     cyclic C G E L ∧ between C L A ∧
     ¬ coll F G K ∧

@@ -1,5 +1,6 @@
 import SystemE
 import LeanGeo.Abbre
+import LeanGeo.Axiom
 import LeanGeo.Theorem.Position
 import LeanGeo.Theorem.Triangle
 import LeanGeo.Theorem.Angle
@@ -299,18 +300,6 @@ theorem parallelogram_diagonals_equal_is_rectangle:
     euclid_apply parallel_supplementConsecutiveAngle CD AB DA_line D A C B
     euclid_finish
   have h_CDA_is_right: ∠ C:D:A = ∟ := by euclid_finish
-  euclid_finish
---
-
-theorem parallelogram_median_mid_mid_para : ∀ (A B C D E F: Point) (AB BC CD DA EF: Line), parallelogram A B C D AB BC CD DA ∧ distinctPointsOnLine E F EF ∧ midpoint B E C ∧ midpoint A F D →  (¬ EF.intersectsLine CD) := by
-  euclid_intros
-  euclid_apply parallelogram_eqSides A B C D AB BC CD DA
-  have h0: parallelogram E F D C EF DA CD BC := by
-    have h1: A.sameSide B EF := by
-      euclid_apply quadrilateral_line_from_side_sameside A B C D E F AB BC CD DA EF
-      euclid_finish
-    euclid_assert formQuadrilateral E F D C EF DA CD BC
-    sorry
   euclid_finish
 
 theorem trapezoid_median_mid_mid_para : ∀ (A B C D E F: Point) (AB BC CD DA EF: Line), formQuadrilateral A B C D AB BC CD DA ∧ (¬ AB.intersectsLine CD) ∧ distinctPointsOnLine E F EF ∧ midpoint B E C ∧ midpoint A F D →  (¬ EF.intersectsLine CD) := by

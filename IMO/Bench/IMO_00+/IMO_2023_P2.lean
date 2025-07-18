@@ -23,14 +23,13 @@ theorem IMO_2023_P2 :
     distinctPointsOnLine D L DL ∧
     ¬ DL.intersectsLine BC ∧
     L.onLine BE ∧
-    L.onLine DL ∧
     circumCircle ω B D L ∧
     P.onCircle Ω ∧
     P.onCircle ω ∧
     P ≠ B ∧
-    Oω.isCentre ω →
+    Oω.isCentre ω ∧
     tangentAtPoint P Oω TL ω ∧
     M.onLine TL ∧
-    M.onLine BS ∧
+    M.onLine BS →
     ∠ B:A:M = ∠ M:A:C := by
   sorry

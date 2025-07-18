@@ -59,8 +59,12 @@ abbrev tangentLine (L : Line) (O : Circle) : Prop :=
 ∃! (P : Point), (P.onLine L) ∧ (P.onCircle O)
 
 @[simp]
-abbrev inCircle (Ω : Circle) (AB BC CA : Line) : Prop :=
-tangentLine AB Ω ∧ tangentLine BC Ω ∧ tangentLine CA Ω
+abbrev inCircle (Ω : Circle) (A B C: Point) (AB BC CA : Line) : Prop :=
+tangentLine AB Ω ∧ tangentLine BC Ω ∧ tangentLine CA Ω ∧ ∃(I: Point), inCentre I A B C ∧ inCentre I A B C
+
+@[simp]
+abbrev exCircle (Ω : Circle) (A B C: Point) (AB BC CA : Line) : Prop :=
+tangentLine AB Ω ∧ tangentLine BC Ω ∧ tangentLine CA Ω ∧ ∃(I: Point), exCentre I A B C ∧ inCentre I A B C
 
 @[simp]
 abbrev tangentAtPoint (P O: Point) (L: Line) (C :Circle) : Prop :=

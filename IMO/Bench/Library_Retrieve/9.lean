@@ -3,7 +3,7 @@ import SystemE
 import LeanGeo
 namespace LeanGeo
 
-theorem librar9 :
+theorem library9 :
 ∀ (L M T : Line) (A B C D : Point),
   twoLinesIntersectAtPoint L T A ∧
   twoLinesIntersectAtPoint M T B ∧
