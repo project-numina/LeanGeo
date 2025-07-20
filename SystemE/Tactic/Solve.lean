@@ -37,7 +37,7 @@ def EuclidApply (rule : Term) (idents : Array Ident)  : TacticM Unit := do
         return ⟨τ, rule⟩
       else  -- τ is an implication, rather than ∀
         dbg_trace rule
-        return ⟨P, ← `(term| $rule (by dsimp at *; esmt))⟩
+        return ⟨P, ← `(term| $rule (by (try dsimp at *); esmt))⟩
     | _ => return ⟨τ, rule⟩
   )
   elimAllConjunctions
