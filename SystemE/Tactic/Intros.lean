@@ -15,10 +15,9 @@ def EuclidIntros : TacticM Unit := do
       let ctx ← getLCtx
       for fvar in fvars do
         let decl := ctx.getFVar! fvar
-        let freshName ← Lean.Meta.getUnusedUserName decl.userName
         -- Run `intro`.
         liftMetaTactic fun g => do
-          let (_, g') ← g.intro freshName
+          let (_, g') ← g.intro decl.userName
           return [g']
         -- Destruct conjunctions.
         elimConjunction decl
