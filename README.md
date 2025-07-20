@@ -104,4 +104,4 @@ We would like this to be a community driven repo. Specifically the following are
 
 1. Expanding the theorem library.
 2. Getting proof reconstruction to work for the `esmt` tactic.
-3. Currently the `@[euclid]` attribute requires that axioms imports are chained linearly (eg `superposition` imports `metric` which imports `diagrammatic`)
+3. Improve axiom caching: currently the `@[euclid]` attribute requires that axioms imports are chained linearly (eg `superposition` imports `metric` which imports `diagrammatic`). If someone could get the caching to work using something like [DiscrTree](https://leanprover-community.github.io/mathlib4_docs/Lean/Meta/DiscrTreeTypes.html#Lean.Meta.DiscrTree) that would be greatly appreciated.
