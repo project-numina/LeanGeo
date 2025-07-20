@@ -3,8 +3,7 @@ name: Lean 4 CI
 on:
   push:
     branches:
-      - main
-      - master
+      - "*"
   pull_request:
 
 env:
