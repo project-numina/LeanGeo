@@ -1,0 +1,32 @@
+name: Lean 4 CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+
+env:
+  LEAN_ABORT_ON_FAILED_IMPORTS: "1"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Lean 4 environment
+        uses: leanprover/lean4-action@v0.8.10
+
+      - name: Update Lake dependencies
+        run: lake update
+
+      - name: Build Book package
+        run: lake build Book
+
+      - name: Build UniGeo package
+        run: lake build UniGeo
+
+      - name: Build LeanGeo package
+        run: lake build LeanGeo
