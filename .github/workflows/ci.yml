@@ -13,19 +13,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Set up Lean 4 environment
-        uses: leanprover/lean-action@v1.1.0
-
-      - name: Update Lake dependencies
-        run: lake update
-
-      - name: Build Book package
-        run: lake build Book
-
-      - name: Build UniGeo package
-        run: lake build UniGeo
-
-      - name: Build LeanGeo package
-        run: lake build LeanGeo
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
+      - run: lake update
+      - run: lake build Book
+      - run: lake build UniGeo
+      - run: lake build LeanGeo
