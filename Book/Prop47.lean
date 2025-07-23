@@ -71,26 +71,26 @@ by
   euclid_assert ((∠ d:b:a : ℝ) = ∠ f:b:c)
   euclid_assert ((∠ c:b:a : ℝ) + ∟ = ∠ c:b:f)
   euclid_apply (proposition_4 b d a b c f BD AD AB BC FC BF)
-  euclid_assert ((Triangle.area △ a:b:d) = Triangle.area △ b:c:f)
+  euclid_assert ((triangle.area △ a:b:d) = triangle.area △ b:c:f)
   euclid_apply (proposition_41 l' b d l a AL BD BC DE AB AD)
   euclid_apply (proposition_41 g f b a c AG BF FG AB FC BC)
-  euclid_assert ((Triangle.area △ g:f:b : ℝ) + (Triangle.area △ g:b:a) = (Triangle.area △ l':b:d) + (Triangle.area △ l':d:l))
+  euclid_assert ((triangle.area △ g:f:b : ℝ) + (triangle.area △ g:b:a) = (triangle.area △ l':b:d) + (triangle.area △ l':d:l))
   euclid_apply (line_from_points a e) as AE
   euclid_apply (line_from_points b k) as BK
   euclid_apply sum_angles_onlyif c e a b CE AC
   euclid_apply sum_angles_onlyif c k b a CK BC
   euclid_assert ((∠ e:c:a : ℝ) = (∠ k:c:b))
   euclid_apply (proposition_4 c e a c b k CE AE AC BC BK CK)
-  euclid_assert ((Triangle.area △ a:c:e : ℝ) = Triangle.area △ c:b:k)
+  euclid_assert ((triangle.area △ a:c:e : ℝ) = triangle.area △ c:b:k)
   euclid_apply (proposition_41 l' c e l a AL CE BC DE AC AE)
   euclid_apply (proposition_41 h k c a b AH CK HK AC BK BC)
-  euclid_assert ((Triangle.area △ k:c:a : ℝ) + (Triangle.area △ k:a:h) = (Triangle.area △ l':c:e) + (Triangle.area △ l':e:l))
+  euclid_assert ((triangle.area △ k:c:a : ℝ) + (triangle.area △ k:a:h) = (triangle.area △ l':c:e) + (triangle.area △ l':e:l))
   euclid_apply (rectangle_area b c d e BC DE BD CE)
   euclid_apply (rectangle_area b a f g AB FG BF AG)
   euclid_apply (rectangle_area a c h k AC HK AH CK)
   euclid_apply sum_parallelograms_area b c d e l' l BC DE BD CE
   euclid_apply parallelogram_area b l' d l BC DE BD AL
-  euclid_assert ((Triangle.area △ b:d:e : ℝ) + (Triangle.area △ b:e:c) = (Triangle.area △ g:f:b) + (Triangle.area △ g:b:a) + (Triangle.area △ k:c:a) + (Triangle.area △ k:a:h))
+  euclid_assert ((triangle.area △ b:d:e : ℝ) + (triangle.area △ b:e:c) = (triangle.area △ g:f:b) + (triangle.area △ g:b:a) + (triangle.area △ k:c:a) + (triangle.area △ k:a:h))
   euclid_finish
 
 end Elements.Book1

@@ -11,7 +11,7 @@ open LeanGeo
 theorem proposition_37 : ∀ (a b c d : Point) (AB BC AC BD CD AD : Line),
   formTriangle a b c AB BC AC ∧ formTriangle d b c BD BC CD ∧ distinctPointsOnLine a d AD ∧
   ¬(AD.intersectsLine BC) ∧ d.sameSide c AB →
-  Triangle.area △ a:b:c = Triangle.area △ d:b:c :=
+  triangle.area △ a:b:c = triangle.area △ d:b:c :=
 by
   euclid_intros
   euclid_apply (proposition_31 b a c AC) as BE
@@ -26,7 +26,7 @@ by
 theorem proposition_37' : ∀ (a b c d : Point) (AB BC AC BD CD AD : Line),
   formTriangle a b c AB BC AC ∧ formTriangle d b c BD BC CD ∧ distinctPointsOnLine a d AD ∧
   ¬(AD.intersectsLine BC) →
-  Triangle.area △ a:b:c = Triangle.area △ d:b:c :=
+  triangle.area △ a:b:c = triangle.area △ d:b:c :=
 by
   euclid_intros
   by_cases (d.sameSide c AB)

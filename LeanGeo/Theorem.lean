@@ -1,14 +1,7 @@
+import LeanGeo.Abbre
+import LeanGeo.Axiom
 import LeanGeo.Theorem.Basic
-import LeanGeo.Theorem.BookTheorem
-import LeanGeo.Theorem.Angle
-import LeanGeo.Theorem.PerpBisector
-import LeanGeo.Theorem.Position
-import LeanGeo.Theorem.Parallel
-import LeanGeo.Theorem.Construction
 import LeanGeo.Theorem.Triangle
-import LeanGeo.Theorem.Area
+import LeanGeo.Theorem.Metrics
 import LeanGeo.Theorem.Circle
 import LeanGeo.Theorem.Quadrilateral
-import LeanGeo.Theorem.TriangleCenter
-import LeanGeo.Theorem.CircumCenter
-import LeanGeo.Theorem.OrthoCenter

@@ -4,22 +4,22 @@ namespace LeanGeo
 
 opaque area' : Point → Point → Point → ℝ
 
-inductive Triangle
+inductive triangle
 | ofPoints (a b c : Point)
 
 @[simp]
-abbrev Triangle.area : Triangle → ℝ :=
+abbrev triangle.area : triangle → ℝ :=
   fun x =>
     match x with
     | ofPoints a b c => area' a b c
 
 
-notation:max "△" a ":" b ":" c:66 => Triangle.ofPoints a b c
+notation:max "△" a ":" b ":" c:66 => triangle.ofPoints a b c
 
-instance : Coe Triangle ℝ :=
-  ⟨Triangle.area⟩
+instance : Coe triangle ℝ :=
+  ⟨triangle.area⟩
 
--- example (a b c : Point) : Triangle.area (△ a:b:c) = 0 := by
+-- example (a b c : Point) : triangle.area (△ a:b:c) = 0 := by
 --   dsimp
 
 end LeanGeo
