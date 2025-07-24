@@ -1,6 +1,13 @@
 # LeanGeo (paper to be published)
 ______________________________________________________________________
 
+## running LeanGeo-Bench eval
+
+To launch the server, clone and cd into the LeanGeo repository and then run: 
+```
+cp .env.template .env
+docker compose up -d
+```
 
 ## Quick Links
 

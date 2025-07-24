@@ -18,10 +18,6 @@ lean_lib Book {
 lean_lib UniGeo {
 }
 
-lean_lib E3 {
-
-}
-
 require mathlib from git "https://github.com/leanprover-community/mathlib4.git" @ "9837ca9d65d9de6fad1ef4381750ca688774e608"
 
 require smt from git "https://github.com/ufmg-smite/lean-smt.git" @ "9b81e91cc9ea3833203317a7f425267112083672"
