@@ -20,6 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: leanprover/lean-action@v1
+
       - run: lake update
       - run: lake build Book
       - run: lake build UniGeo
@@ -27,13 +28,17 @@ jobs:
 
       - name: Build documentation
         run: lake -R -Kenv=dev build LeanGeo:docs
+
+      - name: Copy documentation into deployable folder
+        run: |
+          mkdir -p docs/docs
+          cp -r .lake/build/doc/* docs/docs
+
       - name: Upload docs artifact
         uses: actions/upload-pages-artifact@v2
         with:
           path: docs/
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
-      - name: Make sure the cache works
-        run: |
-          mv docs/docs .lake/build/doc
