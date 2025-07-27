@@ -5,7 +5,7 @@ on:
     branches:
       - "*"
   pull_request:
-  
+
 permissions:
   contents: read
   pages: write
@@ -28,12 +28,12 @@ jobs:
       - name: Build documentation
         run: lake -R -Kenv=dev build LeanGeo:docs
       - name: Upload docs artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v2
         with:
           path: docs/
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v2
       - name: Make sure the cache works
         run: |
           mv docs/docs .lake/build/doc
