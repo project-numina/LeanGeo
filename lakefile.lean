@@ -64,6 +64,5 @@ script aggregate do
 
 require checkdecls from git "https://github.com/PatrickMassot/checkdecls.git" @ "e2285d36490b9315a215564e6d34a2c88cccfc33"
 
-meta if get_config? env = some "dev" then
 require «doc-gen4» from git
   "https://github.com/leanprover/doc-gen4.git" @ "v4.15.0"
