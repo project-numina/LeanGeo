@@ -15,8 +15,7 @@ lean_lib LeanGeo {
 lean_lib Book {
 }
 
-lean_lib E3 {
-
+lean_lib UniGeo {
 }
 
 require mathlib from git "https://github.com/leanprover-community/mathlib4.git" @ "9837ca9d65d9de6fad1ef4381750ca688774e608"
@@ -65,7 +64,6 @@ script aggregate do
 
 require checkdecls from git "https://github.com/PatrickMassot/checkdecls.git" @ "e2285d36490b9315a215564e6d34a2c88cccfc33"
 
-meta if get_config? env = some "dev" then
 require «doc-gen4» from git
   "https://github.com/leanprover/doc-gen4.git" @ "v4.15.0"
 

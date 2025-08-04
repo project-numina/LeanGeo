@@ -1,30 +1,13 @@
-Autoformalizing Euclidean Geometry
-==================================
-
-
-![LeanEuclid](https://github.com/loganrjmurphy/LeanEuclid/blob/master/images/LeanEuclid.jpg)
-
-
-Code for the paper:  
-
-[Autoformalizing Euclidean Geometry](https://arxiv.org/abs/2405.17216)  
-International Conference on Machine Learning (ICML), 2024  
-[Logan Murphy](https://www.cs.toronto.edu/~lmurphy/)\*, [Kaiyu Yang](https://yangky11.github.io/)\* (\* equal contribution), [Jialiang Sun](https://www.linkedin.com/in/jack-sun-2741711b5/?originalSubdomain=ca), [Zhaoyu Li](https://www.zhaoyu-li.com/), [Anima Anandkumar](http://tensorlab.cms.caltech.edu/users/anima/), and [Xujie Si](https://www.cs.toronto.edu/~six/)
-
-```bibtex
-@inproceedings{murphy2024leaneuclid,
-  title={Autoformalizing {Euclidean} Geometry},
-  author={Murphy, Logan and Yang, Kaiyu and Sun, Jialiang and Li, Zhaoyu and Anandkumar, Anima and Si, Xujie},
-  booktitle={International Conference on Machine Learning (ICML)},
-  year={2024}
-}
-```
-
-
-[![GitHub license](https://img.shields.io/github/license/loganrjmurphy/LeanEuclid)](https://github.com/loganrjmurphy/LeanEuclid/blob/master/LICENSE)
-
+# LeanGeo (paper to be published)
 ______________________________________________________________________
 
+## running LeanGeo-Bench eval
+
+To launch the server, clone and cd into the LeanGeo repository and then run: 
+```
+cp .env.template .env
+docker compose up -d
+```
 
 ## Quick Links
 
@@ -42,22 +25,31 @@ ______________________________________________________________________
 
 ## Requirements
 
-* A working setup of [Lean 4](https://lean-lang.org/), including [elan](https://github.com/leanprover/elan) and [Lean's VSCode extension](https://lean-lang.org/lean4/doc/quickstart.html)
-* Install the latest version of [Z3](https://github.com/Z3Prover/z3) and [CVC5](https://cvc5.github.io/) and make sure they can be accessed from the command line
-* Install Python dependencies: `pip install smt-portfolio openai`
-* Find out the location of `smt-portfolio` and make sure Lean's VSCode extension can also access it. For example, if `which smt-portfolio` outputs `/Users/yangky/miniconda3/envs/lean/bin/smt-portfolio`, you should set `Server Env Paths` in Lean's VSCode extension as below:
-<img width="938" alt="image" src="https://github.com/loganrjmurphy/LeanEuclid/assets/5431913/abfc6d25-e2e4-462e-934d-a10b4cb4e96c">
+It is recommended that you run this repo on linux (if you are on windows you can use wsl). 
 
+You will need to install the following linux packages: 
+```
+clang
+libc++-dev
+cvc5
+libcvc5-dev
+```
 
+Additionally, your `C` and `CXX` compilers both need to be set to `clang`. Which can be done using the following command
+```
+export CC=clang
+export CXX=clang++
+```
 
 ## Building
 
 Take the following steps to build the Lean project:
 
-1. Run `lake script run check` to check if the requirements are satisfied.
-2. Run `lake exe cache get` to download the [mathlib](https://github.com/leanprover-community/mathlib4) cache
-3. Run `lake build` to compile the formal system E
-4. Open a file for Euclid's *Elements* in VS Code, e.g., [Book/Prop01.lean](Book/Prop01.lean). You should expect to see:
+1. Run `lake run cvc5/downloadRelease` to install the latest copy of `cvc5`
+2. Run `lake script run check` to check if the requirements are satisfied.
+3. Run `lake exe cache get` to download the [mathlib](https://github.com/leanprover-community/mathlib4) cache
+4. Run `lake build` to compile the formal system E
+5. Open a file for Euclid's *Elements* in VS Code, e.g., [Book/Prop01.lean](Book/Prop01.lean). You should expect to see:
 
 ![Elements Prop1](https://github.com/loganrjmurphy/LeanEuclid/blob/master/images/Elements_prop1.png)
 
@@ -76,9 +68,8 @@ E is a formal system introduced by [Avigad et al., 2009](https://arxiv.org/abs/0
 
 
 
-## LeanEuclid
-
-LeanEuclid is a benchmark for testing autoformalization. It consists of 173 Euclidean geometry problems manually formalized into Lean. The theorems and proofs are in the format prescribed by the formal system E. Among the 173 problems, 48 are from Euclid's Elements, and 125 are adapted from the UniGeo dataset ([Chen et al., 2022](https://arxiv.org/abs/2212.02746)).
+## LeanGeo-Bench
+We introduce LeanGeo-Bench, the first benchmark specifically designed for the formal proof of plane geometry theorems. As detailed in Table \ref{sample-table}, LeanGeo-Bench comprises 123 problems sourced from theorem library, textbooks, synthetic generation and competitions like the IMO, covering a wide spectrum of difficulty.
 
 
 ### Euclid's *Elements*
@@ -106,67 +97,19 @@ theorem proposition_1 :
     euclid_finish
 ```
 
-
-
-### UniGeo
-
-Problems from UniGeo are generally easier than those from *Elements*. Unlike *Elements*, UniGeo's problem text does not include complete information about the problem, so we manually provide missing diagrammatic details to the text. For example:
-
-Diagram in [UniGeo/Congruent/diagrams/1.png](https://github.com/loganrjmurphy/LeanEuclid/blob/master/UniGeo/Congruent/diagrams/1.png):
-
-![UniGeo Congruent Theorem 1](https://github.com/loganrjmurphy/LeanEuclid/blob/master/images/UniGeo_congruent_1.png)
-
-UniGeo's theorem statement in [UniGeo/Congruent/texts/1.txt](https://github.com/loganrjmurphy/LeanEuclid/blob/master/UniGeo/Congruent/texts/1.txt).
-
-```
-Given T U ≅ R S. R S ∥ T U. Complete the proof that △ R T U ≅ △ T R S.
-```
-
-UniGeo's proof in [UniGeo/Congruent/proofs/1.txt](https://github.com/loganrjmurphy/LeanEuclid/blob/master/UniGeo/Congruent/proofs/1.txt):
-```
-RS ∥ TU
-TU ≅ RS
-∠RTU ≅ ∠SRT
-RT ≅ RT
-△RTU ≅ △TRS
-```
-
-Diagrammatic details we provide:
-```
-There is a quadrilateral RSUT with vertices R, S, U, and T. There is a diagonal line segment RT drawn inside the quadrilateral, connecting vertices R and T. 
-```
-
-Our formalized theorem and proof in [UniGeo/Congruent/Thm01.lean](https://github.com/loganrjmurphy/LeanEuclid/blob/master/UniGeo/Congruent/Thm01.lean):
-
-```lean
-theorem theorem_1 : ∀ (R S T U : Point) (RS ST RT TU RU : Line),
-  formTriangle R S T RS ST RT ∧
-  formTriangle R T U RT TU RU ∧
-  S.opposingSides U RT ∧
-  |(T─U)| = |(R─S)| ∧
-  ¬ RS.intersectsLine TU →
-  (△ R:T:U).congruent (△ T:R:S) :=
-by
-  euclid_intros
-  euclid_apply Elements.Book1.proposition_29''' S U R T RS TU RT
-  euclid_finish
-```
-
-
-## Evaluating Autoformalized Theorem Statements
-
-In addition to proof automation, our symbolic reasoning engine can be used to check the equivalence of autoformalized theorem statements against ground-truth theorem statements. We have built a wrapper `E3` which performs two forms of equivalence checking: 
-
-1. Standard equivalence checking, i.e., check if the two theorem statements are logically equivalent or not. It may also be that one is strictly stronger than the other.
-2. *Approximate* equivalence checking, where we try to quantify how close the two statements are to one another. 
-
-Typically, the latter is only done if the statements are not proven equivalent, but you'd like to see how "close" the prediction was to the ground truth. More details on `E3` can be found [here](https://github.com/loganrjmurphy/LeanEuclid/tree/master/E3).
-
 ## Experiments
 
-In our paper, we used LeanEuclid to test state-of-the-art LLMs on theorem statements and proof autoformalization. We provide a Python wrapper which can be used to replicate our experiment procedure. More details and usage examples can be found [here](https://github.com/loganrjmurphy/LeanEuclid/tree/master/AutoFormalization).
 
 ## Acknowledgements
 
-* We use ([our own fork](https://github.com/yangky11/lean-smt) of) [lean-smt](https://github.com/ufmg-smite/lean-smt) for running SMT solvers from Lean.
-* There are concurrent efforts on formalizing Euclidean geometry in Lean (e.g., [EG](https://github.com/jjdishere/EG) and [Hernandez-Espiet's work](https://github.com/leanprover-community/mathlib4/pull/7300)). To the best of our knowledge, LeanEuclid is unique in its use of external solvers to handle diagrammatic reasoning, which is typically performed explicitly. However, this comes at the expense of [breaking soundness](https://github.com/loganrjmurphy/LeanEuclid/blob/master/SystemE/Meta/Smt/Solver.lean#L44-L47). 
+* Our SystemE implementation is heavily inspired by LeanEuclid.
+* However, unlike LeanEuclid we use LeanSMT's builtin translator, caching the SystemE axioms for speed purpose.
+
+## Contributions
+
+We would like this to be a community driven repo. Specifically the following areas require development
+
+1. Expanding the theorem library.
+2. Getting proof reconstruction to work for the `esmt` tactic.
+3. Improve axiom caching: currently the `@[euclid]` attribute requires that axioms imports are chained linearly (eg `superposition` imports `metric` which imports `diagrammatic`). If someone could get the caching to work using something like [DiscrTree](https://leanprover-community.github.io/mathlib4_docs/Lean/Meta/DiscrTreeTypes.html#Lean.Meta.DiscrTree) that would be greatly appreciated.
+4. Mathlib comptability: in the `to415_mathlib` branch we define all SystemE primitives and axioms in terms of complex numbers. Sorry filling for SystemE axioms would be greatly appreciated. The smt solver interface is also broken on that branch so if any could implement monomorphization that would be great too.

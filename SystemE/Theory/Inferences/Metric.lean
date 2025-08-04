@@ -22,12 +22,12 @@ namespace LeanGeo
 
 
 
-@[euclid, metric]
+@[euclid]
 axiom zero_segment_if :
   ∀ (a b : Point),  |(a ─ b)| = 0 → a = b
 
 
-@[euclid, metric]
+@[euclid]
 axiom zero_segment_onlyif : ∀ (a b : Point),
   a = b → |(a─b)| = 0
 
@@ -35,7 +35,7 @@ axiom zero_segment_onlyif : ∀ (a b : Point),
 -- 2.
 -- ab ≥ 0
 --
-@[euclid, metric]
+@[euclid]
 axiom segment_gte_zero : ∀ (a b : Point),
   0 ≤ length a b
 
@@ -43,14 +43,13 @@ axiom segment_gte_zero : ∀ (a b : Point),
 -- 3.
 -- ab = ba.
 --
--- @[simp]
-@[euclid, metric]
+@[simp, euclid]
 axiom segment_symmetric : ∀ (a b : Point),
   |(a─b)| = |(b─a)|
 --
 
 
-@[euclid, metric]
+@[euclid]
 axiom angle_symm : ∀ (a b c : Point),
   (a ≠ b) ∧ (b ≠ c) → ((∠ a:b:c) = (∠ c:b:a))
 
@@ -58,8 +57,7 @@ axiom angle_symm : ∀ (a b c : Point),
 -- 5.
 -- 0 ≤ \abc and \abc ≤ right-angle + right-angle.
 -- --
--- @[simp]
-@[euclid, metric]
+@[simp, euclid]
 axiom angle_range : ∀ (a b c : Point), a ≠ b ∧ b ≠ c → 0 ≤ ∠ a:b:c ∧ ∠ a:b:c ≤ ∟ + ∟
 -- this actually can't be proven because Angle.ofPoints don't require points to be distinct
 -- := fun a b c => angle_range (Angle.ofPoints a b c)
@@ -68,29 +66,25 @@ axiom angle_range : ∀ (a b c : Point), a ≠ b ∧ b ≠ c → 0 ≤ ∠ a:b:c
 -- 6.
 -- △aab = 0. △
 --
--- @[simp]
-@[euclid, metric]
+@[simp, euclid]
 axiom degenerated_area : ∀ (a b : Point), area' a a b = 0
 
 --
 -- 7.
 -- △abc ≥ 0.
 -- --
--- @[simp]
-@[euclid, metric]
+@[simp, euclid]
 axiom area_gte_zero : ∀ a b c : Point, 0 ≤ area' a b c
 
 --
 -- 8.
 -- △abc = △cab and △abc = △acb.
 --
--- @[simp]
-@[euclid, metric]
+@[simp, euclid]
 axiom area_symm_1 : ∀ (a b c : Point),
     area' a b c = area' c a b
 
--- @[simp]
-@[euclid, metric]
+@[simp, euclid]
 axiom area_symm_2 : ∀ (a b c : Point),
     area' a b c = area' a c b
 
@@ -100,7 +94,7 @@ axiom area_symm_2 : ∀ (a b c : Point),
 -- \cab = \c′a′b′, then △abc = △a′b′c′.
 --
 
-@[euclid, metric]
+@[euclid]
 axiom area_congruence : ∀ (a b c a' b' c' : Point),
     |(a─b)| = |(a'─b')| ∧
     |(b─c)| = |(b'─c')| ∧

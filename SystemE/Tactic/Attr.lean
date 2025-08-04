@@ -3,29 +3,17 @@ import Smt.Translate
 import Smt.Real
 import Smt.Translate.Commands
 import SystemE.Tactic.EQuery
--- import SystemE.Tactic.Translate
+
 import Smt
 
 open Lean Meta Elab Command
 
 open Smt.Translate.Query
 
-initialize diagExtension : LabelExtension ← registerLabelAttr `diag "System E diagrammatic inference axiom"
-initialize metricExtension : LabelExtension ← registerLabelAttr `metric "System E metric inference axiom"
-initialize superExtension : LabelExtension ← registerLabelAttr `super "System E superposition inference axiom"
-initialize transferExtension : LabelExtension ← registerLabelAttr `transfer "System E transfer inference axiom"
-
 abbrev EuclidExtension := SimpleScopedEnvExtension (QueryBuilderM.State × List Expr × List Smt.Translate.Command) (QueryBuilderM.State × List Expr × List Smt.Translate.Command)
 
 instance : Inhabited Smt.Translate.Command :=
   ⟨Smt.Translate.Command.exit⟩
-
-#check ConstantInfo.levelParams
-#check getConstInfo
-#check ConstantInfo.type
-#check Smt.Translator.applyTranslators!
-#check IO.processCommands
-#check registerSimpAttr
 
 instance : Inhabited QueryBuilderM.State :=
   ⟨{ : QueryBuilderM.State }⟩

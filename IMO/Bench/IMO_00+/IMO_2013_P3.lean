@@ -2,7 +2,6 @@ import Mathlib
 import SystemE
 import LeanGeo
 namespace LeanGeo
-
 --Let the excircle of triangle $ABC$ opposite the vertex $A$ be tangent to the side $BC$ at the point $A_1$. Define the points $B_1$ on $CA$ and $C_1$ on $AB$ analogously, using the excircles opposite $B$ and $C$, respectively. Suppose that the circumcentre of triangle $A_1B_1C_1$ lies on the circumcircle of triangle $ABC$. Prove that triangle $ABC$ is right-angled.
 theorem imo2013_p3 :
   ∀ (A B C Ia Ib Ic A1 B1 C1 O1 : Point)
