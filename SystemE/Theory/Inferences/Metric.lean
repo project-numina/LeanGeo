@@ -104,11 +104,11 @@ axiom area_congruence : ∀ (a b c a' b' c' : Point),
     ∠ c:a:b = ∠ c':a':b'
     → area' a b c = area' a' b' c'
 
-@[euclid, metric]
+@[euclid]
 axiom radius_withCentre : ∀ (A O : Point) (Ω : Circle),
     O.isCentre Ω ∧ A.onCircle Ω → |(O─A)| = rad Ω
 
-@[euclid, metric]
+@[euclid]
 axiom circlePower_withCentre: ∀ (A O : Point) (Ω : Circle),
     O.isCentre Ω → Pow(A, Ω) = |(A─O)| * |(A─O)| - (rad Ω) * (rad Ω)
 
