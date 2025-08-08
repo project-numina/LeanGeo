@@ -39,7 +39,7 @@ by
 
   euclid_assert ∠ V:X:W = ∠ U:W:Y
   euclid_assert (△ U:W:X).congruent (△ V:X:W)
-  euclid_apply Triangle.congruent_if (△ U:W:X) (△ V:X:W)
+  euclid_apply triangle.congruent_if (△ U:W:X) (△ V:X:W)
   euclid_finish
 
 end UniGeo.Quadrilateral

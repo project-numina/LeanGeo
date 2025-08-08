@@ -18,7 +18,7 @@ theorem theorem_16 : ∀ (P Q R S T : Point) (PQ QR RS ST PT PS QS : Line),
 by
   euclid_intros
   euclid_assert (△ P:S:T).congruent (△ Q:S:R)
-  euclid_apply Triangle.congruent_if (△ P:S:T) (△ Q:S:R)
+  euclid_apply triangle.congruent_if (△ P:S:T) (△ Q:S:R)
   euclid_finish
 
 end UniGeo.Congruent

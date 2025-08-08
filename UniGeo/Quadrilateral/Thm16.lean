@@ -13,7 +13,7 @@ theorem theorem_16 : ∀ (F G H I : Point) (FG HI GH FI FH : Line),
 by
   euclid_intros
   euclid_assert (△ F:G:H).congruent (△ H:I:F)
-  euclid_apply Triangle.congruent_if (△ F:G:H) (△ H:I:F)
+  euclid_apply triangle.congruent_if (△ F:G:H) (△ H:I:F)
   euclid_finish
 
 

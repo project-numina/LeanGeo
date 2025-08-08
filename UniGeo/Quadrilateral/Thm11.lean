@@ -13,7 +13,7 @@ theorem theorem_11 : ∀ (S T U V : Point) (ST UV TU SV SU : Line),
 by
   euclid_intros
   euclid_assert (△ S:T:U).congruent (△ S:V:U)
-  euclid_apply Triangle.congruent_if (△ S:T:U) (△ S:V:U)
+  euclid_apply triangle.congruent_if (△ S:T:U) (△ S:V:U)
   euclid_finish
 
 end UniGeo.Quadrilateral

@@ -14,7 +14,7 @@ theorem theorem_3 : ∀ (H I J K : Point) (HI IJ JH HK : Line),
 by
   euclid_intros
   euclid_assert (△ H:I:K).congruent (△ H:J:K)
-  euclid_apply Triangle.congruent_if (△ H:I:K) (△ H:J:K)
+  euclid_apply triangle.congruent_if (△ H:I:K) (△ H:J:K)
   euclid_finish
 
 end UniGeo.Triangle

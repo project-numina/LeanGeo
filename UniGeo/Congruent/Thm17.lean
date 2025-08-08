@@ -19,7 +19,7 @@ by
     euclid_apply Elements.Book1.proposition_15 R T U S V RT SU
     euclid_finish
   euclid_assert (△ R:U:V).congruent (△ S:T:V)
-  euclid_apply Triangle.congruent_if (△ R:U:V) (△ S:T:V)
+  euclid_apply triangle.congruent_if (△ R:U:V) (△ S:T:V)
   euclid_finish
 
 end UniGeo.Congruent

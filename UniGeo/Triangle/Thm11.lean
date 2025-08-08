@@ -13,7 +13,7 @@ theorem theorem_11 : ∀ (V W X T U Y : Point) (VW WX XV TU UY YT : Line),
 by
   euclid_intros
   euclid_assert (△ V:W:X).similar (△ T:Y:U)
-  euclid_apply Triangle.similar_if (△ V:W:X) (△ T:Y:U)
+  euclid_apply triangle.similar_if (△ V:W:X) (△ T:Y:U)
   euclid_finish
 
 end UniGeo.Triangle

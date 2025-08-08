@@ -17,7 +17,7 @@ docker compose up -d
 1. [LeanEuclid](#leaneuclid)
     1. [Euclid's *Elements*](#euclids-elements)
     1. [UniGeo](#unigeo)
-1. [Evaluating Autoformalized Theorem Statements](#evaluating-autoformalized-theorem-statements)
+1. [Evaluating on LeanGeo-Bench](#evaluating-on-leangeo-bench)
 1. [Experiments](#experiments)
 1. [Acknowledgements](#acknowledgements)
 
@@ -95,6 +95,62 @@ theorem proposition_1 :
     euclid_apply point_on_circle_onlyif b a c ACE
     use c
     euclid_finish
+```
+
+## Evaluating on LeanGeo-Bench
+
+### Evaluation Framwork
+
+We use the evaluation method provided by CombiBench. See https://github.com/MoonshotAI/CombiBench/tree/master for details.
+
+### Setup Environment
+
+You need to follow these steps to quickly install the required packages.
+
+First, install the lean server on a device with sufficient CPU and memory (Recommended: [TODO]).
+
+~~~
+git clone https://github.com/project-numina/kimina-lean-server.git
+cd kimina-lean-server
+git checkout leangeo
+~~~
+
+Second, download Combibench on any device.
+
+~~~
+git clone https://github.com/MoonshotAI/CombiBench.git
+cd CombiBench
+~~~
+
+
+### Setup a Lean Server
+
+Follow https://github.com/project-numina/kimina-lean-server/tree/leangeo to configure a lean server and get a custom url and API_KEY.
+
+You can use the following instructions to build a lean server quickly.
+~~~
+cp .env.template .env
+docker compose up -d
+~~~
+
+You can also change the port number of lean server in the `compose.yaml` file to align with the port number required by `CombiBench/evaluation`.
+
+### Setup a LLM API Key
+
+We support API interfaces such as OpenAI, Antropic, TogetherAI, and Google GenerativeAI.
+
+### Configuration
+
+Refer to https://github.com/MoonshotAI/CombiBench/blob/master/evaluation/config/geometry_template.json5 to configure the dataset, lean server, llm server, generation parameters, prompt, and parallel parameters.
+
+You can also add custom prompts under the `CombiBench/evaluation/config/extra_prompt` and configure the path in the `prompt_template` argument within the config file. 
+
+### Run Evaluation
+
+To run evaluation on LeanGeo-Bench:
+
+```
+python evaluation/cli.py online-one-stage -c evaluation/config/geometry_template.json5
 ```
 
 ## Experiments

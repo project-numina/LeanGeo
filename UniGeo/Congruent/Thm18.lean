@@ -22,7 +22,7 @@ by
     euclid_apply Elements.Book1.proposition_29''' G E F H FG EH FH
     euclid_finish
   euclid_assert (△ E:H:I).congruent (△ G:F:I)
-  euclid_apply Triangle.congruent_if (△ E:H:I) (△ G:F:I)
+  euclid_apply triangle.congruent_if (△ E:H:I) (△ G:F:I)
   euclid_finish
 
 end UniGeo.Congruent

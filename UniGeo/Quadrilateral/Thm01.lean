@@ -15,7 +15,7 @@ theorem theorem_1 : ∀ (Q R S T : Point) (QR ST RS QT QS : Line),
 by
   euclid_intros
   euclid_assert  (△ Q:S:T).congruent (△ S:Q:R)
-  euclid_apply Triangle.congruent_if (△ Q:S:T) (△ S:Q:R)
+  euclid_apply triangle.congruent_if (△ Q:S:T) (△ S:Q:R)
   euclid_finish
 
 end UniGeo.Quadrilateral

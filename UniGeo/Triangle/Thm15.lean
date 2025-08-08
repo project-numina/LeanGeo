@@ -13,7 +13,7 @@ theorem theorem_15 : ∀ (S T V Q R U : Point) (ST TV VS QR RU UQ : Line),
 by
   euclid_intros
   euclid_assert (△ S:T:V).similar (△ U:R:Q)
-  euclid_apply Triangle.similar_if (△ S:T:V) (△ U:R:Q)
+  euclid_apply triangle.similar_if (△ S:T:V) (△ U:R:Q)
   euclid_finish
 
 end UniGeo.Triangle

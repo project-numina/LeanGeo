@@ -13,7 +13,7 @@ theorem theorem_18 : ∀ (S T V R U W : Point) (ST TV VS RU UW WR : Line),
 by
   euclid_intros
   euclid_assert (△ S:T:V).similar (△ W:U:R)
-  euclid_apply Triangle.similar_if (△ S:T:V) (△ W:U:R)
+  euclid_apply triangle.similar_if (△ S:T:V) (△ W:U:R)
   euclid_finish
 
 end UniGeo.Triangle

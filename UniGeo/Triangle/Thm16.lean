@@ -13,7 +13,7 @@ theorem theorem_16 : ∀ (F H K G I J : Point) (FH HK KF GI IJ JG : Line),
 by
   euclid_intros
   euclid_assert (△ F:H:K).similar (△ I:G:J)
-  euclid_apply Triangle.similar_if (△ F:H:K) (△ I:G:J)
+  euclid_apply triangle.similar_if (△ F:H:K) (△ I:G:J)
   euclid_finish
 
 end UniGeo.Triangle

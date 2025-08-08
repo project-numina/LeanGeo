@@ -17,7 +17,7 @@ by
     euclid_apply Elements.Book1.proposition_29''' I G H F HI FG FH
     euclid_finish
   euclid_assert (△ F:G:H).congruent (△ H:I:F)
-  euclid_apply Triangle.congruent_if (△ F:G:H) (△ H:I:F)
+  euclid_apply triangle.congruent_if (△ F:G:H) (△ H:I:F)
   euclid_finish
 
 

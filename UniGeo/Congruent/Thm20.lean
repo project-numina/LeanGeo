@@ -16,7 +16,7 @@ theorem theorem_20 : ∀ (F G H I J : Point) (FH FI IG GJ JH : Line),
 by
   euclid_intros
   euclid_assert (△ F:G:I).congruent (△ G:H:J)
-  euclid_apply Triangle.congruent_if (△ F:G:I) (△ G:H:J)
+  euclid_apply triangle.congruent_if (△ F:G:I) (△ G:H:J)
   euclid_finish
 
 end UniGeo.Congruent

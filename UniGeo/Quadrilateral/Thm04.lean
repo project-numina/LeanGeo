@@ -17,7 +17,7 @@ by
     euclid_apply Elements.Book1.proposition_29''' H J G I GH IJ GI
     euclid_finish
   euclid_assert (△ G:H:I).congruent (△ I:J:G)
-  euclid_apply Triangle.congruent_if (△ G:H:I) (△ I:J:G)
+  euclid_apply triangle.congruent_if (△ G:H:I) (△ I:J:G)
   euclid_finish
 
 end UniGeo.Quadrilateral

@@ -14,7 +14,7 @@ theorem theorem_12 : ∀ (T U V W : Point) (TU VW UV TW TV : Line),
 by
   euclid_intros
   euclid_assert (△ T:V:W).congruent (△ V:T:U)
-  euclid_apply Triangle.congruent_if (△ T:V:W) (△ V:T:U)
+  euclid_apply triangle.congruent_if (△ T:V:W) (△ V:T:U)
   euclid_finish
 
 end UniGeo.Quadrilateral

@@ -18,7 +18,7 @@ by
     euclid_apply Elements.Book1.proposition_29''' W Y V X VW XY VX
     euclid_finish
   euclid_assert (△ V:X:Y).congruent (△ X:V:W)
-  euclid_apply Triangle.congruent_if (△ V:X:Y) (△ X:V:W)
+  euclid_apply triangle.congruent_if (△ V:X:Y) (△ X:V:W)
   euclid_finish
 
 end UniGeo.Quadrilateral

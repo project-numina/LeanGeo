@@ -13,7 +13,7 @@ theorem theorem_8 : ∀ (U X Y V W Z : Point) (UX XY YU VW WZ ZV : Line),
 by
   euclid_intros
   euclid_assert (△ V:W:Z).similar (△ X:Y:U)
-  euclid_apply Triangle.similar_if (△ V:W:Z) (△ X:Y:U)
+  euclid_apply triangle.similar_if (△ V:W:Z) (△ X:Y:U)
   euclid_finish
 
 end UniGeo.Triangle

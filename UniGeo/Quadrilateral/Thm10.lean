@@ -17,7 +17,7 @@ by
     euclid_apply Elements.Book1.proposition_29''' W U V T VW TU TV
     euclid_finish
   euclid_assert (△ T:U:V).congruent (△ V:W:T)
-  euclid_apply Triangle.congruent_if (△ T:U:V) (△ V:W:T)
+  euclid_apply triangle.congruent_if (△ T:U:V) (△ V:W:T)
   euclid_finish
 
 end UniGeo.Quadrilateral

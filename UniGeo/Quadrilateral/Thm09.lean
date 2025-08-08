@@ -18,7 +18,7 @@ by
     euclid_apply Elements.Book1.proposition_29''' G I F H FG HI FH
     euclid_finish
   euclid_assert (△ F:H:I).congruent (△ H:F:G)
-  euclid_apply Triangle.congruent_if (△ F:H:I) (△ H:F:G)
+  euclid_apply triangle.congruent_if (△ F:H:I) (△ H:F:G)
   euclid_finish
 
 end UniGeo.Quadrilateral

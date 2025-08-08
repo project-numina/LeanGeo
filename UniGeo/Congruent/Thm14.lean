@@ -16,7 +16,7 @@ theorem theorem_14 : ∀ (U V W X Y : Point) (UW VX UX VW : Line),
 by
   euclid_intros
   euclid_assert (△ U:X:Y).congruent (△ W:V:Y)
-  euclid_apply Triangle.congruent_if (△ U:X:Y) (△ W:V:Y)
+  euclid_apply triangle.congruent_if (△ U:X:Y) (△ W:V:Y)
   euclid_finish
 
 end UniGeo.Congruent

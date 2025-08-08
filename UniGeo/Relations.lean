@@ -21,10 +21,10 @@ axiom quadrilateral_anglesSum (a b c d : Point) (AB CD AC BD : Line) :
 axiom triangle_AngleSum (a b c : Point) (AB BC CA : Line) :
     formTriangle a b c AB BC CA → ∠ a:b:c + ∠ b:c:a + ∠ a:c:b = ∟ + ∟
 
-namespace Triangle
+namespace triangle
 @[simp]
-abbrev congruent : Triangle → Triangle →  Prop
-| (Triangle.ofPoints A B C) ,(Triangle.ofPoints D E F) =>
+abbrev congruent : triangle → triangle →  Prop
+| (triangle.ofPoints A B C) ,(triangle.ofPoints D E F) =>
   -- SSS
   (|(A─B)| = |(D─E)| ∧ |(B─C)| = |(E─F)| ∧ |(C─A)| = |(F─D)|) ∨
   -- SAS
@@ -43,17 +43,17 @@ abbrev congruent : Triangle → Triangle →  Prop
   (∠ A:B:C = ∠ D:E:F ∧ |(B─C)| = |(E─F)| ∧ ∠ C:A:B = ∠ F:D:E)
 
 @[simp]
-axiom congruent_if (T1 T2: Triangle): congruent T1 T2 →
+axiom congruent_if (T1 T2: triangle): congruent T1 T2 →
   match T1,T2 with
-  | (Triangle.ofPoints A B C) ,(Triangle.ofPoints D E F) =>
+  | (triangle.ofPoints A B C) ,(triangle.ofPoints D E F) =>
     |(A─B)| = |(D─E)| ∧ |(B─C)| = |(E─F)| ∧ |(A─C)| = |(D─F)| ∧ ∠ A:B:C = ∠ D:E:F ∧ ∠ A:C:B = ∠ D:F:E ∧ ∠ B:A:C = ∠ E:D:F
 
 notation:50 a:51 "≅" b:51 => congruent a b
 
 @[simp]
-abbrev similar (T1 T2: Triangle): Prop :=
+abbrev similar (T1 T2: triangle): Prop :=
   match T1, T2 with
-  | (Triangle.ofPoints A B C) ,(Triangle.ofPoints D E F) =>
+  | (triangle.ofPoints A B C) ,(triangle.ofPoints D E F) =>
   (∠ A:B:C = ∠ D:E:F ∧ ∠ B:C:A = ∠ E:F:D) ∨
   (∠ B:C:A = ∠ E:F:D ∧ ∠ C:A:B = ∠ F:D:E) ∨
   (∠ C:A:B = ∠ F:D:E ∧ ∠ A:B:C = ∠ D:E:F) ∨
@@ -67,14 +67,14 @@ abbrev similar (T1 T2: Triangle): Prop :=
 notation:50 a:51 "~" b:51 => similar a b
 
 @[simp]
-axiom similar_if (T1 T2: Triangle): similar T1 T2 →
+axiom similar_if (T1 T2: triangle): similar T1 T2 →
   match T1,T2 with
-  | (Triangle.ofPoints A B C) ,(Triangle.ofPoints D E F) =>
+  | (triangle.ofPoints A B C) ,(triangle.ofPoints D E F) =>
     |(A─B)| / |(D─E)| = |(B─C)| / |(E─F)| ∧ |(A─B)| / |(D─E)| = |(B─C)| / |(E─F)|
    ∧ |(C─A)| / |(F─D)| = |(A─B)| / |(D─E)| ∧ ∠ A:B:C = ∠ D:E:F
    ∧ ∠ A:C:B = ∠ D:F:E ∧ ∠ B:A:C = ∠ E:D:F
 
-end Triangle
+end triangle
 
 namespace Quadrilateral
 --abbrev Cyclic (A B C D : Point) (AB BC CD DA : Line) : Prop :=

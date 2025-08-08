@@ -1,4 +1,5 @@
 import SystemE
+open LeanGeo
 @[simp]
 abbrev formIsotriangle (a b c : Point) (AB BC CA : Line) : Prop :=
   formTriangle a b c AB BC CA ∧ |(a─b)| = |(a─c)|

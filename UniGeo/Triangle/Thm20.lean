@@ -13,7 +13,7 @@ theorem theorem_20 : ∀ (P R T S U Q : Point) (PR RT TP SU UQ QS : Line),
 by
   euclid_intros
   euclid_assert (△ P:R:T).similar (△ S:U:Q)
-  euclid_apply Triangle.similar_if (△ P:R:T) (△ S:U:Q)
+  euclid_apply triangle.similar_if (△ P:R:T) (△ S:U:Q)
   euclid_finish
 
 end UniGeo.Triangle

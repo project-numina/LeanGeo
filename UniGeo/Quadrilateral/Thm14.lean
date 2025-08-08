@@ -13,7 +13,7 @@ theorem theorem_14 : ∀ (G H I J : Point) (GH IJ HI GJ GI : Line),
 by
   euclid_intros
   euclid_assert (△ G:H:I).congruent (△ G:J:I)
-  euclid_apply Triangle.congruent_if (△ G:H:I) (△ G:J:I)
+  euclid_apply triangle.congruent_if (△ G:H:I) (△ G:J:I)
   euclid_finish
 
 end UniGeo.Quadrilateral

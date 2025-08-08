@@ -13,7 +13,7 @@ theorem theorem_17 : ∀ (P Q R S : Point) (PQ RS QR PS PR : Line),
 by
   euclid_intros
   euclid_assert (△ P:Q:R).congruent (△ P:S:R)
-  euclid_apply Triangle.congruent_if (△ P:Q:R) (△ P:S:R)
+  euclid_apply triangle.congruent_if (△ P:Q:R) (△ P:S:R)
   euclid_finish
 
 end UniGeo.Quadrilateral

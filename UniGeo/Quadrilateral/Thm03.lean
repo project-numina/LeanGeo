@@ -13,7 +13,7 @@ theorem theorem_3 : ∀ (W X Y Z : Point) (WX YZ XY WZ WY : Line),
 by
   euclid_intros
   euclid_assert (△ W:X:Y).congruent (△ Y:Z:W)
-  euclid_apply Triangle.congruent_if (△ W:X:Y) (△ Y:Z:W)
+  euclid_apply triangle.congruent_if (△ W:X:Y) (△ Y:Z:W)
   euclid_finish
 
 end UniGeo.Quadrilateral

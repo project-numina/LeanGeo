@@ -14,7 +14,7 @@ theorem theorem_19 : ∀ (R S T U : Point) (RS ST RT RU : Line),
 by
   euclid_intros
   euclid_assert (△ R:S:U).congruent (△ R:T:U)
-  euclid_apply Triangle.congruent_if (△ R:S:U) (△ R:T:U)
+  euclid_apply triangle.congruent_if (△ R:S:U) (△ R:T:U)
   euclid_finish
 
 end UniGeo.Congruent
