@@ -49,28 +49,17 @@ export CXX=clang++
 ## Building
 
 Take the following steps to build the Lean project:
-
-1. Run `lake run cvc5/downloadRelease` to install the latest copy of `cvc5`
-2. Run `lake script run check` to check if the requirements are satisfied.
-3. Run `lake exe cache get` to download the [mathlib](https://github.com/leanprover-community/mathlib4) cache
-4. Run `lake build` to compile the formal system E
-5. Open a file for Euclid's *Elements* in VS Code, e.g., [Book/Prop01.lean](Book/Prop01.lean). You should expect to see:
-
-![Elements Prop1](https://github.com/loganrjmurphy/LeanEuclid/blob/master/images/Elements_prop1.png)
-
-
-Optionally, you can:
-
-1. Run `lake -R -Kenv=dev build SystemE:docs` to build the documentation
-1. View the auto-generated documentation locally at ./lake/build/doc, e.g., using `python -mhttp.server`
-
-If you have problems building the project, [Dockerfile](./Dockerfile) and [scripts/build.sh](./scripts/build.sh) may serve as useful references.
+~~~
+lake run cvc5/downloadRelease
+lake exe cache get
+lake build cvc5 SystemE mathlib LeanGeo
+~~~
 
 ## Evaluating on LeanGeo-Bench
 
 ### Evaluation Framwork
 
-We use the evaluation method provided by CombiBench. See https://github.com/MoonshotAI/CombiBench/tree/master for details.
+We use the evaluation method provided by [CombiBench](https://github.com/MoonshotAI/CombiBench/tree/master).
 
 ### Setup Environment
 
@@ -94,7 +83,7 @@ cd CombiBench
 
 ### Setup a Lean Server
 
-Follow https://github.com/project-numina/kimina-lean-server/tree/leangeo to configure a lean server and get a custom url and API_KEY.
+Follow [kimina-lean-server](https://github.com/project-numina/kimina-lean-server/tree/leangeo) to configure a lean server and get a custom url and API_KEY.
 
 You can use the following instructions to build a lean server quickly.
 ~~~
@@ -110,7 +99,7 @@ We support API interfaces such as OpenAI, Antropic, TogetherAI, and Google Gener
 
 ### Configuration
 
-Refer to https://github.com/MoonshotAI/CombiBench/blob/master/evaluation/config/geometry_template.json5 to configure the dataset, lean server, llm server, generation parameters, prompt, and parallel parameters.
+Refer to [geometry_template.json5](https://github.com/MoonshotAI/CombiBench/blob/master/evaluation/config/geometry_template.json5) to configure the dataset, lean server, llm server, generation parameters, prompt, and parallel parameters.
 
 You can also add custom prompts under the `CombiBench/evaluation/config/extra_prompt` and configure the path in the `prompt_template` argument within the config file. 
 
