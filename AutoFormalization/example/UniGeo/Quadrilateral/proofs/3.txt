@@ -1,8 +1,0 @@
-ST≅TU
-SV≅UV
-TV≅TV
-△STV≅△UTV
-∠STV≅∠UTV
-TW≅TW
-△STW≅△UTW
-UW≅SW

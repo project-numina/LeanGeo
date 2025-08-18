@@ -1,5 +1,0 @@
-V is the midpoint of UW
-WY≅VX
-VY≅UX
-UV≅VW
-△VWY≅△UVX

@@ -1,5 +1,0 @@
-∠UTV≅∠TVW
-∠VTW≅∠TVU
-TV≅TV
-△TUV≅△VWT
-TW≅UV

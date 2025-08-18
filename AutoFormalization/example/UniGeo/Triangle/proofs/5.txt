@@ -1,4 +1,0 @@
-SW/RV=ST/RU
-∠S≅∠R
-△STW~△RUV
-∠SWT≅∠RVU

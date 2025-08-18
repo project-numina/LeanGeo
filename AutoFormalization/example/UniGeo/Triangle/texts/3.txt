@@ -1,1 +1,0 @@
-Given P S bisects ∠ Q P R. P S bisects ∠ Q P R and P Q ≅ P R. Complete the proof that Q S ≅ R S.
