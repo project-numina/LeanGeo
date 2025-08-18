@@ -5,7 +5,16 @@
 </p>
 
 LeanGeo is a manually formalized system of plane geometry theorems and their proofs in the Lean 4 proof assistant. It's built upon the axiomatic framework of [LeanEuclid](https://github.com/loganrjmurphy/LeanEuclid), inheriting its foundational geometric objects, relations, and axioms. LeanGeo comprises 260 geometric theorems organized into five major classes: Basic, Metrics, Triangle, Circle, and Quadrilateral, each further refined into numerous subclasses. Additionally, LeanGeo leverages [LeanSMT](https://github.com/ufmg-smite/lean-smt) at its core and can support Lean version 4.15.
-
+Here is an example of proving the basic property of isotriangle:
+```
+theorem isoTriangle_imp_eq_angles : ∀ (A B C : Point), IsoTriangle A B C → ∠ A:B:C =∠ A:C:B := by
+  euclid intros
+  euclid apply exists midpoint B C as D
+  euclid apply line from points B C as BC
+  euclid apply coll angles eq
+  euclid apply congruentTriangles SSS D B A D C A euclid apply coll angles eq
+  euclid finish
+```
 ## LeanGeo-Bench
 
 LeanGeo-Bench is the first benchmark tailored for formalizing and proving contest-level plane geometry theorems. As shown in the following table, the benchmark consists of 122 problems drawn from diverse sources, including existing theorem libraries, textbooks, synthetically generated problems, contest problems and all geometry problems from the official IMO problems since 2000.
