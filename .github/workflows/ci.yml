@@ -1,0 +1,27 @@
+name: Lean 4 CI
+
+on:
+  push:
+    branches:
+      - "*"
+  pull_request:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+env:
+  LEAN_ABORT_ON_FAILED_IMPORTS: "1"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
+
+      - run: lake update
+      - run: lake build Book
+      - run: lake build UniGeo
+      - run: lake build LeanGeo

@@ -1,0 +1,49 @@
+name: Lean 4 Docs
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:  # Allow manual deploy too
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+env:
+  LEAN_ABORT_ON_FAILED_IMPORTS: "1"
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
+
+      - run: lake update
+      - run: lake build LeanGeo:docs
+
+      - name: Copy documentation into deployable folder
+        run: |
+          mkdir -p docs/docs
+          cp -r .lake/build/doc/* docs/docs
+
+      - name: Upload docs artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/
+
+  deploy:
+    needs: docs
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
