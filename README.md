@@ -4,9 +4,10 @@
     <a href="https://huggingface.co/datasets/AI-MO/GeometryLeanBench"><img src="https://img.shields.io/badge/🤗-huggingface-FFD21E"></a>
 </p>
 
+LeanGeo is a manually formalized system of plane geometry theorems and their proofs in the Lean 4 proof assistant. It's built upon the axiomatic framework of [LeanEuclid](https://github.com/loganrjmurphy/LeanEuclid), inheriting its foundational geometric objects, relations, and axioms. LeanGeo comprises 260 theorems organized into five major classes: Basic, Metrics, Triangle, Circle, and Quadrilateral, each further refined into numerous subclasses. Additionally, LeanGeo leverages [LeanSMT](https://github.com/ufmg-smite/lean-smt) at its core and can support Lean version 4.15.
+
 Website for our paper:
 [LeanGeo](https://arxiv.org/abs/2508.14644)
-LeanGeo is a manually formalized system of plane geometry theorems and their proofs in the Lean 4 proof assistant. It's built upon the axiomatic framework of [LeanEuclid](https://github.com/loganrjmurphy/LeanEuclid), inheriting its foundational geometric objects, relations, and axioms. LeanGeo comprises 260 theorems organized into five major classes: Basic, Metrics, Triangle, Circle, and Quadrilateral, each further refined into numerous subclasses. Additionally, LeanGeo leverages [LeanSMT](https://github.com/ufmg-smite/lean-smt) at its core and can support Lean version 4.15.
 
 ## LeanGeo-Bench
 
